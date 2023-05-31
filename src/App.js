@@ -1,23 +1,26 @@
 import React from "react";
+import { createTheme, ThemeProvider } from "@mui/material/styles";
+import { Header } from "./components/Header";
 import "./App.css";
 
+const theme = createTheme({
+  palette: {
+    primary: {
+      main: "#ff3d00",
+    },
+    secondary: {
+      main: "#aa00ff",
+    },
+    background: {
+      default: "#f1f1f1",
+    },
+  },
+});
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <ThemeProvider theme={theme}>
+      <Header />
+    </ThemeProvider>
   );
 }
 
