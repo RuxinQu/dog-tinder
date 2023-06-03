@@ -1,15 +1,15 @@
-@import url("https://fonts.googleapis.com/css2?family=Lobster&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Kalam&display=swap");
 
 h1 {
   font-size: 45px;
 }
 
-.lobster {
-  font-family: "Lobster", cursive;
+.kalam {
+  font-family: "kalam", cursive !important;
 }
 
 .logo {
-  width: 40%;
+  width: 100px;
   margin-top: 20px;
 }
 
@@ -17,4 +17,13 @@ h1 {
   background-image: url(../public/bg-home.png);
   background-size: cover;
   background-position: center;
+}
+
+/* signup form */
+.signup-form {
+  background-color: #fff;
+  max-width: 360px;
+  border-radius: 10px;
+  padding: 20px;
+  text-align: center;
 }
