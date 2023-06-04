@@ -1,7 +1,13 @@
 import React from "react";
-import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import {
+  BrowserRouter as Router,
+  Route,
+  Routes,
+  Outlet,
+} from "react-router-dom";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import Home from "./pages/Home";
+import { DogCard } from "./components/DogCard";
 
 import { Header } from "./components/Header";
 import "./App.css";
@@ -15,7 +21,7 @@ const theme = createTheme({
       main: "#aa00ff",
     },
     background: {
-      default: "#f1f1f1",
+      default: "#00000",
     },
   },
   typography: {
@@ -30,15 +36,26 @@ const theme = createTheme({
     ].join(","),
   },
 });
+const Layout = () => {
+  return (
+    <>
+      <Header />
+      <Outlet />
+    </>
+  );
+};
+
 function App() {
   return (
     <ThemeProvider theme={theme}>
       <Router>
         <Routes>
           <Route path="/" element={<Home />} />
+          <Route element={<Layout />}>
+            <Route path="/board" element={<DogCard />} />
+          </Route>
         </Routes>
       </Router>
-      {/* <Header /> */}
     </ThemeProvider>
   );
 }

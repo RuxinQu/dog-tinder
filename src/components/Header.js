@@ -4,7 +4,7 @@ import Grid from "@mui/material/Grid";
 import IconButton from "@mui/material/IconButton";
 import PetsIcon from "@mui/icons-material/Pets";
 import PersonIcon from "@mui/icons-material/Person";
-import ChatIcon from "@mui/icons-material/Chat";
+import ForumIcon from "@mui/icons-material/Forum";
 
 export const Header = () => {
   return (
@@ -22,7 +22,7 @@ export const Header = () => {
         </Grid>
         <Grid item xs={4}>
           <IconButton>
-            <ChatIcon fontSize="large" />
+            <ForumIcon fontSize="large" color="info" />
           </IconButton>
         </Grid>
       </Grid>
