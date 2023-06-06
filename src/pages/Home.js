@@ -6,14 +6,13 @@ import { SignupDialogContainer } from "../container.js/SignupDialogContainer";
 
 export default function Home() {
   const [open, setOpen] = useState(false);
-  const [title, setTitle] = useState("");
+  const [register, setRegister] = useState(false);
   const handleOpenSignup = () => {
     setOpen(true);
-    setTitle("CREATE ACCOUNT");
+    setRegister(true);
   };
   const handleOpenLogin = () => {
     setOpen(true);
-    setTitle("LOGIN YOUR ACCOUNT");
   };
   const handleClose = () => setOpen(false);
 
@@ -78,7 +77,10 @@ export default function Home() {
         }}
       >
         {open && (
-          <SignupDialogContainer handleClose={handleClose} title={title} />
+          <SignupDialogContainer
+            handleClose={handleClose}
+            register={register}
+          />
         )}
       </Box>
     </Box>
