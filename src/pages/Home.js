@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import Button from "@mui/material/Button";
 import Fab from "@mui/material/Fab";
 import Box from "@mui/material/Box";
-import { SignupDialog } from "../components/SignupDialog";
+import { SignupDialogContainer } from "../container.js/SignupDialogContainer";
 
 export default function Home() {
   const [open, setOpen] = useState(false);
@@ -77,7 +77,9 @@ export default function Home() {
           alignItems: "center",
         }}
       >
-        {open && <SignupDialog handleClose={handleClose} title={title} />}
+        {open && (
+          <SignupDialogContainer handleClose={handleClose} title={title} />
+        )}
       </Box>
     </Box>
   );

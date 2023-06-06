@@ -90,7 +90,7 @@ export const DogCard = () => {
         href="https://fonts.googleapis.com/css?family=Alatsi&display=swap"
         rel="stylesheet"
       />
-      <h1>React Tinder Card</h1>
+
       <div className="cardContainer">
         {db.map((character, index) => (
           <TinderCard

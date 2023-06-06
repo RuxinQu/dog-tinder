@@ -28,11 +28,18 @@ h1 {
   text-align: center;
 }
 
+.header {
+  height: 12dvh;
+  display: flex;
+  align-items: center;
+}
+
 .tinder-card {
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  height: 88dvh;
 }
 
 h1 {
@@ -84,10 +91,10 @@ h1 {
 }
 
 .buttons {
-  margin: 20px 0;
+  margin: 40px 0;
   width: 260px;
   display: flex;
-  justify-content: space-around;
+  justify-content: space-between;
 }
 
 @keyframes popup {

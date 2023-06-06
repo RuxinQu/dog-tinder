@@ -1,6 +1,5 @@
-import React, { useState } from "react";
+import React from "react";
 import { Formik, Form, Field, ErrorMessage } from "formik";
-import * as Yup from "yup";
 import Button from "@mui/material/Button";
 import IconButton from "@mui/material/IconButton";
 import OutlinedInput from "@mui/material/OutlinedInput";
@@ -10,37 +9,23 @@ import FormControl from "@mui/material/FormControl";
 import TextField from "@mui/material/TextField";
 import Visibility from "@mui/icons-material/Visibility";
 import VisibilityOff from "@mui/icons-material/VisibilityOff";
+import Alert from "@mui/material/Alert";
 
-export const SignupDialog = ({ title, handleClose }) => {
-  // hide password input
-  const [showPassword, setShowPassword] = useState(false);
-  const handleClickShowPassword = () => setShowPassword((show) => !show);
-  const handleMouseDownPassword = (event) => {
-    event.preventDefault();
-  };
-
-  // Define Yup validation schema
-  const validationSchema = Yup.object().shape({
-    email: Yup.string().email().required("Email is required"),
-    password: Yup.string()
-      .min(6, "Password must be at least 6 characters")
-      .required("Password is required"),
-    confirmPassword: Yup.string()
-      .oneOf([Yup.ref("password"), null], "Passwords must match")
-      .required("Confirm Password is required"),
-  });
-
+export const SignupDialog = ({
+  title,
+  alertMessage,
+  handleClose,
+  showPassword,
+  handleClickShowPassword,
+  handleMouseDownPassword,
+  validationSchema,
+  handleSubmit,
+}) => {
   // Define initial form values
   const initialValues = {
     email: "",
     password: "",
     confirmPassword: "",
-  };
-
-  // Handle form submission
-  const handleSubmit = (values) => {
-    // Handle form submission logic here
-    console.log(values);
   };
 
   return (
@@ -168,6 +153,7 @@ export const SignupDialog = ({ title, handleClose }) => {
           </Button>
         </Form>
       </Formik>
+      {alertMessage && <Alert severity="error">{alertMessage}</Alert>}
     </div>
   );
 };
