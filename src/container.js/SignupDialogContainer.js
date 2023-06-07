@@ -1,9 +1,12 @@
 import React, { useState } from "react";
+import { useCookies } from "react-cookie";
+
 import * as Yup from "yup";
 import { SignupDialog } from "../components/SignupDialog";
 import { signIn } from "../util/Api";
 
 export const SignupDialogContainer = ({ register, handleClose }) => {
+  const [cookie, setCookie] = useCookies(null);
   // hide password input
   const [showPassword, setShowPassword] = useState(false);
   const [alertMessage, setAlertMessage] = useState("");
@@ -35,10 +38,12 @@ export const SignupDialogContainer = ({ register, handleClose }) => {
     // Handle form submission logic here
     const option = register === true ? "register" : "login";
     const response = await signIn(values, option);
+    const jsonResponse = await response.json();
     if (response.ok) {
+      setCookie("AuthToken", jsonResponse.token);
+      setCookie("UserId", jsonResponse.user._id);
       window.location.assign("/board");
     } else {
-      const jsonResponse = await response.json();
       setAlertMessage(jsonResponse.message);
     }
   };
