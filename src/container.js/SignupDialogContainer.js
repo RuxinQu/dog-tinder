@@ -1,9 +1,12 @@
 import React, { useState } from "react";
+import { useCookies } from "react-cookie";
+
 import * as Yup from "yup";
 import { SignupDialog } from "../components/SignupDialog";
-import { signUp } from "../util/Api";
+import { signIn } from "../util/Api";
 
-export const SignupDialogContainer = ({ title, handleClose }) => {
+export const SignupDialogContainer = ({ register, handleClose }) => {
+  const [cookie, setCookie] = useCookies(null);
   // hide password input
   const [showPassword, setShowPassword] = useState(false);
   const [alertMessage, setAlertMessage] = useState("");
@@ -19,26 +22,35 @@ export const SignupDialogContainer = ({ title, handleClose }) => {
     password: Yup.string()
       .min(6, "Password must be at least 6 characters")
       .required("Password is required"),
-    confirmPassword: Yup.string()
-      .oneOf([Yup.ref("password"), null], "Passwords must match")
-      .required("Confirm Password is required"),
+    //only do validation on comfirmPassword input when signup
+    confirmPassword: Yup.string().when(`${register}`, {
+      is: true,
+      then: () =>
+        Yup.string()
+          .oneOf([Yup.ref("password"), null], "Passwords must match")
+          .required("Confirm password is required"),
+      otherwise: () => Yup.string().strip(),
+    }),
   });
 
   // Handle form submission
   const handleSubmit = async (values) => {
     // Handle form submission logic here
-    const response = await signUp(values);
+    const option = register === true ? "register" : "login";
+    const response = await signIn(values, option);
+    const jsonResponse = await response.json();
     if (response.ok) {
+      setCookie("AuthToken", jsonResponse.token);
+      setCookie("UserId", jsonResponse.user._id);
       window.location.assign("/board");
     } else {
-      const jsonResponse = await response.json();
       setAlertMessage(jsonResponse.message);
     }
   };
 
   return (
     <SignupDialog
-      title={title}
+      register={register}
       alertMessage={alertMessage}
       handleClose={handleClose}
       showPassword={showPassword}

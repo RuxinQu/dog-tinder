@@ -1,19 +1,27 @@
 import React, { useState } from "react";
+import { useCookies } from "react-cookie";
+import { SignupDialogContainer } from "../container.js/SignupDialogContainer";
 import Button from "@mui/material/Button";
 import Fab from "@mui/material/Fab";
 import Box from "@mui/material/Box";
-import { SignupDialogContainer } from "../container.js/SignupDialogContainer";
 
 export default function Home() {
+  const [cookies, setCookie, removeCookie] = useCookies(["user"]);
+  const authToken = cookies.AuthToken;
+
   const [open, setOpen] = useState(false);
-  const [title, setTitle] = useState("");
+  const [register, setRegister] = useState(false);
   const handleOpenSignup = () => {
     setOpen(true);
-    setTitle("CREATE ACCOUNT");
+    setRegister(true);
   };
   const handleOpenLogin = () => {
     setOpen(true);
-    setTitle("LOGIN YOUR ACCOUNT");
+  };
+  const handleLogout = () => {
+    removeCookie("UserId");
+    removeCookie("AuthToken");
+    window.location.reload();
   };
   const handleClose = () => setOpen(false);
 
@@ -37,9 +45,9 @@ export default function Home() {
           fontWeight: "bold",
           opacity: 0.8,
         }}
-        onClick={handleOpenLogin}
+        onClick={() => (authToken ? handleLogout() : handleOpenLogin())}
       >
-        Login
+        {authToken ? "LogOut" : "Login"}
       </Button>
       <Box
         sx={{
@@ -57,14 +65,17 @@ export default function Home() {
           <h1 className="kalam">Meetup for dogs.</h1>
           <h2>Join and meet other dog pals</h2>
         </div>
+
         <Fab
           variant="extended"
           className="kalam"
           color="secondary"
           sx={{ my: 2, fontWeight: "bold" }}
-          onClick={handleOpenSignup}
+          onClick={() => {
+            authToken ? window.location.assign("/board") : handleOpenSignup();
+          }}
         >
-          Register Now
+          {authToken ? "Meet Our Dogs" : "Register Now"}
         </Fab>
       </Box>
       <Box
@@ -78,7 +89,10 @@ export default function Home() {
         }}
       >
         {open && (
-          <SignupDialogContainer handleClose={handleClose} title={title} />
+          <SignupDialogContainer
+            handleClose={handleClose}
+            register={register}
+          />
         )}
       </Box>
     </Box>

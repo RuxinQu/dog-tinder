@@ -12,7 +12,7 @@ import VisibilityOff from "@mui/icons-material/VisibilityOff";
 import Alert from "@mui/material/Alert";
 
 export const SignupDialog = ({
-  title,
+  register,
   alertMessage,
   handleClose,
   showPassword,
@@ -35,7 +35,7 @@ export const SignupDialog = ({
       </div>
 
       <h2 className="kalam" style={{ textAlign: "center" }}>
-        {title}
+        {register ? "CREATE ACCOUNT" : "LOGIN YOUR ACCOUNT"}
       </h2>
       <p style={{ padding: "15px 0" }}>
         By clicking Submit, you agree to our terms. Learn how we process your
@@ -104,7 +104,7 @@ export const SignupDialog = ({
             />
           </FormControl>
 
-          {title === "CREATE ACCOUNT" && (
+          {register && (
             <FormControl sx={{ m: 1, width: "25ch" }} variant="outlined">
               <InputLabel htmlFor="outlined-adornment-confirm-password">
                 Confirm Password

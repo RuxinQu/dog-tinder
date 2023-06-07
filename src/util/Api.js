@@ -5,9 +5,9 @@ const getOptions = {
   },
 };
 
-export const signUp = async (data) => {
+export const signIn = async (data, request) => {
   try {
-    const response = await fetch("http://localhost:3001/user/register", {
+    const response = await fetch(`http://localhost:3001/user/${request}`, {
       method: "POST",
       body: JSON.stringify(data),
       headers: {
