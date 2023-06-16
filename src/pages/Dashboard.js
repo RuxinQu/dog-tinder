@@ -1,8 +1,9 @@
 import React, { useState } from "react";
 import { DogCard } from "../components/DogCard";
 import { Header } from "../components/Header";
-import { MatchList } from "../components/MatchList";
-import { Chat } from "../components/Chat";
+// import { MatchList } from "../components/MatchList";
+// import { Chat } from "../components/Chat";
+import { UserContainer } from "../container/UserContainer";
 import Box from "@mui/material/Box";
 
 export default function Dashboard() {
@@ -16,7 +17,7 @@ export default function Dashboard() {
   };
   return (
     <Box sx={{ display: "flex", justifyContent: "space-between" }}>
-      {showHeader && <MatchList />}
+      {/* {showHeader && <MatchList />} */}
       <Box sx={{ flexGrow: 1 }}>
         <Header
           showHeader={showHeader}
@@ -25,7 +26,7 @@ export default function Dashboard() {
         />
         <DogCard />
       </Box>
-      {showChat && <Chat />}
+      {showChat && <UserContainer />}
     </Box>
   );
 }

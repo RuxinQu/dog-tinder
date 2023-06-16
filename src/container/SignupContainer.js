@@ -2,10 +2,10 @@ import React, { useState } from "react";
 import { useCookies } from "react-cookie";
 
 import * as Yup from "yup";
-import { SignupDialog } from "../components/SignupDialog";
+import { Signup } from "../components/Signup";
 import { signIn } from "../util/Api";
 
-export const SignupDialogContainer = ({ register, handleClose }) => {
+export const SignupContainer = ({ register, handleClose }) => {
   const [cookie, setCookie] = useCookies(null);
   // hide password input
   const [showPassword, setShowPassword] = useState(false);
@@ -49,7 +49,7 @@ export const SignupDialogContainer = ({ register, handleClose }) => {
   };
 
   return (
-    <SignupDialog
+    <Signup
       register={register}
       alertMessage={alertMessage}
       handleClose={handleClose}

@@ -12,7 +12,7 @@ import VisibilityOff from "@mui/icons-material/VisibilityOff";
 import CancelOutlinedIcon from "@mui/icons-material/CancelOutlined";
 import Alert from "@mui/material/Alert";
 
-export const SignupDialog = ({
+export const Signup = ({
   register,
   alertMessage,
   handleClose,

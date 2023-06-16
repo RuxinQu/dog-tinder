@@ -6,8 +6,8 @@ import { theme, Layout } from "./util/theme";
 
 import Home from "./pages/Home";
 
-import { DogCard } from "./components/DogCard";
-import { Chat } from "./components/Chat";
+import Dashboard from "./pages/Dashboard";
+
 import "./App.css";
 
 function App() {
@@ -18,10 +18,9 @@ function App() {
       <Router>
         <Routes>
           <Route path="/" element={<Home />} />
-          <Route element={<Layout />}>
-            {authToken && <Route path="/board" element={<DogCard />} />}
-            <Route path="/11" element={<Chat />} />
-          </Route>
+          {/* <Route element={<Layout />}> */}
+          {authToken && <Route path="/board" element={<Dashboard />} />}
+          {/* </Route> */}
         </Routes>
       </Router>
     </ThemeProvider>
