@@ -4,8 +4,6 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "@chatscope/chat-ui-kit-react": "^1.10.1",
-    "@chatscope/chat-ui-kit-styles": "^1.4.0",
     "@emotion/react": "^11.11.0",
     "@emotion/styled": "^11.11.0",
     "@mui/icons-material": "^5.11.16",
@@ -15,6 +13,7 @@
     "@testing-library/react": "^13.4.0",
     "@testing-library/user-event": "^13.5.0",
     "formik": "^2.4.1",
+    "luxon": "^3.3.0",
     "react": "^18.2.0",
     "react-cookie": "^4.1.1",
     "react-dom": "^18.2.0",

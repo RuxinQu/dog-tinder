@@ -7,7 +7,7 @@ import PetsIcon from "@mui/icons-material/Pets";
 import PersonIcon from "@mui/icons-material/Person";
 import ForumIcon from "@mui/icons-material/Forum";
 
-export const Header = () => {
+export const Header = ({ handleToggleHeader, handleToggleChat }) => {
   const navigate = useNavigate();
   return (
     <Box sx={{ flexGrow: 1 }} className="header">
@@ -16,7 +16,7 @@ export const Header = () => {
         sx={{ textAlign: "center", maxWidth: 1000, margin: "0 auto" }}
       >
         <Grid item xs={4}>
-          <IconButton>
+          <IconButton onClick={handleToggleHeader}>
             <PersonIcon fontSize="large" />
           </IconButton>
         </Grid>
@@ -26,7 +26,7 @@ export const Header = () => {
           </IconButton>
         </Grid>
         <Grid item xs={4}>
-          <IconButton>
+          <IconButton onClick={handleToggleChat}>
             <ForumIcon fontSize="large" color="info" />
           </IconButton>
         </Grid>

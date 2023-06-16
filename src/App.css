@@ -28,6 +28,14 @@ h1 {
   text-align: center;
 }
 
+/* dashboard  */
+
+.match-list {
+  background-color: red;
+  width: 25%;
+  height: 100dvh;
+}
+
 .header {
   height: 12dvh;
   display: flex;
@@ -40,11 +48,6 @@ h1 {
   justify-content: center;
   align-items: center;
   height: 88dvh;
-}
-
-h1 {
-  font-family: "Damion", cursive;
-  text-shadow: 0px 0px 60px 0px rgba(0, 0, 0, 0.3);
 }
 
 .swipe {

@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useCookies } from "react-cookie";
-import { SignupDialogContainer } from "../container.js/SignupDialogContainer";
+import { SignupContainer } from "../container/SignupContainer";
 import Button from "@mui/material/Button";
 import Fab from "@mui/material/Fab";
 import Box from "@mui/material/Box";
@@ -16,6 +16,7 @@ export default function Home() {
     setRegister(true);
   };
   const handleOpenLogin = () => {
+    setRegister(false);
     setOpen(true);
   };
   const handleLogout = () => {
@@ -89,10 +90,7 @@ export default function Home() {
         }}
       >
         {open && (
-          <SignupDialogContainer
-            handleClose={handleClose}
-            register={register}
-          />
+          <SignupContainer handleClose={handleClose} register={register} />
         )}
       </Box>
     </Box>
