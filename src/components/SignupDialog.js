@@ -9,6 +9,7 @@ import FormControl from "@mui/material/FormControl";
 import TextField from "@mui/material/TextField";
 import Visibility from "@mui/icons-material/Visibility";
 import VisibilityOff from "@mui/icons-material/VisibilityOff";
+import CancelOutlinedIcon from "@mui/icons-material/CancelOutlined";
 import Alert from "@mui/material/Alert";
 
 export const SignupDialog = ({
@@ -31,7 +32,7 @@ export const SignupDialog = ({
   return (
     <div className="signup-form">
       <div onClick={handleClose} style={{ textAlign: "right" }}>
-        ⓧ
+        <CancelOutlinedIcon />
       </div>
 
       <h2 className="kalam" style={{ textAlign: "center" }}>

@@ -16,6 +16,7 @@ export default function Home() {
     setRegister(true);
   };
   const handleOpenLogin = () => {
+    setRegister(false);
     setOpen(true);
   };
   const handleLogout = () => {

@@ -1,5 +1,6 @@
 import React, { useState, useMemo, useRef } from "react";
 import TinderCard from "react-tinder-card";
+import Box from "@mui/material/Box";
 import Fab from "@mui/material/Fab";
 import ReplayIcon from "@mui/icons-material/Replay";
 import CloseIcon from "@mui/icons-material/Close";
@@ -81,7 +82,7 @@ export const DogCard = () => {
   };
 
   return (
-    <div className="tinder-card">
+    <Box className="tinder-card">
       <link
         href="https://fonts.googleapis.com/css?family=Damion&display=swap"
         rel="stylesheet"
@@ -125,6 +126,6 @@ export const DogCard = () => {
           You swiped {lastDirection}
         </h2>
       )}
-    </div>
+    </Box>
   );
 };
