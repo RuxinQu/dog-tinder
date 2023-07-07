@@ -1,35 +1,66 @@
 import React, { useState, useMemo, useRef } from "react";
+import { useCookies } from "react-cookie";
+import { addMatch } from "../util/Api";
 import TinderCard from "react-tinder-card";
 import Box from "@mui/material/Box";
 import Fab from "@mui/material/Fab";
-import ReplayIcon from "@mui/icons-material/Replay";
 import CloseIcon from "@mui/icons-material/Close";
 import FavoriteOutlinedIcon from "@mui/icons-material/FavoriteOutlined";
+import ImageGallery from "react-image-gallery";
+import "react-image-gallery/styles/css/image-gallery.css";
+
+import Card from "@mui/material/Card";
+import CardContent from "@mui/material/CardContent";
+import CardMedia from "@mui/material/CardMedia";
+
+import Typography from "@mui/material/Typography";
 
 const db = [
   {
+    id: "01",
     name: "Richard Hendricks",
-    url: "https://images.dog.ceo/breeds/saluki/n02091831_8843.jpg",
+    breed: "ddd",
+    age: "1",
+    description: "laalall",
+    img: [
+      { original: "https://images.dog.ceo/breeds/saluki/n02091831_8843.jpg" },
+      { original: "https://images.dog.ceo/breeds/saluki/n02091831_8843.jpg" },
+      { original: "https://images.dog.ceo/breeds/saluki/n02091831_8843.jpg" },
+    ],
   },
   {
     name: "Erlich Bachman",
-    url: "https://images.dog.ceo/breeds/bouvier/n02106382_1000.jpg",
+    id: "02",
+    breed: "ddd",
+    age: "1",
+    description:
+      "laalalllaalallaalallaalallaalallaalallaalallaalallaalallaalallaalallaalallaalallaalallaalallaalallaalallaalal",
+    img: [
+      { original: "https://images.dog.ceo/breeds/bouvier/n02106382_1000.jpg" },
+      { original: "https://images.dog.ceo/breeds/bouvier/n02106382_1000.jpg" },
+      { original: "https://images.dog.ceo/breeds/bouvier/n02106382_1000.jpg" },
+    ],
   },
-  {
-    name: "Monica Hall",
-    url: "https://images.dog.ceo/breeds/mix/dog1.jpg",
-  },
-  {
-    name: "Jared Dunn",
-    url: "https://images.dog.ceo/breeds/spitz-japanese/tofu.jpg",
-  },
-  {
-    name: "Dinesh Chugtai",
-    url: "https://images.dog.ceo/breeds/setter-english/n02100735_7731.jpg",
-  },
+  // {
+  //   name: "Monica Hall",
+  //   id: "03",
+  //   url: "https://images.dog.ceo/breeds/mix/dog1.jpg",
+  // },
+  // {
+  //   name: "Jared Dunn",
+  //   id: "04",
+  //   url: "https://images.dog.ceo/breeds/spitz-japanese/tofu.jpg",
+  // },
+  // {
+  //   name: "Dinesh Chugtai",
+  //   id: "05",
+  //   url: "https://images.dog.ceo/breeds/setter-english/n02100735_7731.jpg",
+  // },
 ];
 
 export const DogCard = () => {
+  const [cookies, setCookie, removeCookie] = useCookies(["user"]);
+  const myId = cookies.UserId;
   const [currentIndex, setCurrentIndex] = useState(db.length - 1);
   const [lastDirection, setLastDirection] = useState();
   // used for outOfFrame closure
@@ -53,9 +84,11 @@ export const DogCard = () => {
   const canSwipe = currentIndex >= 0;
 
   // set last direction and decrease current index
-  const swiped = (direction, nameToDelete, index) => {
+  const swiped = (direction, nameToDelete, characterId, index) => {
     setLastDirection(direction);
     updateCurrentIndex(index - 1);
+    console.log(direction);
+    addMatch(myId, characterId);
   };
 
   const outOfFrame = (name, idx) => {
@@ -98,24 +131,33 @@ export const DogCard = () => {
             ref={childRefs[index]}
             className="swipe"
             key={character.name}
-            onSwipe={(dir) => swiped(dir, character.name, index)}
+            onSwipe={(dir) => swiped(dir, character.name, character.id, index)}
             onCardLeftScreen={() => outOfFrame(character.name, index)}
           >
-            <div
-              style={{ backgroundImage: "url(" + character.url + ")" }}
-              className="card"
-            >
-              <h3>{character.name}</h3>
-            </div>
+            <Card className="card">
+              <CardMedia>
+                <ImageGallery items={character.img} loading="lazy" />
+              </CardMedia>
+              <CardContent>
+                <Typography gutterBottom variant="h5" component="div">
+                  {character.name}
+                </Typography>
+                <Typography gutterBottom variant="body1" component="div">
+                  breed: {character.breed}
+                  <br />
+                  age: {character.age}
+                </Typography>
+                <Typography variant="body2" color="text.secondary">
+                  {character.description}
+                </Typography>
+              </CardContent>
+            </Card>
           </TinderCard>
         ))}
       </div>
       <div className="buttons">
         <Fab size="small" disabled={!canSwipe} onClick={() => swipe("left")}>
           <CloseIcon color="error" />
-        </Fab>
-        <Fab size="small" disabled={!canGoBack} onClick={() => goBack()}>
-          <ReplayIcon color="warning" />
         </Fab>
         <Fab size="small" disabled={!canSwipe} onClick={() => swipe("right")}>
           <FavoriteOutlinedIcon color="success" />
