@@ -5,7 +5,7 @@ import { ThemeProvider } from "@mui/material/styles";
 import { theme, Layout } from "./util/theme";
 
 import Home from "./pages/Home";
-
+import Profile from "./pages/Profile";
 import Dashboard from "./pages/Dashboard";
 
 import "./App.css";
@@ -18,9 +18,9 @@ function App() {
       <Router>
         <Routes>
           <Route path="/" element={<Home />} />
-          {/* <Route element={<Layout />}> */}
+
           {authToken && <Route path="/board" element={<Dashboard />} />}
-          {/* </Route> */}
+          {authToken && <Route path="/profile" element={<Profile />} />}
         </Routes>
       </Router>
     </ThemeProvider>

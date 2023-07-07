@@ -16,7 +16,7 @@ export const Header = ({ handleToggleHeader, handleToggleChat }) => {
         sx={{ textAlign: "center", maxWidth: 1000, margin: "0 auto" }}
       >
         <Grid item xs={4}>
-          <IconButton onClick={handleToggleHeader}>
+          <IconButton onClick={() => navigate("/profile")}>
             <PersonIcon fontSize="large" />
           </IconButton>
         </Grid>

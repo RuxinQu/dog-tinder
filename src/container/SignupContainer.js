@@ -42,7 +42,9 @@ export const SignupContainer = ({ register, handleClose }) => {
     if (response.ok) {
       setCookie("AuthToken", jsonResponse.token);
       setCookie("UserId", jsonResponse.user._id);
-      window.location.assign("/board");
+      option === "register"
+        ? window.location.assign("/profile")
+        : window.location.assign("/board");
     } else {
       setAlertMessage(jsonResponse.message);
     }
