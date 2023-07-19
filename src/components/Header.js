@@ -84,7 +84,7 @@ export const Header = ({ handleToggleChat }) => {
           </IconButton>
         </Grid>
         <Grid item xs={4}>
-          <IconButton onClick={handleToggleChat}>
+          <IconButton onClick={() => navigate("/chat")}>
             <ForumIcon fontSize="large" color="info" />
           </IconButton>
         </Grid>

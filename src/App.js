@@ -7,6 +7,7 @@ import { theme, Layout } from "./util/theme";
 import Home from "./pages/Home";
 import Profile from "./pages/Profile";
 import Dashboard from "./pages/Dashboard";
+import Chat from "./pages/Chat";
 
 import "./App.css";
 
@@ -26,6 +27,7 @@ function App() {
             {authToken && (
               <Route path="/profile" element={<Profile myId={myId} />} />
             )}
+            {authToken && <Route path="/chat" element={<Chat myId={myId} />} />}
           </Route>
         </Routes>
       </Router>

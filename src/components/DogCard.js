@@ -1,5 +1,5 @@
 import React, { useState, useMemo, useRef, useEffect } from "react";
-import { addMatch, getUsers } from "../util/Api";
+import { addMatch } from "../util/Api";
 import TinderCard from "react-tinder-card";
 import Box from "@mui/material/Box";
 import Fab from "@mui/material/Fab";
@@ -54,6 +54,21 @@ export const DogCard = ({ myId, users }) => {
       await childRefs[currentIndex].current.swipe(dir); // Swipe the card!
     }
   };
+
+  const swipeConfig = {
+    // Set the allowable swipe directions
+    swipe: {
+      left: true, // Allow swipe left
+      right: true, // Allow swipe right
+      up: false, // Disable swipe up
+      down: false, // Disable swipe down
+    },
+    // Set the swipe tolerance
+    delta: 20,
+    // Set the initial position threshold before triggering a swipe
+    preventSwipe: "pre",
+  };
+
   return (
     <Box className="tinder-card">
       <link
@@ -72,23 +87,31 @@ export const DogCard = ({ myId, users }) => {
             className="swipe"
             key={character._id}
             onSwipe={(dir) => swiped(dir, character, index)}
+            {...swipeConfig}
             onCardLeftScreen={() => outOfFrame(character.name, index)}
           >
             <Card className="card">
-              <CardMedia>
-                <ImageGallery items={character.imgs} loading="lazy" />
-              </CardMedia>
+              <CardMedia
+                component="img"
+                height="250"
+                image={
+                  character.imgs[0]?.original ||
+                  "https://www.bil-jac.com/Images/DogPlaceholder.svg"
+                }
+                alt={character.name}
+              />
               <CardContent>
                 <Typography gutterBottom variant="h5" component="div">
-                  {character.name}
+                  {character.name || "user" + character._id.slice(3, 7)}
                 </Typography>
                 <Typography gutterBottom variant="body1" component="div">
-                  breed: {character.breed}
+                  breed: {character.breed || "unknown"}
                   <br />
-                  age: {character.age}
+                  age: {character.age || "unknown"}
                 </Typography>
                 <Typography variant="body2" color="text.secondary">
-                  {character.description}
+                  {character.description ||
+                    "This user hasn't updated the profile yet"}
                 </Typography>
               </CardContent>
             </Card>
