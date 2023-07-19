@@ -21,6 +21,15 @@ export const signIn = async (data, request) => {
   }
 };
 
+export const getUsers = async () => {
+  try {
+    const response = await fetch(`/user/all`, getOptions);
+    return response;
+  } catch (err) {
+    console.log(err);
+  }
+};
+
 export const getUser = async (id) => {
   try {
     const response = await fetch(`/user/one/${id}`, getOptions);

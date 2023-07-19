@@ -1,6 +1,5 @@
 import React, { useState, useMemo, useRef, useEffect } from "react";
-import { useCookies } from "react-cookie";
-import { addMatch, getUser } from "../util/Api";
+import { addMatch, getUsers } from "../util/Api";
 import TinderCard from "react-tinder-card";
 import Box from "@mui/material/Box";
 import Fab from "@mui/material/Fab";
@@ -8,74 +7,20 @@ import CloseIcon from "@mui/icons-material/Close";
 import FavoriteOutlinedIcon from "@mui/icons-material/FavoriteOutlined";
 import ImageGallery from "react-image-gallery";
 import "react-image-gallery/styles/css/image-gallery.css";
-
 import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
-
 import Typography from "@mui/material/Typography";
 
-const db = [
-  {
-    id: "01",
-    name: "Richard Hendricks",
-    breed: "ddd",
-    age: "1",
-    description: "laalall",
-    img: [
-      { original: "https://images.dog.ceo/breeds/saluki/n02091831_8843.jpg" },
-      { original: "https://images.dog.ceo/breeds/saluki/n02091831_8843.jpg" },
-      { original: "https://images.dog.ceo/breeds/saluki/n02091831_8843.jpg" },
-    ],
-  },
-  {
-    name: "Erlich Bachman",
-    id: "02",
-    breed: "ddd",
-    age: "1",
-    description:
-      "laalalllaalallaalallaalallaalallaalallaalallaalallaalallaalallaalallaalallaalallaalallaalallaalallaalallaalal",
-    img: [
-      { original: "https://images.dog.ceo/breeds/bouvier/n02106382_1000.jpg" },
-      { original: "https://images.dog.ceo/breeds/bouvier/n02106382_1000.jpg" },
-      { original: "https://images.dog.ceo/breeds/bouvier/n02106382_1000.jpg" },
-    ],
-  },
-  // {
-  //   name: "Monica Hall",
-  //   id: "03",
-  //   url: "https://images.dog.ceo/breeds/mix/dog1.jpg",
-  // },
-  // {
-  //   name: "Jared Dunn",
-  //   id: "04",
-  //   url: "https://images.dog.ceo/breeds/spitz-japanese/tofu.jpg",
-  // },
-  // {
-  //   name: "Dinesh Chugtai",
-  //   id: "05",
-  //   url: "https://images.dog.ceo/breeds/setter-english/n02100735_7731.jpg",
-  // },
-];
-
-export const DogCard = () => {
-  useEffect(() => {
-    const getUsers = async () => {
-      const response = await getUser();
-      console.log(response);
-    };
-    getUsers();
-  }, []);
-  const [cookies, setCookie, removeCookie] = useCookies(["user"]);
-  const myId = cookies.UserId;
-  const [currentIndex, setCurrentIndex] = useState(db.length - 1);
+export const DogCard = ({ myId, users }) => {
+  const [currentIndex, setCurrentIndex] = useState(users.length - 1);
   const [lastDirection, setLastDirection] = useState();
   // used for outOfFrame closure
   const currentIndexRef = useRef(currentIndex);
 
   const childRefs = useMemo(
     () =>
-      Array(db.length)
+      Array(users.length)
         .fill(0)
         .map((i) => React.createRef()),
     []
@@ -85,17 +30,14 @@ export const DogCard = () => {
     setCurrentIndex(val);
     currentIndexRef.current = val;
   };
-
-  const canGoBack = currentIndex < db.length - 1;
-
   const canSwipe = currentIndex >= 0;
-
   // set last direction and decrease current index
-  const swiped = (direction, nameToDelete, characterId, index) => {
+  const swiped = (direction, character, index) => {
     setLastDirection(direction);
     updateCurrentIndex(index - 1);
-    console.log(direction);
-    addMatch(myId, characterId);
+    if (direction === "right") {
+      addMatch(myId, character._id);
+    }
   };
 
   const outOfFrame = (name, idx) => {
@@ -108,19 +50,10 @@ export const DogCard = () => {
   };
 
   const swipe = async (dir) => {
-    if (canSwipe && currentIndex < db.length) {
+    if (canSwipe && currentIndex < users.length) {
       await childRefs[currentIndex].current.swipe(dir); // Swipe the card!
     }
   };
-
-  // increase current index and show card
-  const goBack = async () => {
-    if (!canGoBack) return;
-    const newIndex = currentIndex + 1;
-    updateCurrentIndex(newIndex);
-    await childRefs[newIndex].current.restoreCard();
-  };
-
   return (
     <Box className="tinder-card">
       <link
@@ -133,17 +66,17 @@ export const DogCard = () => {
       />
 
       <div className="cardContainer">
-        {db.map((character, index) => (
+        {users?.map((character, index) => (
           <TinderCard
             ref={childRefs[index]}
             className="swipe"
-            key={character.name}
-            onSwipe={(dir) => swiped(dir, character.name, character.id, index)}
+            key={character._id}
+            onSwipe={(dir) => swiped(dir, character, index)}
             onCardLeftScreen={() => outOfFrame(character.name, index)}
           >
             <Card className="card">
               <CardMedia>
-                <ImageGallery items={character.img} loading="lazy" />
+                <ImageGallery items={character.imgs} loading="lazy" />
               </CardMedia>
               <CardContent>
                 <Typography gutterBottom variant="h5" component="div">
