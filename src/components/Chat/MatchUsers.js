@@ -8,30 +8,32 @@ export function MatchUsers({ u, setShowbox, setYourId, myId }) {
   const [allMatch, setAllmatch] = useState([]);
   useEffect(() => {
     const getMatch = async () => {
-      const myMatches = await fetch(`/user/match/${myId}`, {
+      const myProfile = await fetch(`/user/one/${myId}`, {
         method: "GET",
         headers: {
           "Content-Type": "application/json",
         },
       });
-      const myMatchesJson = await myMatches.json();
-      if (myMatchesJson.length) {
-        setMyMatches([...myMatchesJson]);
+      const myProfileJson = await myProfile.json();
+      const myMatches = myProfileJson.matches;
+      if (myMatches.length) {
+        setMyMatches([...myMatches]);
       }
 
-      const yourMatches = await fetch(`/user/match/${u._id}`, {
+      const yourProfile = await fetch(`/user/one/${u._id}`, {
         method: "GET",
         headers: {
           "Content-Type": "application/json",
         },
       });
-      const yourMatchesJson = await yourMatches.json();
-      const bothMatch = myMatchesJson.concat(yourMatchesJson);
+      const yourProfileJson = await yourProfile.json();
+      const yourMatches = yourProfileJson.matches;
+      const bothMatch = myMatches.concat(yourMatches);
       if (bothMatch.length) {
         setAllmatch([...bothMatch]);
       }
 
-      if (myMatchesJson?.includes(u._id) && yourMatchesJson?.includes(myId)) {
+      if (myMatches?.includes(u._id) && yourMatches?.includes(myId)) {
         setMatch(true);
       }
     };

@@ -1,6 +1,6 @@
-import React, { useState, useMemo, useRef } from "react";
+import React, { useState, useMemo, useRef, useEffect } from "react";
 import { useCookies } from "react-cookie";
-import { addMatch } from "../util/Api";
+import { addMatch, getUser } from "../util/Api";
 import TinderCard from "react-tinder-card";
 import Box from "@mui/material/Box";
 import Fab from "@mui/material/Fab";
@@ -59,6 +59,13 @@ const db = [
 ];
 
 export const DogCard = () => {
+  useEffect(() => {
+    const getUsers = async () => {
+      const response = await getUser();
+      console.log(response);
+    };
+    getUsers();
+  }, []);
   const [cookies, setCookie, removeCookie] = useCookies(["user"]);
   const myId = cookies.UserId;
   const [currentIndex, setCurrentIndex] = useState(db.length - 1);

@@ -15,18 +15,5 @@ export default function Dashboard() {
   const handleToggleChat = () => {
     showChat ? setShowChat(false) : setShowChat(true);
   };
-  return (
-    <Box sx={{ display: "flex", justifyContent: "space-between" }}>
-      {/* {showHeader && <MatchList />} */}
-      <Box sx={{ flexGrow: 1 }}>
-        <Header
-          showHeader={showHeader}
-          handleToggleHeader={handleToggleHeader}
-          handleToggleChat={handleToggleChat}
-        />
-        <DogCard />
-      </Box>
-      {showChat && <UserContainer />}
-    </Box>
-  );
+  return <DogCard />;
 }

@@ -13,14 +13,20 @@ import "./App.css";
 function App() {
   const [cookies, setCookie] = useCookies(["user"]);
   const authToken = cookies.AuthToken;
+  const myId = cookies.UserId;
   return (
     <ThemeProvider theme={theme}>
       <Router>
         <Routes>
           <Route path="/" element={<Home />} />
-
-          {authToken && <Route path="/board" element={<Dashboard />} />}
-          {authToken && <Route path="/profile" element={<Profile />} />}
+          <Route element={<Layout />}>
+            {authToken && (
+              <Route path="/board" element={<Dashboard myId={myId} />} />
+            )}
+            {authToken && (
+              <Route path="/profile" element={<Profile myId={myId} />} />
+            )}
+          </Route>
         </Routes>
       </Router>
     </ThemeProvider>
