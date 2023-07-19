@@ -19,13 +19,14 @@ function App() {
       <Router>
         <Routes>
           <Route path="/" element={<Home />} />
-
-          {authToken && (
-            <Route path="/board" element={<Dashboard myId={myId} />} />
-          )}
-          {authToken && (
-            <Route path="/profile" element={<Profile myId={myId} />} />
-          )}
+          <Route element={<Layout />}>
+            {authToken && (
+              <Route path="/board" element={<Dashboard myId={myId} />} />
+            )}
+            {authToken && (
+              <Route path="/profile" element={<Profile myId={myId} />} />
+            )}
+          </Route>
         </Routes>
       </Router>
     </ThemeProvider>

@@ -1,8 +1,9 @@
-import React, { useState } from "react";
+import React from "react";
 import { deleteImg } from "../util/Api";
 import { ButtonDialog } from "./ButtonDialog";
 
 export const PetForm = ({
+  myId,
   formState,
   handleInputChange,
   setPetImage,
@@ -10,7 +11,6 @@ export const PetForm = ({
   petImage,
   disableButton,
   alertText,
-  title,
   handleSubmit,
 }) => {
   return (
@@ -117,7 +117,6 @@ export const PetForm = ({
       <div>
         <p>Pet Images: </p>
         {petImage?.map((i) => {
-          console.log(i);
           return (
             <div
               key={i.url}
@@ -133,7 +132,7 @@ export const PetForm = ({
                     );
                     newImageState.unshift(i);
                     setPetImage(newImageState);
-                    formState.images = newImageState;
+                    formState.imgs = newImageState;
                     handleSubmit();
                   }}
                 >
@@ -146,11 +145,7 @@ export const PetForm = ({
                     );
                     setPetImage(newImageState);
                     const url = new URL(i.url);
-                    await deleteImg(
-                      url.pathname.slice(1),
-                      formState._id,
-                      i._id
-                    );
+                    await deleteImg(url.pathname.slice(1), myId, i._id);
                   }}
                 />
               </div>
@@ -160,9 +155,7 @@ export const PetForm = ({
       </div>
 
       <div style={{ marginTop: "1rem" }}>
-        <button disabled={disableButton}>
-          {title === "edit" ? "Update" : "Submit"}
-        </button>
+        <button disabled={disableButton}>Update</button>
       </div>
       <small style={{ color: "red", display: "block" }}>{alertText}</small>
     </form>

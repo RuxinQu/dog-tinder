@@ -1,20 +1,8 @@
 import React, { useState, useEffect } from "react";
-
-import { useCookies } from "react-cookie";
-import { useNavigate } from "react-router-dom";
 import { updateProfile, uploadImgs, getUser } from "../util/Api";
 import { PetForm } from "../components/Petform";
-const petUploadHelper = [
-  "name",
-  "breed",
-  "age",
-  "size",
-  "gender",
-  "description",
-];
 
 export default function Profile({ myId }) {
-  const navigate = useNavigate();
   const [formState, setFormState] = useState({});
   const [formImage, setFormImage] = useState([]);
   const [petImage, setPetImage] = useState([]);
@@ -28,7 +16,7 @@ export default function Profile({ myId }) {
       setPetImage(userJson.imgs);
     };
     getUserProfile();
-  }, []);
+  }, [myId]);
   const handleInputChange = (event) => {
     const { name, value } = event.target;
     setFormState({ ...formState, [name]: value });
@@ -45,37 +33,39 @@ export default function Profile({ myId }) {
     formImage.forEach((img) => {
       data.append("imgs", img);
     });
-    // try {
-    if (formImage.length) {
-      const uploadImgResponse = await uploadImgs(data);
-      console.log(uploadImgResponse);
-      const imageUrl = uploadImgResponse.imgs;
-      formState.imgs.push(...imageUrl);
+    try {
+      if (formImage.length) {
+        const uploadImgResponse = await uploadImgs(data);
+        console.log(uploadImgResponse);
+        const imageUrl = uploadImgResponse.imgs;
+        formState.imgs.push(...imageUrl);
+      }
+      const response = await updateProfile(myId, formState);
+      if (response.ok) {
+        setAlertText("Profile updated");
+        setDisableButton(false);
+        setTimeout(() => {
+          setAlertText("");
+          window.location.reload();
+        }, 2000);
+      }
+    } catch (error) {
+      setAlertText("failed to update the profile");
+      console.log(error);
     }
-    console.log(formState);
-    const response = await updateProfile(myId, formState);
-    console.log(response);
-    //   if (response.ok) {
-    //     setAlertText("pet updated");
-    //     setDisableButton(false);
-    //     setFormImage([]);
-    //     setTimeout(() => {
-    //       setAlertText("");
-    //     }, 2000);
-    //   }
-    // } catch (error) {
-    //   setAlertText("failed to add the pet");
-    //   console.log(error);
-    // }
   };
 
   return (
     <PetForm
+      myId={myId}
       formState={formState}
       petImage={petImage}
+      setPetImage={setPetImage}
       handleInputChange={handleInputChange}
       handleFormImageChange={handleFormImageChange}
       handleSubmit={handleSubmit}
+      alertText={alertText}
+      disableButton={disableButton}
     />
   );
 }
