@@ -1,44 +1,56 @@
-import React, { useState, useEffect } from "react";
-import { ChatDisplay } from "../components/Chat/ChatDisplay";
+import React, { useEffect, useState } from "react";
+import { getUser } from "../util/Api";
 
-export function ChatContainer({ myId, yourId }) {
-  const [allMessage, setAllMessage] = useState([]);
+import Avatar from "@mui/material/Avatar";
+
+export function ChatContainer({ yourId, myId, setUserToDisplay }) {
+  const [isHovered, setIsHovered] = useState(false);
+  const [you, setYou] = useState([]);
+  const [match, setMatch] = useState(false);
   useEffect(() => {
-    const getMessage = async () => {
-      const myMessage = await fetch(
-        `http://localhost:3001/message/one?fromId=${myId}&receiveId=${yourId}`,
-        {
-          method: "GET",
-          headers: {
-            "Content-Type": "application/json",
-          },
-        }
-      );
-      const myMessageJson = await myMessage.json();
-      const yourMessage = await fetch(
-        `http://localhost:3001/message/one?fromId=${yourId}&receiveId=${myId}`,
-        {
-          method: "GET",
-          headers: {
-            "Content-Type": "application/json",
-          },
-        }
-      );
-      const yourMessageJson = await yourMessage.json();
-      setAllMessage([...myMessageJson, ...yourMessageJson]);
+    const getMatch = async () => {
+      const youInfo = await getUser(yourId);
+      const youInfoJson = await youInfo.json();
+      setYou(youInfoJson);
+      const yourMatch = youInfoJson.matches;
+      if (yourMatch.includes(myId)) {
+        setMatch(true);
+      } else setMatch(false);
     };
-    getMessage();
-  }, [yourId, allMessage]);
+    getMatch();
+  }, [yourId, match]);
 
-  const message = allMessage.sort(
-    (a, b) => new Date(a.timeSent) - new Date(b.timeSent)
-  );
+  const handleMouseEnter = () => {
+    setIsHovered(true);
+  };
 
+  const handleMouseLeave = () => {
+    setIsHovered(false);
+  };
   return (
-    <>
-      {allMessage.length && (
-        <ChatDisplay message={message} myId={myId} yourId={yourId} />
-      )}
-    </>
+    match && (
+      <div
+        style={{
+          display: "flex",
+          alignItems: "center",
+          padding: 10,
+          backgroundColor: isHovered ? "#fff" : "#f1f1f1",
+        }}
+        onClick={() => setUserToDisplay(you)}
+        onMouseEnter={handleMouseEnter}
+        onMouseLeave={handleMouseLeave}
+      >
+        <Avatar
+          alt={you.name}
+          src={
+            you.imgs[0]?.original ||
+            "https://www.bil-jac.com/Images/DogPlaceholder.svg"
+          }
+        />
+        <span style={{ padding: "0 5px" }}>
+          {you.name || "user" + you._id.slice(3, 7)}
+        </span>
+      </div>
+    )
   );
 }
