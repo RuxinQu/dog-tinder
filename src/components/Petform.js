@@ -119,10 +119,10 @@ export const PetForm = ({
         {petImage?.map((i) => {
           return (
             <div
-              key={i.url}
+              key={i.original}
               style={{ display: "inline-block", margin: "0 10px" }}
             >
-              <img src={i.url} alt={formState.name} width={"100"} />
+              <img src={i.original} alt={formState.name} width={"100"} />
               <div>
                 <button
                   onClick={(e) => {
@@ -144,7 +144,7 @@ export const PetForm = ({
                       (img) => img._id !== i._id
                     );
                     setPetImage(newImageState);
-                    const url = new URL(i.url);
+                    const url = new URL(i.original);
                     await deleteImg(url.pathname.slice(1), myId, i._id);
                   }}
                 />

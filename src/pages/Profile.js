@@ -36,8 +36,8 @@ export default function Profile({ myId }) {
     try {
       if (formImage.length) {
         const uploadImgResponse = await uploadImgs(data);
-        console.log(uploadImgResponse);
         const imageUrl = uploadImgResponse.imgs;
+        console.log(imageUrl);
         formState.imgs.push(...imageUrl);
       }
       const response = await updateProfile(myId, formState);
