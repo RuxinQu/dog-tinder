@@ -36,7 +36,7 @@ export function ChatContainer({ yourId, myId, setUserToDisplay }) {
           padding: 10,
           backgroundColor: isHovered ? "#fff" : "#f1f1f1",
         }}
-        onClick={() => setUserToDisplay(yourId)}
+        onClick={() => setUserToDisplay(you)}
         onMouseEnter={handleMouseEnter}
         onMouseLeave={handleMouseLeave}
       >

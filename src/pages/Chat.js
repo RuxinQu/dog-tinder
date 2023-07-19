@@ -29,7 +29,7 @@ export default function Chat({ myId }) {
           />
         ))}
       </Box>
-      <MessageContainer yourId={userToDisplay} myId={myId} />
+      <MessageContainer you={userToDisplay} me={me} />
     </Box>
   );
 }
