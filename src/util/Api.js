@@ -1,3 +1,13 @@
+const generateOptions = (method, token) => {
+  return {
+    method: method,
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${token}`,
+    },
+  };
+};
+
 const getOptions = {
   method: "GET",
   headers: {
@@ -21,31 +31,31 @@ export const signIn = async (data, request) => {
   }
 };
 
-export const getUsers = async () => {
+export const getUsers = async (token) => {
+  const options = generateOptions("GET", token);
   try {
-    const response = await fetch(`/user/all`, getOptions);
+    const response = await fetch(`/user/all`, options);
     return response;
   } catch (err) {
     console.log(err);
   }
 };
 
-export const getUser = async (id) => {
+export const getUser = async (id, token) => {
+  const options = generateOptions("GET", token);
   try {
-    const response = await fetch(`/user/one/${id}`, getOptions);
+    const response = await fetch(`/user/one/${id}`, options);
     return response;
   } catch (err) {
     console.log(err);
   }
 };
 
-export const updateProfile = async (id, data) => {
+export const updateProfile = async (id, data, token) => {
+  const options = generateOptions("PUT", token);
   try {
     const response = await fetch(`/user/profile/${id}`, {
-      method: "PUT",
-      headers: {
-        "Content-Type": "application/json",
-      },
+      ...options,
       body: JSON.stringify(data),
     });
     return response;
@@ -54,23 +64,25 @@ export const updateProfile = async (id, data) => {
   }
 };
 
-export const addMatch = async (myId, id) => {
+export const addMatch = async (myId, id, token) => {
+  const options = generateOptions("PUT", token);
   const response = await fetch(`/user/add-match?myId=${myId}&yourId=${id}`, {
-    method: "PUT",
-    headers: {
-      "Content-Type": "application/json",
-    },
+    ...options,
     body: JSON.stringify({ id }),
   });
   return response;
 };
 
-export const uploadImgs = async (data) => {
+export const uploadImgs = async (data, token) => {
+  const options = generateOptions("POST", token);
   try {
     const response = await fetch("/user/upload-imgs", {
       mode: "cors",
       method: "POST",
       body: data,
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
     });
     const jsonResponse = await response.json();
     return jsonResponse;
@@ -79,16 +91,25 @@ export const uploadImgs = async (data) => {
   }
 };
 
-export const deleteImg = async (key, userId, imgId) => {
+export const deleteImg = async (key, userId, imgId, token) => {
+  const options = generateOptions("DELETE", token);
   try {
     const response = await fetch(
       `/user/delete-img/${key}/user/${userId}/img/${imgId}`,
-      {
-        method: "DELETE",
-        headers: {
-          "Content-Type": "application/json",
-        },
-      }
+      options
+    );
+    return response;
+  } catch (err) {
+    console.log(err);
+  }
+};
+
+export const getMessage = async (myId, yourId, token) => {
+  const options = generateOptions("GET", token);
+  try {
+    const response = await fetch(
+      `http://localhost:3001/message/one?fromId=${myId}&receiveId=${yourId}`,
+      options
     );
     return response;
   } catch (err) {

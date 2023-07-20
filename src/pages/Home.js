@@ -1,14 +1,10 @@
 import React, { useState } from "react";
-import { useCookies } from "react-cookie";
 import { SignupContainer } from "../container/SignupContainer";
 import Button from "@mui/material/Button";
 import Fab from "@mui/material/Fab";
 import Box from "@mui/material/Box";
 
-export default function Home() {
-  const [cookies, setCookie, removeCookie] = useCookies(["user"]);
-  const authToken = cookies.AuthToken;
-
+export default function Home({ authToken, removeCookie }) {
   const [open, setOpen] = useState(false);
   const [register, setRegister] = useState(false);
   const handleOpenSignup = () => {

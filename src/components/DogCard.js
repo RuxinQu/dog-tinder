@@ -12,7 +12,7 @@ import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
 import Typography from "@mui/material/Typography";
 
-export const DogCard = ({ myId, users }) => {
+export const DogCard = ({ myId, users, authToken }) => {
   const [currentIndex, setCurrentIndex] = useState(users.length - 1);
   const [lastDirection, setLastDirection] = useState();
   // used for outOfFrame closure
@@ -36,7 +36,7 @@ export const DogCard = ({ myId, users }) => {
     setLastDirection(direction);
     updateCurrentIndex(index - 1);
     if (direction === "right") {
-      addMatch(myId, character._id);
+      addMatch(myId, character._id, authToken);
     }
   };
 

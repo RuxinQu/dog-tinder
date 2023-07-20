@@ -1,32 +1,17 @@
 import React, { useState, useEffect } from "react";
 import { ChatDisplay } from "../components/Chat/ChatDisplay";
 import { ChatInput } from "../components/Chat/ChatInput";
+import { getMessage } from "../util/Api";
 import Box from "@mui/material/Box";
 
-export const MessageContainer = ({ you, me }) => {
+export const MessageContainer = ({ you, me, authToken }) => {
   const [allMessage, setAllMessage] = useState([]);
   const [messagesInOrder, setMessageInOrder] = useState([]);
   useEffect(() => {
-    const getMessage = async () => {
-      const myMessage = await fetch(
-        `http://localhost:3001/message/one?fromId=${me._id}&receiveId=${you._id}`,
-        {
-          method: "GET",
-          headers: {
-            "Content-Type": "application/json",
-          },
-        }
-      );
+    const getMessages = async () => {
+      const myMessage = await getMessage(me._id, you._id, authToken);
       const myMessageJson = await myMessage.json();
-      const yourMessage = await fetch(
-        `http://localhost:3001/message/one?fromId=${you._id}&receiveId=${me._id}`,
-        {
-          method: "GET",
-          headers: {
-            "Content-Type": "application/json",
-          },
-        }
-      );
+      const yourMessage = await getMessage(you._id, me._id, authToken);
       const yourMessageJson = await yourMessage.json();
       setAllMessage([...myMessageJson, ...yourMessageJson]);
       const message = allMessage.sort(
@@ -34,7 +19,7 @@ export const MessageContainer = ({ you, me }) => {
       );
       setMessageInOrder(message);
     };
-    getMessage();
+    getMessages();
   }, [you, allMessage]);
 
   return (
@@ -50,7 +35,9 @@ export const MessageContainer = ({ you, me }) => {
         </h3>
       )}
       <ChatDisplay message={messagesInOrder} you={you} me={me} />
-      {you && <ChatInput myId={me._id} yourId={you._id} />}
+      {you && (
+        <ChatInput myId={me._id} yourId={you._id} authToken={authToken} />
+      )}
     </Box>
   );
 };

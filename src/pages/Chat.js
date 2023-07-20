@@ -5,12 +5,12 @@ import { MessageContainer } from "../container/MessageContainer";
 
 import Box from "@mui/material/Box";
 
-export default function Chat({ myId }) {
+export default function Chat({ myId, authToken }) {
   const [userToDisplay, setUserToDisplay] = useState("");
   const [me, setMe] = useState({});
   useEffect(() => {
     const getMatch = async () => {
-      const meInfo = await getUser(myId);
+      const meInfo = await getUser(myId, authToken);
       const meInfoJson = await meInfo.json();
       setMe(meInfoJson);
     };
@@ -26,10 +26,11 @@ export default function Chat({ myId }) {
             key={yourId}
             myId={myId}
             setUserToDisplay={setUserToDisplay}
+            authToken={authToken}
           />
         ))}
       </Box>
-      <MessageContainer you={userToDisplay} me={me} />
+      <MessageContainer you={userToDisplay} me={me} authToken={authToken} />
     </Box>
   );
 }

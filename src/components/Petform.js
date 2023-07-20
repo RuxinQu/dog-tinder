@@ -12,6 +12,7 @@ export const PetForm = ({
   disableButton,
   alertText,
   handleSubmit,
+  authToken,
 }) => {
   return (
     <form
@@ -145,7 +146,12 @@ export const PetForm = ({
                     );
                     setPetImage(newImageState);
                     const url = new URL(i.original);
-                    await deleteImg(url.pathname.slice(1), myId, i._id);
+                    await deleteImg(
+                      url.pathname.slice(1),
+                      myId,
+                      i._id,
+                      authToken
+                    );
                   }}
                 />
               </div>

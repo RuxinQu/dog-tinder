@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { DateTime } from "luxon";
 
-export function ChatInput({ myId, yourId }) {
+export function ChatInput({ myId, yourId, authToken }) {
   const [content, setContent] = useState("");
   const handleSubmit = async () => {
     const response = await fetch("/message/add-message", {
@@ -14,6 +14,7 @@ export function ChatInput({ myId, yourId }) {
       }),
       headers: {
         "Content-Type": "application/json",
+        Authorization: `Bearer ${authToken}`,
       },
     });
     response.ok ? setContent("") : alert("Something went wrong");

@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { updateProfile, uploadImgs, getUser } from "../util/Api";
 import { PetForm } from "../components/Petform";
 
-export default function Profile({ myId }) {
+export default function Profile({ myId, authToken }) {
   const [formState, setFormState] = useState({});
   const [formImage, setFormImage] = useState([]);
   const [petImage, setPetImage] = useState([]);
@@ -10,7 +10,7 @@ export default function Profile({ myId }) {
   const [disableButton, setDisableButton] = useState(false);
   useEffect(() => {
     const getUserProfile = async () => {
-      const user = await getUser(myId);
+      const user = await getUser(myId, authToken);
       const userJson = await user.json();
       setFormState(userJson);
       setPetImage(userJson.imgs);
@@ -35,12 +35,12 @@ export default function Profile({ myId }) {
     });
     try {
       if (formImage.length) {
-        const uploadImgResponse = await uploadImgs(data);
+        const uploadImgResponse = await uploadImgs(data, authToken);
         const imageUrl = uploadImgResponse.imgs;
         console.log(imageUrl);
         formState.imgs.push(...imageUrl);
       }
-      const response = await updateProfile(myId, formState);
+      const response = await updateProfile(myId, formState, authToken);
       if (response.ok) {
         setAlertText("Profile updated");
         setDisableButton(false);
@@ -66,6 +66,7 @@ export default function Profile({ myId }) {
       handleSubmit={handleSubmit}
       alertText={alertText}
       disableButton={disableButton}
+      authToken={authToken}
     />
   );
 }
