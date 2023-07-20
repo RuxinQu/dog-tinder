@@ -15,7 +15,7 @@ export default function Chat({ myId, authToken }) {
       setMe(meInfoJson);
     };
     getMatch();
-  }, [me]);
+  }, [myId]);
 
   return (
     <Box sx={{ display: "flex", flexWrap: "wrap", justifyContent: "center" }}>

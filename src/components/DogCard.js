@@ -1,5 +1,6 @@
 import React, { useState, useMemo, useRef, useEffect } from "react";
 import { useNavigate, Link } from "react-router-dom";
+import { PetDetail } from "./PetDetail";
 import { addMatch } from "../util/Api";
 import TinderCard from "react-tinder-card";
 import Box from "@mui/material/Box";
@@ -8,15 +9,10 @@ import CloseIcon from "@mui/icons-material/Close";
 import FavoriteOutlinedIcon from "@mui/icons-material/FavoriteOutlined";
 import ImageGallery from "react-image-gallery";
 import "react-image-gallery/styles/css/image-gallery.css";
-import Card from "@mui/material/Card";
-import CardContent from "@mui/material/CardContent";
-import CardMedia from "@mui/material/CardMedia";
-import Typography from "@mui/material/Typography";
 
 export const DogCard = ({ myId, users, authToken }) => {
   const navigate = useNavigate();
   const [currentIndex, setCurrentIndex] = useState(users.length - 1);
-  const [lastDirection, setLastDirection] = useState();
   // used for outOfFrame closure
   const currentIndexRef = useRef(currentIndex);
 
@@ -35,7 +31,6 @@ export const DogCard = ({ myId, users, authToken }) => {
   const canSwipe = currentIndex >= 0;
   // set last direction and decrease current index
   const swiped = (direction, character, index) => {
-    setLastDirection(direction);
     updateCurrentIndex(index - 1);
     if (direction === "right") {
       addMatch(myId, character._id, authToken);
@@ -57,20 +52,6 @@ export const DogCard = ({ myId, users, authToken }) => {
     }
   };
 
-  const swipeConfig = {
-    // Set the allowable swipe directions
-    swipe: {
-      left: true, // Allow swipe left
-      right: true, // Allow swipe right
-      up: false, // Disable swipe up
-      down: false, // Disable swipe down
-    },
-    // Set the swipe tolerance
-    delta: 20,
-    // Set the initial position threshold before triggering a swipe
-    preventSwipe: "pre",
-  };
-
   return (
     <Box className="tinder-card">
       <link
@@ -89,44 +70,18 @@ export const DogCard = ({ myId, users, authToken }) => {
             className="swipe"
             key={character._id}
             onSwipe={(dir) => swiped(dir, character, index)}
-            {...swipeConfig}
             onCardLeftScreen={() => outOfFrame(character.name, index)}
           >
-            {/* <Card className="card">
-              <CardMedia
-                component="img"
-                height="250"
-                image={
-                  character.imgs[0]?.original ||
-                  "https://www.bil-jac.com/Images/DogPlaceholder.svg"
-                }
-                alt={character.name}
-              />
-              <CardContent>
-                <Typography gutterBottom variant="h5" component="div">
-                  {character.name || "user" + character._id.slice(3, 7)}
-                </Typography>
-                <Typography gutterBottom variant="body1" component="div">
-                  breed: {character.breed || "unknown"}
-                  <br />
-                  age: {character.age || "unknown"}
-                </Typography>
-                <Typography variant="body2" color="text.secondary">
-                  {character.description ||
-                    "This user hasn't updated the profile yet"}
-                </Typography>
-              </CardContent>
-            </Card> */}
             <div
               style={{
-                backgroundImage:
-                  "url(" + character.imgs[0]?.original ||
-                  "https://www.bil-jac.com/Images/DogPlaceholder.svg" + ")",
+                backgroundImage: character.imgs[0]?.original
+                  ? "url(" + character.imgs[0]?.original + ")"
+                  : "url(https://www.bil-jac.com/Images/DogPlaceholder.svg)",
               }}
               className="card"
             >
               <Link to={`/detail/${character._id}`} className="petName kalam">
-                {character.name}
+                {character.name || "user" + character._id.slice(3, 7)}
               </Link>
             </div>
           </TinderCard>
@@ -140,11 +95,6 @@ export const DogCard = ({ myId, users, authToken }) => {
           <FavoriteOutlinedIcon color="success" />
         </Fab>
       </div>
-      {lastDirection && (
-        <h2 key={lastDirection} className="infoText">
-          You swiped {lastDirection}
-        </h2>
-      )}
     </Box>
   );
 };
