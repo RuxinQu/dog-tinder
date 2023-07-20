@@ -8,7 +8,6 @@ import Home from "./pages/Home";
 import Profile from "./pages/Profile";
 import Dashboard from "./pages/Dashboard";
 import Chat from "./pages/Chat";
-import BadRequest from "./pages/BadRequest";
 
 import "./App.css";
 

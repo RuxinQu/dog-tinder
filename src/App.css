@@ -69,7 +69,22 @@ h1 {
   min-height: 450px;
   box-shadow: 0px 0px 60px 0px rgba(0, 0, 0, 0.3) !important;
   border-radius: 20px;
+  background-size: cover;
+  background-position: center;
 }
+/* .card {
+  position: relative;
+  background-color: #fff;
+  width: 350px;
+  max-width: 400px;
+  max-width: 260px;
+  min-height: 450px;
+  /* height: 300px; 
+  box-shadow: 0px 0px 60px 0px rgba(0, 0, 0, 0.3);
+  border-radius: 20px;
+  background-size: cover;
+  background-position: center;
+} */
 
 .cardContent {
   width: 100%;
@@ -83,6 +98,18 @@ h1 {
   color: #000;
   animation-name: popup;
   animation-duration: 800ms;
+}
+
+.petName {
+  display: block;
+  text-align: center;
+  padding-top: 10px;
+  font-size: 25px;
+  color: #aa00ff;
+}
+
+.petName:hover {
+  color: #f48b48;
 }
 
 .buttons {

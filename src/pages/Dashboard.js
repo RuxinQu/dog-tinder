@@ -9,8 +9,10 @@ export default function Dashboard({ myId, authToken }) {
     const getAllUsers = async () => {
       const response = await getUsers(authToken);
       const responseJson = await response.json();
-      const userArr = responseJson.filter((u) => u._id !== myId);
-      setUsers([...userArr]);
+      if (response.ok) {
+        const userArr = responseJson.filter((u) => u._id !== myId);
+        setUsers([...userArr]);
+      }
     };
     getAllUsers();
   }, []);

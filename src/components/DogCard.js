@@ -1,4 +1,5 @@
 import React, { useState, useMemo, useRef, useEffect } from "react";
+import { useNavigate, Link } from "react-router-dom";
 import { addMatch } from "../util/Api";
 import TinderCard from "react-tinder-card";
 import Box from "@mui/material/Box";
@@ -13,6 +14,7 @@ import CardMedia from "@mui/material/CardMedia";
 import Typography from "@mui/material/Typography";
 
 export const DogCard = ({ myId, users, authToken }) => {
+  const navigate = useNavigate();
   const [currentIndex, setCurrentIndex] = useState(users.length - 1);
   const [lastDirection, setLastDirection] = useState();
   // used for outOfFrame closure
@@ -90,7 +92,7 @@ export const DogCard = ({ myId, users, authToken }) => {
             {...swipeConfig}
             onCardLeftScreen={() => outOfFrame(character.name, index)}
           >
-            <Card className="card">
+            {/* <Card className="card">
               <CardMedia
                 component="img"
                 height="250"
@@ -114,7 +116,19 @@ export const DogCard = ({ myId, users, authToken }) => {
                     "This user hasn't updated the profile yet"}
                 </Typography>
               </CardContent>
-            </Card>
+            </Card> */}
+            <div
+              style={{
+                backgroundImage:
+                  "url(" + character.imgs[0]?.original ||
+                  "https://www.bil-jac.com/Images/DogPlaceholder.svg" + ")",
+              }}
+              className="card"
+            >
+              <Link to={`/detail/${character._id}`} className="petName kalam">
+                {character.name}
+              </Link>
+            </div>
           </TinderCard>
         ))}
       </div>
