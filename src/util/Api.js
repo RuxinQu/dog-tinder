@@ -8,13 +8,6 @@ const generateOptions = (method, token) => {
   };
 };
 
-const getOptions = {
-  method: "GET",
-  headers: {
-    "Content-Type": "application/json",
-  },
-};
-
 //login or register
 export const signIn = async (data, request) => {
   try {

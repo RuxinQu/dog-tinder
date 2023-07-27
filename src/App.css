@@ -60,6 +60,8 @@ h1 {
   width: 90vw;
   max-width: 400px;
   min-height: 450px;
+  display: flex;
+  justify-content: center;
 }
 
 .card {
@@ -69,6 +71,8 @@ h1 {
   min-height: 450px;
   box-shadow: 0px 0px 60px 0px rgba(0, 0, 0, 0.3) !important;
   border-radius: 20px;
+  background-size: cover;
+  background-position: center;
 }
 
 .cardContent {
@@ -76,13 +80,16 @@ h1 {
   height: 100%;
 }
 
-.infoText {
-  width: 100%;
-  justify-content: center;
-  display: flex;
-  color: #000;
-  animation-name: popup;
-  animation-duration: 800ms;
+.petName {
+  display: block;
+  text-align: center;
+  padding-top: 10px;
+  font-size: 25px;
+  color: #aa00ff;
+}
+
+.petName:hover {
+  color: #f48b48;
 }
 
 .buttons {
@@ -90,6 +97,25 @@ h1 {
   width: 260px;
   display: flex;
   justify-content: space-between;
+}
+
+.detailContainer {
+  position: relative;
+  margin: 0 auto;
+  min-height: 450px;
+  max-width: 640px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  box-shadow: 0px 0px 60px 0px rgba(0, 0, 0, 0.3) !important;
+  border-radius: 20px;
+  padding: 10px;
+}
+
+.detailInfo {
+  width: 300px;
+  text-align: center;
 }
 
 @keyframes popup {
@@ -114,4 +140,13 @@ h1 {
   100% {
     transform: scale(1, 1);
   }
+}
+
+.noMatch {
+  text-align: center;
+  margin-top: 10dvh;
+}
+
+.noMatch * {
+  margin-top: 30px;
 }

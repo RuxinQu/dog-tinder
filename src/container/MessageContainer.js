@@ -9,15 +9,17 @@ export const MessageContainer = ({ you, me, authToken }) => {
   const [messagesInOrder, setMessageInOrder] = useState([]);
   useEffect(() => {
     const getMessages = async () => {
-      const myMessage = await getMessage(me._id, you._id, authToken);
-      const myMessageJson = await myMessage.json();
-      const yourMessage = await getMessage(you._id, me._id, authToken);
-      const yourMessageJson = await yourMessage.json();
-      setAllMessage([...myMessageJson, ...yourMessageJson]);
-      const message = allMessage.sort(
-        (a, b) => new Date(a.timeSent) - new Date(b.timeSent)
-      );
-      setMessageInOrder(message);
+      if (you) {
+        const myMessage = await getMessage(me._id, you._id, authToken);
+        const myMessageJson = await myMessage.json();
+        const yourMessage = await getMessage(you._id, me._id, authToken);
+        const yourMessageJson = await yourMessage.json();
+        setAllMessage([...myMessageJson, ...yourMessageJson]);
+        const message = allMessage.sort(
+          (a, b) => new Date(a.timeSent) - new Date(b.timeSent)
+        );
+        setMessageInOrder(message);
+      }
     };
     getMessages();
   }, [you, allMessage]);
