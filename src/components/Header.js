@@ -10,7 +10,7 @@ import ForumIcon from "@mui/icons-material/Forum";
 import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
 
-export const Header = ({ handleToggleChat }) => {
+export const Header = () => {
   const navigate = useNavigate();
   const [cookies, setCookie, removeCookie] = useCookies(["user"]);
   const [anchorEl, setAnchorEl] = React.useState(null);

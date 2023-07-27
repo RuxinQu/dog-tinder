@@ -14,7 +14,7 @@ export default function Dashboard({ myId, authToken }) {
       const substractArr = [...meJson.matches, myId];
 
       // userArr doesn't contain matched user or myself
-      if (usersResponse.ok && meResponse) {
+      if (usersResponse.ok && meResponse.ok) {
         const userArr = usersJson.filter(
           (item) => !substractArr.includes(item._id)
         );
@@ -22,7 +22,7 @@ export default function Dashboard({ myId, authToken }) {
       }
     };
     getAllUsers();
-  }, []);
+  }, [authToken, myId]);
 
   return users.length ? (
     <DogCard myId={myId} users={users} authToken={authToken} />

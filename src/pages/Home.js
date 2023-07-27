@@ -4,7 +4,7 @@ import Button from "@mui/material/Button";
 import Fab from "@mui/material/Fab";
 import Box from "@mui/material/Box";
 
-export default function Home({ authToken, removeCookie }) {
+export default function Home({ authToken, setCookie, removeCookie }) {
   const [open, setOpen] = useState(false);
   const [register, setRegister] = useState(false);
   const handleOpenSignup = () => {
@@ -86,7 +86,11 @@ export default function Home({ authToken, removeCookie }) {
         }}
       >
         {open && (
-          <SignupContainer handleClose={handleClose} register={register} />
+          <SignupContainer
+            handleClose={handleClose}
+            setCookie={setCookie}
+            register={register}
+          />
         )}
       </Box>
     </Box>

@@ -1,27 +1,28 @@
-import React, { useState, useMemo, useRef, useEffect } from "react";
-import { useNavigate, Link } from "react-router-dom";
-import { PetDetail } from "./PetDetail";
+import React, { useState, useMemo, useRef } from "react";
+import { Detail } from "./Detail";
 import { addMatch } from "../util/Api";
 import TinderCard from "react-tinder-card";
 import Box from "@mui/material/Box";
 import Fab from "@mui/material/Fab";
 import CloseIcon from "@mui/icons-material/Close";
 import FavoriteOutlinedIcon from "@mui/icons-material/FavoriteOutlined";
-import ImageGallery from "react-image-gallery";
-import "react-image-gallery/styles/css/image-gallery.css";
 
 export const DogCard = ({ myId, users, authToken }) => {
-  const navigate = useNavigate();
+  const [turnCard, setTurnCard] = useState(false);
   const [currentIndex, setCurrentIndex] = useState(users.length - 1);
   // used for outOfFrame closure
   const currentIndexRef = useRef(currentIndex);
+
+  const handleTurnCard = () => {
+    turnCard ? setTurnCard(false) : setTurnCard(true);
+  };
 
   const childRefs = useMemo(
     () =>
       Array(users.length)
         .fill(0)
         .map((i) => React.createRef()),
-    []
+    [users.length]
   );
 
   const updateCurrentIndex = (val) => {
@@ -52,7 +53,11 @@ export const DogCard = ({ myId, users, authToken }) => {
     }
   };
 
-  return (
+  return turnCard ? (
+    users?.map((u) => (
+      <Detail user={u} handleTurnCard={handleTurnCard} turn={true} />
+    ))
+  ) : (
     <Box className="tinder-card">
       <link
         href="https://fonts.googleapis.com/css?family=Damion&display=swap"
@@ -80,9 +85,9 @@ export const DogCard = ({ myId, users, authToken }) => {
               }}
               className="card"
             >
-              <Link to={`/detail/${character._id}`} className="petName kalam">
+              <span className="petName kalam" onClick={handleTurnCard}>
                 {character.name || "user" + character._id.slice(3, 7)}
-              </Link>
+              </span>
             </div>
           </TinderCard>
         ))}
