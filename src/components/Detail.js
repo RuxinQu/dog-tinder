@@ -4,7 +4,6 @@ import Button from "@mui/material/Button";
 import Fab from "@mui/material/Fab";
 import Typography from "@mui/material/Typography";
 import UndoIcon from "@mui/icons-material/Undo";
-
 import ImageGallery from "react-image-gallery";
 import "react-image-gallery/styles/css/image-gallery.css";
 

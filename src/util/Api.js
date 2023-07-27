@@ -67,7 +67,6 @@ export const addMatch = async (myId, id, token) => {
 };
 
 export const uploadImgs = async (data, token) => {
-  const options = generateOptions("POST", token);
   try {
     const response = await fetch("/user/upload-imgs", {
       mode: "cors",

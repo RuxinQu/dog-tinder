@@ -3,10 +3,17 @@ import { getUser } from "../util/Api";
 
 import Avatar from "@mui/material/Avatar";
 
-export function ChatContainer({ yourId, myId, setUserToDisplay, authToken }) {
+export function ChatContainer({
+  yourId,
+  myId,
+  userToDisplay,
+  setUserToDisplay,
+  authToken,
+}) {
   const [isHovered, setIsHovered] = useState(false);
   const [you, setYou] = useState([]);
   const [match, setMatch] = useState(false);
+  // go through the match list of the user in my match list. Only display the user from my match list that also has me included in their match list
   useEffect(() => {
     const getMatch = async () => {
       const youInfo = await getUser(yourId, authToken);
@@ -18,7 +25,7 @@ export function ChatContainer({ yourId, myId, setUserToDisplay, authToken }) {
       } else setMatch(false);
     };
     getMatch();
-  }, [yourId, match]);
+  }, [yourId, match, authToken, myId]);
 
   const handleMouseEnter = () => {
     setIsHovered(true);
@@ -27,6 +34,15 @@ export function ChatContainer({ yourId, myId, setUserToDisplay, authToken }) {
   const handleMouseLeave = () => {
     setIsHovered(false);
   };
+  const setBg = () => {
+    if (userToDisplay._id === you._id) {
+      return "#fff";
+    } else if (isHovered) {
+      return "#fff";
+    } else {
+      return '"#f1f1f1"';
+    }
+  };
   return (
     match && (
       <div
@@ -34,7 +50,7 @@ export function ChatContainer({ yourId, myId, setUserToDisplay, authToken }) {
           display: "flex",
           alignItems: "center",
           padding: 10,
-          backgroundColor: isHovered ? "#fff" : "#f1f1f1",
+          backgroundColor: setBg(),
         }}
         onClick={() => setUserToDisplay(you)}
         onMouseEnter={handleMouseEnter}
