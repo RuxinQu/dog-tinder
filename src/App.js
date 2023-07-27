@@ -18,7 +18,11 @@ function App() {
   const authToken = cookies.AuthToken;
   const myId = cookies.UserId;
 
-  useEffect(() => {});
+  // useEffect(() => {
+  //   if (!authToken) {
+  //     window.location.assign("/");
+  //   }
+  // }, []);
   return (
     <ThemeProvider theme={theme}>
       <Router>
@@ -35,12 +39,12 @@ function App() {
           />
 
           <Route element={<Layout />}>
-            {authToken && (
-              <Route
-                path="/board"
-                element={<Dashboard myId={myId} authToken={authToken} />}
-              />
-            )}
+            {/* {authToken && ( */}
+            <Route
+              path="/board"
+              element={<Dashboard myId={myId} authToken={authToken} />}
+            />
+            {/* )} */}
             {authToken && (
               <Route
                 path="/profile"

@@ -22,7 +22,7 @@ export const MessageContainer = ({ you, me, authToken }) => {
       }
     };
     getMessages();
-  }, [you, allMessage]);
+  }, [you, allMessage, authToken, me._id]);
 
   return (
     <Box
@@ -32,7 +32,7 @@ export const MessageContainer = ({ you, me, authToken }) => {
       }}
     >
       {you && (
-        <h3 style={{ textAlign: "center" }}>
+        <h3 style={{ textAlign: "center", padding: 5 }} className="kalam">
           {you.name || "user" + you._id.slice(3, 7)}
         </h3>
       )}

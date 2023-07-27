@@ -6,7 +6,7 @@ import { idbPromise } from "../util/idbHelper";
 
 export default function PetDetail({ authToken }) {
   const { userId } = useParams();
-  const [user, setUser] = useState({});
+  const [user, setUser] = useState();
   useEffect(() => {
     const getUserProfile = async () => {
       const localUser = await idbPromise("dog", "getOne", userId);
@@ -24,5 +24,5 @@ export default function PetDetail({ authToken }) {
     getUserProfile();
   }, [authToken, userId]);
 
-  return <Detail user={user} turn={false} />;
+  return user && <Detail user={user} turn={false} />;
 }

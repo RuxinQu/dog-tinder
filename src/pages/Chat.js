@@ -15,16 +15,28 @@ export default function Chat({ myId, authToken }) {
       setMe(meInfoJson);
     };
     getMatch();
-  }, [myId]);
+  }, [myId, authToken]);
 
   return (
-    <Box sx={{ display: "flex", flexWrap: "wrap", justifyContent: "center" }}>
-      <Box sx={{ width: { xs: "100%", sm: "30%" }, border: "1px solid black" }}>
+    <Box
+      sx={{
+        display: "flex",
+        flexWrap: "wrap",
+        justifyContent: "center",
+      }}
+    >
+      <Box
+        sx={{
+          width: { xs: "100%", sm: "30%" },
+          border: "1px solid black",
+        }}
+      >
         {me.matches?.map((yourId) => (
           <ChatContainer
             yourId={yourId}
             key={yourId}
             myId={myId}
+            userToDisplay={userToDisplay}
             setUserToDisplay={setUserToDisplay}
             authToken={authToken}
           />

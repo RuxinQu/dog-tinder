@@ -1,5 +1,7 @@
 import React, { useState } from "react";
 import { DateTime } from "luxon";
+import Button from "@mui/material/Button";
+import TextField from "@mui/material/TextField";
 
 export function ChatInput({ myId, yourId, authToken }) {
   const [content, setContent] = useState("");
@@ -20,14 +22,28 @@ export function ChatInput({ myId, yourId, authToken }) {
     response.ok ? setContent("") : alert("Something went wrong");
   };
   return (
-    <div>
+    <div
+      style={{
+        display: "flex",
+        justifyContent: "center",
+        alignItems: "center",
+        margin: "10px 0",
+      }}
+    >
       <input
         value={content}
         onChange={(e) => setContent(e.target.value)}
-        style={{ width: "80%" }}
+        style={{
+          width: "70%",
+          padding: 5,
+          borderRadius: 20,
+          fontSize: 20,
+        }}
         required
       />
-      <button onClick={handleSubmit}>send</button>
+      <Button variant="contained" onClick={handleSubmit}>
+        Send
+      </Button>
     </div>
   );
 }
