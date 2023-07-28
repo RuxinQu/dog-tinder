@@ -4,7 +4,7 @@ import Button from "@mui/material/Button";
 import Fab from "@mui/material/Fab";
 import Box from "@mui/material/Box";
 
-export default function Home({ authToken, setCookie, removeCookie }) {
+export default function Home({ loggedIn, removeCookie }) {
   const [open, setOpen] = useState(false);
   const [register, setRegister] = useState(false);
   const handleOpenSignup = () => {
@@ -42,14 +42,13 @@ export default function Home({ authToken, setCookie, removeCookie }) {
           fontWeight: "bold",
           opacity: 0.8,
         }}
-        onClick={() => (authToken ? handleLogout() : handleOpenLogin())}
+        onClick={() => (loggedIn ? handleLogout() : handleOpenLogin())}
       >
-        {authToken ? "LogOut" : "Login"}
+        {loggedIn ? "LogOut" : "Login"}
       </Button>
       <Box
         sx={{
           width: { xs: "100%", md: "40%" },
-          //   height: { xs: "40dvh", md: "auto" },
           display: "flex",
           flexDirection: "column",
           alignItems: "center",
@@ -69,10 +68,10 @@ export default function Home({ authToken, setCookie, removeCookie }) {
           color="secondary"
           sx={{ my: 2, fontWeight: "bold" }}
           onClick={() => {
-            authToken ? window.location.assign("/board") : handleOpenSignup();
+            loggedIn ? window.location.assign("/board") : handleOpenSignup();
           }}
         >
-          {authToken ? "Meet Our Dogs" : "Register Now"}
+          {loggedIn ? "Meet Our Dogs" : "Register Now"}
         </Fab>
       </Box>
       <Box
@@ -86,11 +85,7 @@ export default function Home({ authToken, setCookie, removeCookie }) {
         }}
       >
         {open && (
-          <SignupContainer
-            handleClose={handleClose}
-            setCookie={setCookie}
-            register={register}
-          />
+          <SignupContainer handleClose={handleClose} register={register} />
         )}
       </Box>
     </Box>

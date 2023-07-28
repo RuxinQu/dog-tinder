@@ -54,9 +54,7 @@ export const DogCard = ({ myId, users, authToken }) => {
   };
 
   return turnCard ? (
-    users?.map((u) => (
-      <Detail user={u} handleTurnCard={handleTurnCard} turn={true} />
-    ))
+    users?.map((u) => <Detail user={u} handleTurnCard={handleTurnCard} />)
   ) : (
     <Box className="tinder-card">
       <link

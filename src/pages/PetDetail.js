@@ -24,5 +24,5 @@ export default function PetDetail({ authToken }) {
     getUserProfile();
   }, [authToken, userId]);
 
-  return user && <Detail user={user} turn={false} />;
+  return user && <Detail user={user} goBack={true} />;
 }
