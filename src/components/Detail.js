@@ -4,10 +4,11 @@ import Button from "@mui/material/Button";
 import Fab from "@mui/material/Fab";
 import Typography from "@mui/material/Typography";
 import UndoIcon from "@mui/icons-material/Undo";
+import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import ImageGallery from "react-image-gallery";
 import "react-image-gallery/styles/css/image-gallery.css";
 
-export const Detail = ({ user, handleTurnCard, turn }) => {
+export const Detail = ({ user, handleTurnCard, goBack }) => {
   const navigate = useNavigate();
   return (
     <div className="detailContainer">
@@ -15,10 +16,13 @@ export const Detail = ({ user, handleTurnCard, turn }) => {
         size="small"
         color="secondary"
         sx={{ position: "absolute", top: 10, left: 10, zIndex: 10 }}
-        onClick={() => (turn ? handleTurnCard() : navigate(-1))}
+        onClick={() => {
+          goBack ? navigate("-1") : handleTurnCard();
+        }}
       >
-        <UndoIcon />
+        {goBack ? <ArrowBackIcon /> : <UndoIcon />}
       </Fab>
+
       <div style={{ maxWidth: 320 }}>
         {user.imgs?.length ? (
           <ImageGallery items={user.imgs} />

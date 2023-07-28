@@ -71,7 +71,7 @@ export const Header = () => {
             <MenuItem
               onClick={() => {
                 handleLogout();
-                handleClose();
+                // handleClose();
               }}
             >
               Logout
