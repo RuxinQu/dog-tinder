@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { useCookies } from "react-cookie";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import { ThemeProvider } from "@mui/material/styles";
@@ -16,9 +16,12 @@ import "./App.css";
 
 function App() {
   const [cookies, setCookie, removeCookie] = useCookies(["user"]);
+  const [loggedIn, setLoggedIn] = useState(false);
   const authToken = cookies.AuthToken;
   const myId = cookies.UserId;
-  const loggedIn = Auth.loggedIn(authToken);
+  useEffect(() => {
+    setLoggedIn(Auth.loggedIn(authToken));
+  }, [myId, authToken]);
 
   return (
     <ThemeProvider theme={theme}>
@@ -33,7 +36,13 @@ function App() {
             {loggedIn && (
               <Route
                 path="/board"
-                element={<Dashboard myId={myId} authToken={authToken} />}
+                element={
+                  <Dashboard
+                    loggedIn={loggedIn}
+                    myId={myId}
+                    authToken={authToken}
+                  />
+                }
               />
             )}
             {loggedIn && (

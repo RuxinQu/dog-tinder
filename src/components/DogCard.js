@@ -66,7 +66,7 @@ export const DogCard = ({ myId, users, authToken }) => {
         rel="stylesheet"
       />
 
-      <div className="cardContainer">
+      <div className="card-container">
         {users?.map((character, index) => (
           <TinderCard
             ref={childRefs[index]}
@@ -83,7 +83,7 @@ export const DogCard = ({ myId, users, authToken }) => {
               }}
               className="card"
             >
-              <span className="petName kalam" onClick={handleTurnCard}>
+              <span className="pet-name kalam" onClick={handleTurnCard}>
                 {character.name || "user" + character._id.slice(3, 7)}
               </span>
             </div>

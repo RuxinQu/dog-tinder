@@ -3,12 +3,11 @@ export function Mychat({ content, user }) {
   return (
     <div
       style={{
-        display: "flex",
         justifyContent: "flex-end",
-        alignItems: "center",
       }}
+      className="chat-box"
     >
-      <span style={{ border: "solid 1px black" }}>{content}</span>
+      <span className="message-box">{content}</span>
       <Link to={"/profile"}>
         <img
           style={{

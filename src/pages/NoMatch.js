@@ -2,7 +2,7 @@ import React from "react";
 import Link from "@mui/material/Link";
 export default function NoMatch() {
   return (
-    <div className="noMatch">
+    <div className="no-match">
       <h1>404 Not Found</h1>
       <img
         src="https://media.tenor.com/gInQnsr6GoMAAAAd/doge-doge-meme.gif"

@@ -40,8 +40,12 @@ export const SignupContainer = ({ register, handleClose }) => {
     const jsonResponse = await response.json();
     const expirationDate = new Date(Date.now() + 60 * 60 * 1000);
     if (response.ok) {
-      setCookie("AuthToken", jsonResponse.token, { expires: expirationDate });
-      setCookie("UserId", jsonResponse.user._id, { expires: expirationDate });
+      setCookie("AuthToken", jsonResponse.token, {
+        expires: expirationDate,
+      });
+      setCookie("UserId", jsonResponse.user._id, {
+        expires: expirationDate,
+      });
       option === "register"
         ? window.location.assign("/profile")
         : window.location.assign("/board");

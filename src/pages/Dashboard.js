@@ -2,9 +2,8 @@ import React, { useState, useEffect } from "react";
 import { DogCard } from "../components/DogCard";
 import { getUsers, getUser } from "../util/Api";
 
-export default function Dashboard({ myId, authToken }) {
+export default function Dashboard({ loggedIn, myId, authToken }) {
   const [users, setUsers] = useState([]);
-
   useEffect(() => {
     const getAllUsers = async () => {
       const usersResponse = await getUsers(authToken);

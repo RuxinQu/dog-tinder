@@ -32,7 +32,15 @@ export const MessageContainer = ({ you, me, authToken }) => {
       }}
     >
       {you && (
-        <h3 style={{ textAlign: "center", padding: 5 }} className="kalam">
+        <h3
+          style={{
+            textAlign: "center",
+            padding: 15,
+            marginBottom: 15,
+            backgroundColor: "#fec8a7",
+          }}
+          className="kalam"
+        >
           {you.name || "user" + you._id.slice(3, 7)}
         </h3>
       )}

@@ -56,7 +56,7 @@ h1 {
   position: absolute;
 }
 
-.cardContainer {
+.card-container {
   width: 90vw;
   max-width: 400px;
   min-height: 450px;
@@ -75,12 +75,12 @@ h1 {
   background-position: center;
 }
 
-.cardContent {
+.card-content {
   width: 100%;
   height: 100%;
 }
 
-.petName {
+.pet-name {
   display: block;
   text-align: center;
   padding-top: 10px;
@@ -88,7 +88,7 @@ h1 {
   color: #aa00ff;
 }
 
-.petName:hover {
+.pet-name:hover {
   color: #f48b48;
 }
 
@@ -99,7 +99,7 @@ h1 {
   justify-content: space-between;
 }
 
-.detailContainer {
+.detail-container {
   position: relative;
   margin: 0 auto;
   min-height: 450px;
@@ -113,7 +113,7 @@ h1 {
   padding: 10px;
 }
 
-.detailInfo {
+.detail-info {
   width: 300px;
   text-align: center;
 }
@@ -142,11 +142,42 @@ h1 {
   }
 }
 
-.noMatch {
+.no-match {
   text-align: center;
   margin-top: 10dvh;
 }
 
-.noMatch * {
+.no-match * {
   margin-top: 30px;
+}
+
+.profile-form-container {
+  background-color: #e7dddd;
+  display: flex;
+  justify-content: center;
+  padding: 30px;
+}
+
+.profile-form {
+  max-width: 600px;
+  padding: 20px;
+  border: 5px solid #fff;
+  border-radius: 20px;
+}
+
+.profile-form * {
+  margin-top: 2px;
+}
+
+/* chat  */
+.chat-box {
+  display: flex;
+  align-items: center;
+}
+
+.message-box {
+  padding: 10px;
+  background-color: #a6e0ff;
+
+  border-radius: 5px;
 }

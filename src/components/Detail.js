@@ -11,7 +11,7 @@ import "react-image-gallery/styles/css/image-gallery.css";
 export const Detail = ({ user, handleTurnCard, goBack }) => {
   const navigate = useNavigate();
   return (
-    <div className="detailContainer">
+    <div className="detail-container">
       <Fab
         size="small"
         color="secondary"
@@ -33,7 +33,7 @@ export const Detail = ({ user, handleTurnCard, goBack }) => {
           />
         )}
       </div>
-      <div className="detailInfo">
+      <div className="detail-info">
         <h2>I am~~~{user.name || "user" + user._id.slice(3, 7)} </h2>
         <Button variant="outlined" color="secondary" size="small">
           {user.breed || "unknown"}
