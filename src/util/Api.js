@@ -11,7 +11,7 @@ const generateOptions = (method, token) => {
 //login or register
 export const signIn = async (data, request) => {
   try {
-    const response = await fetch(`http://localhost:3001/user/${request}`, {
+    const response = await fetch(`/user/${request}`, {
       method: "POST",
       body: JSON.stringify(data),
       headers: {

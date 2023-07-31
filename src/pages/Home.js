@@ -1,10 +1,14 @@
 import React, { useState } from "react";
+import Cookies from "js-cookie";
 import { SignupContainer } from "../container/SignupContainer";
+import Auth from "../util/auth";
 import Button from "@mui/material/Button";
 import Fab from "@mui/material/Fab";
 import Box from "@mui/material/Box";
 
-export default function Home({ loggedIn, removeCookie }) {
+export default function Home() {
+  const authToken = Cookies.get("AuthToken");
+  const loggedIn = Auth.loggedIn(authToken);
   const [open, setOpen] = useState(false);
   const [register, setRegister] = useState(false);
   const handleOpenSignup = () => {
@@ -15,11 +19,7 @@ export default function Home({ loggedIn, removeCookie }) {
     setRegister(false);
     setOpen(true);
   };
-  const handleLogout = () => {
-    removeCookie("UserId");
-    removeCookie("AuthToken");
-    window.location.reload();
-  };
+
   const handleClose = () => setOpen(false);
 
   return (
@@ -42,7 +42,7 @@ export default function Home({ loggedIn, removeCookie }) {
           fontWeight: "bold",
           opacity: 0.8,
         }}
-        onClick={() => (loggedIn ? handleLogout() : handleOpenLogin())}
+        onClick={() => (loggedIn ? Auth.logOut() : handleOpenLogin())}
       >
         {loggedIn ? "LogOut" : "Login"}
       </Button>

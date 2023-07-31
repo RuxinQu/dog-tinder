@@ -1,8 +1,12 @@
 import React, { useState, useEffect } from "react";
+import Cookies from "js-cookie";
+import Auth from "../util/auth";
 import { updateProfile, uploadImgs, getUser } from "../util/Api";
 import { PetForm } from "../components/Petform";
 
-export default function Profile({ myId, authToken }) {
+export default function Profile({ myId }) {
+  const authToken = Cookies.get("AuthToken");
+  const loggedIn = Auth.loggedIn(authToken);
   const [formState, setFormState] = useState({});
   const [formImage, setFormImage] = useState([]);
   const [petImage, setPetImage] = useState([]);
@@ -56,17 +60,19 @@ export default function Profile({ myId, authToken }) {
   };
 
   return (
-    <PetForm
-      myId={myId}
-      formState={formState}
-      petImage={petImage}
-      setPetImage={setPetImage}
-      handleInputChange={handleInputChange}
-      handleFormImageChange={handleFormImageChange}
-      handleSubmit={handleSubmit}
-      alertText={alertText}
-      disableButton={disableButton}
-      authToken={authToken}
-    />
+    loggedIn && (
+      <PetForm
+        myId={myId}
+        formState={formState}
+        petImage={petImage}
+        setPetImage={setPetImage}
+        handleInputChange={handleInputChange}
+        handleFormImageChange={handleFormImageChange}
+        handleSubmit={handleSubmit}
+        alertText={alertText}
+        disableButton={disableButton}
+        authToken={authToken}
+      />
+    )
   );
 }

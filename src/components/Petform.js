@@ -25,6 +25,9 @@ export const PetForm = ({
         className="profile-form"
       >
         <div>
+          <span>Email: {formState.email}</span>
+        </div>
+        <div>
           <label htmlFor="name">Name: </label>
           <input
             type="text"

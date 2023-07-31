@@ -1,11 +1,17 @@
 import React, { useState, useEffect } from "react";
+import Cookies from "js-cookie";
 import { DogCard } from "../components/DogCard";
 import { getUsers, getUser } from "../util/Api";
+import Auth from "../util/auth";
 
-export default function Dashboard({ loggedIn, myId, authToken }) {
+export default function Dashboard({ myId }) {
+  const authToken = Cookies.get("AuthToken");
   const [users, setUsers] = useState([]);
   useEffect(() => {
     const getAllUsers = async () => {
+      if (!Auth.loggedIn(authToken)) {
+        Auth.logOut();
+      }
       const usersResponse = await getUsers(authToken);
       const usersJson = await usersResponse.json();
       const meResponse = await getUser(myId, authToken);
@@ -21,13 +27,17 @@ export default function Dashboard({ loggedIn, myId, authToken }) {
       }
     };
     getAllUsers();
-  }, [authToken, myId]);
+  });
 
-  return users.length ? (
-    <DogCard myId={myId} users={users} authToken={authToken} />
-  ) : (
-    <h3 style={{ textAlign: "center" }}>
-      You have sent match requests to all the dogs, wait for their replies!
-    </h3>
+  return (
+    <div>
+      {users.length ? (
+        <DogCard myId={myId} users={users} authToken={authToken} />
+      ) : (
+        <h3 style={{ textAlign: "center" }}>
+          You have sent match requests to all the dogs, wait for their replies!
+        </h3>
+      )}
+    </div>
   );
 }
