@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import { DateTime } from "luxon";
 import Button from "@mui/material/Button";
-import TextField from "@mui/material/TextField";
 
 export function ChatInput({ myId, yourId, authToken }) {
   const [content, setContent] = useState("");

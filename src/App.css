@@ -29,13 +29,6 @@ h1 {
 }
 
 /* dashboard  */
-
-.match-list {
-  background-color: red;
-  width: 25%;
-  height: 100dvh;
-}
-
 .header {
   height: 12dvh;
   display: flex;
@@ -50,13 +43,26 @@ h1 {
   height: 88dvh;
 }
 
+.dashboard::before,
+.detail-container::before {
+  content: " ";
+  background-image: url(../public/bg-board.jpeg);
+  background-size: cover;
+  position: absolute;
+  top: 12dvh;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  opacity: 0.7;
+}
+
 .swipe {
   max-width: 400px;
   min-height: 450px;
   position: absolute;
 }
 
-.cardContainer {
+.card-container {
   width: 90vw;
   max-width: 400px;
   min-height: 450px;
@@ -75,12 +81,12 @@ h1 {
   background-position: center;
 }
 
-.cardContent {
+.card-content {
   width: 100%;
   height: 100%;
 }
 
-.petName {
+.pet-name {
   display: block;
   text-align: center;
   padding-top: 10px;
@@ -88,7 +94,7 @@ h1 {
   color: #aa00ff;
 }
 
-.petName:hover {
+.pet-name:hover {
   color: #f48b48;
 }
 
@@ -99,7 +105,13 @@ h1 {
   justify-content: space-between;
 }
 
-.detailContainer {
+/* detail */
+.detail-container {
+  min-height: 88dvh;
+}
+
+.detail {
+  background-color: #f1f1f1 !important;
   position: relative;
   margin: 0 auto;
   min-height: 450px;
@@ -111,9 +123,10 @@ h1 {
   box-shadow: 0px 0px 60px 0px rgba(0, 0, 0, 0.3) !important;
   border-radius: 20px;
   padding: 10px;
+  top: 20px;
 }
 
-.detailInfo {
+.detail-info {
   width: 300px;
   text-align: center;
 }
@@ -142,11 +155,42 @@ h1 {
   }
 }
 
-.noMatch {
+.no-match {
   text-align: center;
   margin-top: 10dvh;
 }
 
-.noMatch * {
+.no-match * {
   margin-top: 30px;
+}
+
+.profile-form-container {
+  background-color: #e7dddd;
+  display: flex;
+  justify-content: center;
+  padding: 30px;
+}
+
+.profile-form {
+  max-width: 600px;
+  padding: 20px;
+  border: 5px solid #fff;
+  border-radius: 20px;
+}
+
+.profile-form * {
+  margin-top: 2px;
+}
+
+/* chat  */
+.chat-box {
+  display: flex;
+  align-items: center;
+}
+
+.message-box {
+  padding: 10px;
+  background-color: #a6e0ff;
+
+  border-radius: 5px;
 }

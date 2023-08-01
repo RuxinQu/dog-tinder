@@ -1,8 +1,12 @@
 import React, { useState, useEffect } from "react";
+import Cookies from "js-cookie";
+import Auth from "../util/auth";
 import { updateProfile, uploadImgs, getUser } from "../util/Api";
 import { PetForm } from "../components/Petform";
 
-export default function Profile({ myId, authToken }) {
+export default function Profile({ myId }) {
+  const authToken = Cookies.get("AuthToken");
+  const loggedIn = Auth.loggedIn(authToken);
   const [formState, setFormState] = useState({});
   const [formImage, setFormImage] = useState([]);
   const [petImage, setPetImage] = useState([]);
@@ -11,12 +15,14 @@ export default function Profile({ myId, authToken }) {
   useEffect(() => {
     const getUserProfile = async () => {
       const user = await getUser(myId, authToken);
+      if (!user.ok) return;
       const userJson = await user.json();
       setFormState(userJson);
       setPetImage(userJson.imgs);
     };
     getUserProfile();
-  }, [myId]);
+  }, [myId, authToken, loggedIn]);
+
   const handleInputChange = (event) => {
     const { name, value } = event.target;
     setFormState({ ...formState, [name]: value });
@@ -55,7 +61,7 @@ export default function Profile({ myId, authToken }) {
     }
   };
 
-  return (
+  return loggedIn ? (
     <PetForm
       myId={myId}
       formState={formState}
@@ -68,5 +74,7 @@ export default function Profile({ myId, authToken }) {
       disableButton={disableButton}
       authToken={authToken}
     />
+  ) : (
+    <p style={{ textAlign: "center", padding: 10 }}>You've logged out.</p>
   );
 }

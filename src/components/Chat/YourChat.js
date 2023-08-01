@@ -3,10 +3,9 @@ export function Yourchat({ content, user }) {
   return (
     <div
       style={{
-        display: "flex",
         justifyContent: "flex-start",
-        alignItems: "center",
       }}
+      className="chat-box"
     >
       <Link to={`/detail/${user._id}`}>
         <img
@@ -20,7 +19,9 @@ export function Yourchat({ content, user }) {
           alt={user?.name || "user" + user._id.slice(3, 7)}
         />
       </Link>
-      <span style={{ border: "solid 1px black" }}>{content}</span>
+      <span className="message-box" style={{ backgroundColor: "#fec8a7" }}>
+        {content}
+      </span>
     </div>
   );
 }

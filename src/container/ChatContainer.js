@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import { getUser } from "../util/Api";
-
 import Avatar from "@mui/material/Avatar";
 
 export function ChatContainer({
@@ -40,7 +39,7 @@ export function ChatContainer({
     } else if (isHovered) {
       return "#fff";
     } else {
-      return '"#f1f1f1"';
+      return "#f1f1f1";
     }
   };
   return (
@@ -51,6 +50,7 @@ export function ChatContainer({
           alignItems: "center",
           padding: 10,
           backgroundColor: setBg(),
+          borderRadius: "50px 0 0 50px",
         }}
         onClick={() => setUserToDisplay(you)}
         onMouseEnter={handleMouseEnter}

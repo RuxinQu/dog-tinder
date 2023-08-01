@@ -54,9 +54,11 @@ export const DogCard = ({ myId, users, authToken }) => {
   };
 
   return turnCard ? (
-    users?.map((u) => <Detail user={u} handleTurnCard={handleTurnCard} />)
+    users?.map((u) => (
+      <Detail key={u._id} user={u} handleTurnCard={handleTurnCard} />
+    ))
   ) : (
-    <Box className="tinder-card">
+    <Box className="tinder-card board">
       <link
         href="https://fonts.googleapis.com/css?family=Damion&display=swap"
         rel="stylesheet"
@@ -66,7 +68,7 @@ export const DogCard = ({ myId, users, authToken }) => {
         rel="stylesheet"
       />
 
-      <div className="cardContainer">
+      <div className="card-container">
         {users?.map((character, index) => (
           <TinderCard
             ref={childRefs[index]}
@@ -83,7 +85,7 @@ export const DogCard = ({ myId, users, authToken }) => {
               }}
               className="card"
             >
-              <span className="petName kalam" onClick={handleTurnCard}>
+              <span className="pet-name kalam" onClick={handleTurnCard}>
                 {character.name || "user" + character._id.slice(3, 7)}
               </span>
             </div>

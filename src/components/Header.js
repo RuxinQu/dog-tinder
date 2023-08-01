@@ -1,6 +1,6 @@
 import React from "react";
-import { useCookies } from "react-cookie";
 import { useNavigate } from "react-router-dom";
+import Auth from "../util/auth";
 import Box from "@mui/material/Box";
 import Grid from "@mui/material/Grid";
 import IconButton from "@mui/material/IconButton";
@@ -12,7 +12,6 @@ import MenuItem from "@mui/material/MenuItem";
 
 export const Header = () => {
   const navigate = useNavigate();
-  const [cookies, setCookie, removeCookie] = useCookies(["user"]);
   const [anchorEl, setAnchorEl] = React.useState(null);
   const open = Boolean(anchorEl);
   const handleClick = (event) => {
@@ -22,11 +21,6 @@ export const Header = () => {
     setAnchorEl(null);
   };
 
-  const handleLogout = () => {
-    removeCookie("UserId");
-    removeCookie("AuthToken");
-    window.location.assign("/");
-  };
   return (
     <Box sx={{ flexGrow: 1 }} className="header">
       <Grid
@@ -54,37 +48,38 @@ export const Header = () => {
           >
             <MenuItem
               onClick={() => {
-                navigate("/profile");
-                handleClose();
+                window.location.assign("/profile");
               }}
             >
               Profile
             </MenuItem>
             <MenuItem
               onClick={() => {
-                navigate("/");
-                handleClose();
+                window.location.assign("/");
               }}
             >
               Home
             </MenuItem>
-            <MenuItem
-              onClick={() => {
-                handleLogout();
-                // handleClose();
-              }}
-            >
-              Logout
-            </MenuItem>
+            <MenuItem onClick={Auth.logOut}>Logout</MenuItem>
           </Menu>
         </Grid>
         <Grid item xs={4}>
-          <IconButton onClick={() => navigate("/board")}>
+          <IconButton
+            onClick={() => {
+              window.location.assign("/board");
+            }}
+          >
             <PetsIcon color="primary" fontSize="large" />
           </IconButton>
         </Grid>
         <Grid item xs={4}>
-          <IconButton onClick={() => navigate("/chat")}>
+          <IconButton
+            onClick={() => {
+              window.location.assign("/chat");
+              // navigate("/chat");
+              // handleClose();
+            }}
+          >
             <ForumIcon fontSize="large" color="info" />
           </IconButton>
         </Grid>

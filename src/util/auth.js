@@ -1,4 +1,5 @@
 import jwt_decode from "jwt-decode";
+import Cookies from "js-cookie";
 
 class Authorization {
   loggedIn(token) {
@@ -10,6 +11,15 @@ class Authorization {
     if (decoded.exp < Date.now() / 1000) {
       return true;
     } else return false;
+  }
+  logOut() {
+    try {
+      Cookies.remove("UserId");
+      Cookies.remove("AuthToken");
+      window.location.assign("/");
+    } catch (err) {
+      console.log(err);
+    }
   }
 }
 

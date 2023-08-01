@@ -11,6 +11,7 @@ export const MessageContainer = ({ you, me, authToken }) => {
     const getMessages = async () => {
       if (you) {
         const myMessage = await getMessage(me._id, you._id, authToken);
+        if (!myMessage.ok) return;
         const myMessageJson = await myMessage.json();
         const yourMessage = await getMessage(you._id, me._id, authToken);
         const yourMessageJson = await yourMessage.json();
@@ -22,17 +23,28 @@ export const MessageContainer = ({ you, me, authToken }) => {
       }
     };
     getMessages();
-  }, [you, allMessage, authToken, me._id]);
+  }, [authToken, allMessage, me._id, you]);
 
   return (
     <Box
       sx={{
         width: { xs: "100%", sm: "60%" },
-        border: "1px solid black",
+        border: "5px solid #e6a7b2",
+        borderRadius: "0 50px 50px 0",
+        borderLeft: 0,
       }}
     >
       {you && (
-        <h3 style={{ textAlign: "center", padding: 5 }} className="kalam">
+        <h3
+          style={{
+            textAlign: "center",
+            padding: 15,
+            marginBottom: 15,
+            backgroundColor: "#fec8a7",
+            borderRadius: "0 50px 0 0",
+          }}
+          className="kalam"
+        >
           {you.name || "user" + you._id.slice(3, 7)}
         </h3>
       )}
