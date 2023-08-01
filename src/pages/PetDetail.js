@@ -17,6 +17,7 @@ export default function PetDetail() {
       if (!localUser || localUser.expiry < new Date().getTime()) {
         console.log("========making an api call ========");
         const user = await getUser(userId, authToken);
+        if (!user.ok) return;
         const userJson = await user.json();
         const cachedData = {
           ...userJson,
@@ -30,7 +31,7 @@ export default function PetDetail() {
       }
     };
     getUserProfile();
-  }, [authToken]);
+  }, [authToken, userId]);
 
   return loggedIn && user && <Detail user={user} goBack={true} />;
 }

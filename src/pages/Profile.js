@@ -15,12 +15,13 @@ export default function Profile({ myId }) {
   useEffect(() => {
     const getUserProfile = async () => {
       const user = await getUser(myId, authToken);
+      if (!user.ok) return;
       const userJson = await user.json();
       setFormState(userJson);
       setPetImage(userJson.imgs);
     };
     getUserProfile();
-  }, [myId]);
+  }, [myId, authToken]);
   const handleInputChange = (event) => {
     const { name, value } = event.target;
     setFormState({ ...formState, [name]: value });

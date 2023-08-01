@@ -34,8 +34,7 @@ export const DogCard = ({ myId, users, authToken }) => {
   // set last direction and decrease current index
   const swiped = (direction, character, index) => {
     updateCurrentIndex(index - 1);
-    if (direction === "right" && Auth.loggedIn()) {
-      console.log(Auth.loggedIn());
+    if (direction === "right" && Auth.loggedIn(authToken)) {
       addMatch(myId, character._id, authToken);
     }
   };
@@ -77,7 +76,7 @@ export const DogCard = ({ myId, users, authToken }) => {
             className="swipe"
             key={character._id}
             onSwipe={(dir) => swiped(dir, character, index)}
-            onCardLeftScreen={() => outOfFrame(character._id, index)}
+            onCardLeftScreen={() => outOfFrame(character.name, index)}
           >
             <div
               style={{

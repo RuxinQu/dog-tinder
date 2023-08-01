@@ -13,8 +13,10 @@ export default function Chat({ myId }) {
   const [userToDisplay, setUserToDisplay] = useState("");
   const [me, setMe] = useState({});
   useEffect(() => {
+    // get all the users from my match list
     const getMatch = async () => {
       const meInfo = await getUser(myId, authToken);
+      if (!meInfo.ok) return;
       const meInfoJson = await meInfo.json();
       setMe(meInfoJson);
     };
@@ -45,16 +47,10 @@ export default function Chat({ myId }) {
               userToDisplay={userToDisplay}
               setUserToDisplay={setUserToDisplay}
               authToken={authToken}
-              loggedIn={loggedIn}
             />
           ))}
         </Box>
-        <MessageContainer
-          you={userToDisplay}
-          me={me}
-          authToken={authToken}
-          loggedIn={loggedIn}
-        />
+        <MessageContainer you={userToDisplay} me={me} />
       </Box>
     )
   );

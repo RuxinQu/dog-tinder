@@ -30,7 +30,7 @@ export default function Dashboard({ myId }) {
   });
 
   return (
-    <div>
+    <div className="dashboard">
       {users.length ? (
         <DogCard myId={myId} users={users} authToken={authToken} />
       ) : (

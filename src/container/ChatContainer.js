@@ -9,7 +9,6 @@ export function ChatContainer({
   userToDisplay,
   setUserToDisplay,
   authToken,
-  loggedIn,
 }) {
   const [isHovered, setIsHovered] = useState(false);
   const [you, setYou] = useState([]);
@@ -17,7 +16,6 @@ export function ChatContainer({
   // go through the match list of the user in my match list. Only display the user from my match list that also has me included in their match list
   useEffect(() => {
     const getMatch = async () => {
-      if (!loggedIn) return;
       const youInfo = await getUser(yourId, authToken);
       const youInfoJson = await youInfo.json();
       setYou(youInfoJson);
