@@ -43,7 +43,8 @@ h1 {
   height: 88dvh;
 }
 
-.dashboard::before {
+.dashboard::before,
+.detail-container::before {
   content: " ";
   background-image: url(../public/bg-board.jpeg);
   background-size: cover;

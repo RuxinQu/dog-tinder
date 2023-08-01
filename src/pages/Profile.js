@@ -21,7 +21,8 @@ export default function Profile({ myId }) {
       setPetImage(userJson.imgs);
     };
     getUserProfile();
-  }, [myId, authToken]);
+  }, [myId, authToken, loggedIn]);
+
   const handleInputChange = (event) => {
     const { name, value } = event.target;
     setFormState({ ...formState, [name]: value });
@@ -60,20 +61,20 @@ export default function Profile({ myId }) {
     }
   };
 
-  return (
-    loggedIn && (
-      <PetForm
-        myId={myId}
-        formState={formState}
-        petImage={petImage}
-        setPetImage={setPetImage}
-        handleInputChange={handleInputChange}
-        handleFormImageChange={handleFormImageChange}
-        handleSubmit={handleSubmit}
-        alertText={alertText}
-        disableButton={disableButton}
-        authToken={authToken}
-      />
-    )
+  return loggedIn ? (
+    <PetForm
+      myId={myId}
+      formState={formState}
+      petImage={petImage}
+      setPetImage={setPetImage}
+      handleInputChange={handleInputChange}
+      handleFormImageChange={handleFormImageChange}
+      handleSubmit={handleSubmit}
+      alertText={alertText}
+      disableButton={disableButton}
+      authToken={authToken}
+    />
+  ) : (
+    <p style={{ textAlign: "center", padding: 10 }}>You've logged out.</p>
   );
 }

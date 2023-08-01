@@ -4,7 +4,6 @@ import Auth from "../util/auth";
 import { getUser } from "../util/Api";
 import { ChatContainer } from "../container/ChatContainer";
 import { MessageContainer } from "../container/MessageContainer";
-
 import Box from "@mui/material/Box";
 
 export default function Chat({ myId }) {
@@ -21,37 +20,37 @@ export default function Chat({ myId }) {
       setMe(meInfoJson);
     };
     getMatch();
-  }, [myId, authToken]);
+  });
 
-  return (
-    loggedIn && (
+  return loggedIn ? (
+    <Box
+      sx={{
+        display: "flex",
+        flexWrap: "wrap",
+        justifyContent: "center",
+      }}
+    >
       <Box
         sx={{
-          display: "flex",
-          flexWrap: "wrap",
-          justifyContent: "center",
+          width: { xs: "100%", sm: "30%" },
+          border: "5px solid #e6a7b2",
+          borderRadius: "20px 0 0 20px",
         }}
       >
-        <Box
-          sx={{
-            width: { xs: "100%", sm: "30%" },
-            border: "5px solid #e6a7b2",
-            borderRadius: "20px 0 0 20px",
-          }}
-        >
-          {me.matches?.map((yourId) => (
-            <ChatContainer
-              yourId={yourId}
-              key={yourId}
-              myId={myId}
-              userToDisplay={userToDisplay}
-              setUserToDisplay={setUserToDisplay}
-              authToken={authToken}
-            />
-          ))}
-        </Box>
-        <MessageContainer you={userToDisplay} me={me} />
+        {me.matches?.map((yourId) => (
+          <ChatContainer
+            yourId={yourId}
+            key={yourId}
+            myId={myId}
+            userToDisplay={userToDisplay}
+            setUserToDisplay={setUserToDisplay}
+            authToken={authToken}
+          />
+        ))}
       </Box>
-    )
+      <MessageContainer you={userToDisplay} me={me} authToken={authToken} />
+    </Box>
+  ) : (
+    <p style={{ textAlign: "center", padding: 10 }}>You've logged out.</p>
   );
 }

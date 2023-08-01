@@ -1,14 +1,10 @@
 import React, { useState, useEffect } from "react";
-import Cookies from "js-cookie";
-import Auth from "../util/auth";
 import { ChatDisplay } from "../components/Chat/ChatDisplay";
 import { ChatInput } from "../components/Chat/ChatInput";
 import { getMessage } from "../util/Api";
 import Box from "@mui/material/Box";
 
-export const MessageContainer = ({ you, me }) => {
-  const authToken = Cookies.get("AuthToken");
-  const loggedIn = Auth.loggedIn(authToken);
+export const MessageContainer = ({ you, me, authToken }) => {
   const [allMessage, setAllMessage] = useState([]);
   const [messagesInOrder, setMessageInOrder] = useState([]);
   useEffect(() => {
@@ -27,7 +23,7 @@ export const MessageContainer = ({ you, me }) => {
       }
     };
     getMessages();
-  }, [authToken, loggedIn, allMessage, me._id, you]);
+  }, [authToken, allMessage, me._id, you]);
 
   return (
     <Box
@@ -52,14 +48,8 @@ export const MessageContainer = ({ you, me }) => {
           {you.name || "user" + you._id.slice(3, 7)}
         </h3>
       )}
-      {loggedIn ? (
-        <ChatDisplay message={messagesInOrder} you={you} me={me} />
-      ) : (
-        <p style={{ textAlign: "center", padding: 10 }}>
-          You're logged out. Log in to view the messages
-        </p>
-      )}
-      {you && loggedIn && (
+      <ChatDisplay message={messagesInOrder} you={you} me={me} />
+      {you && (
         <ChatInput myId={me._id} yourId={you._id} authToken={authToken} />
       )}
     </Box>

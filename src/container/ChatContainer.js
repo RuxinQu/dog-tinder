@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import { getUser } from "../util/Api";
-
 import Avatar from "@mui/material/Avatar";
 
 export function ChatContainer({

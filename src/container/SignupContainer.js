@@ -1,13 +1,11 @@
 import React, { useState } from "react";
 import Cookies from "js-cookie";
-import { useCookies } from "react-cookie";
 import * as Yup from "yup";
 import { Signup } from "../components/Signup";
 import { signIn } from "../util/Api";
 
 export const SignupContainer = ({ register, handleClose }) => {
   // hide password input
-  // const [cookie, setCookie] = useCookies("user");
   const [showPassword, setShowPassword] = useState(false);
   const [alertMessage, setAlertMessage] = useState("");
 
@@ -39,13 +37,10 @@ export const SignupContainer = ({ register, handleClose }) => {
     const option = register === true ? "register" : "login";
     const response = await signIn(values, option);
     const jsonResponse = await response.json();
-    const expirationDate = new Date(Date.now() + 60 * 60 * 1000);
+    const expirationDate = new Date(Date.now() + 2 * 60 * 60 * 1000);
     if (response.ok) {
       Cookies.set("AuthToken", jsonResponse.token, { expires: expirationDate });
-
-      Cookies.set("UserId", jsonResponse.user._id, {
-        expires: expirationDate,
-      });
+      Cookies.set("UserId", jsonResponse.user._id, { expires: expirationDate });
       option === "register"
         ? window.location.assign("/profile")
         : window.location.assign("/board");

@@ -18,7 +18,6 @@ function App() {
   const authToken = Cookies.get("AuthToken");
   const myId = Cookies.get("UserId");
   const loggedIn = Auth.loggedIn(authToken);
-
   return (
     <ThemeProvider theme={theme}>
       <Router>
@@ -36,6 +35,7 @@ function App() {
               <Route path="/detail/:userId" element={<PetDetail />} />
             )}
           </Route>
+          {/* show no match page for all paths when loggedIn is false */}
           <Route path="*" element={<NoMatch />} />
         </Routes>
       </Router>

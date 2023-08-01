@@ -1,7 +1,6 @@
 import React, { useState, useMemo, useRef } from "react";
 import { Detail } from "./Detail";
 import { addMatch } from "../util/Api";
-import Auth from "../util/auth";
 import TinderCard from "react-tinder-card";
 import Box from "@mui/material/Box";
 import Fab from "@mui/material/Fab";
@@ -34,7 +33,7 @@ export const DogCard = ({ myId, users, authToken }) => {
   // set last direction and decrease current index
   const swiped = (direction, character, index) => {
     updateCurrentIndex(index - 1);
-    if (direction === "right" && Auth.loggedIn(authToken)) {
+    if (direction === "right") {
       addMatch(myId, character._id, authToken);
     }
   };
