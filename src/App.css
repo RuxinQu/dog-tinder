@@ -50,6 +50,19 @@ h1 {
   height: 88dvh;
 }
 
+.tinder-card::before,
+.detail-container::before {
+  content: " ";
+  background-image: url(../public/bg-board.jpeg);
+  background-size: cover;
+  position: absolute;
+  top: 12dvh;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  opacity: 0.7;
+}
+
 .swipe {
   max-width: 400px;
   min-height: 450px;
@@ -100,6 +113,11 @@ h1 {
 }
 
 .detail-container {
+  min-height: 88dvh;
+}
+
+.detail {
+  background-color: #f1f1f1 !important;
   position: relative;
   margin: 0 auto;
   min-height: 450px;
@@ -111,6 +129,7 @@ h1 {
   box-shadow: 0px 0px 60px 0px rgba(0, 0, 0, 0.3) !important;
   border-radius: 20px;
   padding: 10px;
+  top: 20px;
 }
 
 .detail-info {
