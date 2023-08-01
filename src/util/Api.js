@@ -100,7 +100,7 @@ export const getMessage = async (myId, yourId, token) => {
   const options = generateOptions("GET", token);
   try {
     const response = await fetch(
-      `http://localhost:3001/message/one?fromId=${myId}&receiveId=${yourId}`,
+      `/message/one?fromId=${myId}&receiveId=${yourId}`,
       options
     );
     return response;

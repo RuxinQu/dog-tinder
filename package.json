@@ -1,6 +1,6 @@
 {
   "name": "dog-tinder",
-  "proxy": "http://localhost:3001/",
+  "proxy": "https://dog-tinder-backend-da6b7ebb15b3.herokuapp.com/",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
