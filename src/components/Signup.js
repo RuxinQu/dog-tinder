@@ -21,6 +21,7 @@ export const Signup = ({
   handleMouseDownPassword,
   validationSchema,
   handleSubmit,
+  loading,
 }) => {
   // Define initial form values
   const initialValues = {
@@ -149,8 +150,9 @@ export const Signup = ({
               borderRadius: 25,
               fontSize: 18,
             }}
+            disabled={loading}
           >
-            SUBMIT
+            {loading ? "SUBMITING" : "SUBMIT"}
           </Button>
         </Form>
       </Formik>

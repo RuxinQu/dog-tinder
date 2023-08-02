@@ -13,7 +13,7 @@ export const SignupContainer = ({ register, handleClose }) => {
   const handleMouseDownPassword = (event) => {
     event.preventDefault();
   };
-
+  const [loading, setLoading] = useState(false);
   // Define Yup validation schema
   const validationSchema = Yup.object().shape({
     email: Yup.string().email().required("Email is required"),
@@ -34,6 +34,7 @@ export const SignupContainer = ({ register, handleClose }) => {
   // Handle form submission
   const handleSubmit = async (values) => {
     // Handle form submission logic here
+    setLoading(true);
     const option = register === true ? "register" : "login";
     const response = await signIn(values, option);
     const jsonResponse = await response.json();
@@ -59,6 +60,7 @@ export const SignupContainer = ({ register, handleClose }) => {
       handleMouseDownPassword={handleMouseDownPassword}
       validationSchema={validationSchema}
       handleSubmit={handleSubmit}
+      loading={loading}
     />
   );
 };
