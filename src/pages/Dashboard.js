@@ -30,7 +30,7 @@ export default function Dashboard({ myId }) {
   return loggedIn ? (
     <div className="dashboard">
       {users.length ? (
-        <DogCard myId={myId} users={users} />
+        <DogCard myId={myId} users={users} authToken={authToken} />
       ) : (
         <h3 style={{ textAlign: "center" }}>
           You have sent match requests to all the dogs, wait for their replies!

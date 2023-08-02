@@ -9,11 +9,13 @@ import FavoriteOutlinedIcon from "@mui/icons-material/FavoriteOutlined";
 
 export const DogCard = ({ myId, users, authToken }) => {
   const [turnCard, setTurnCard] = useState(false);
+  const [userToDisplay, setUserToDisplay] = useState({});
   const [currentIndex, setCurrentIndex] = useState(users.length - 1);
   // used for outOfFrame closure
   const currentIndexRef = useRef(currentIndex);
 
-  const handleTurnCard = () => {
+  const handleTurnCard = (character) => {
+    setUserToDisplay(character);
     turnCard ? setTurnCard(false) : setTurnCard(true);
   };
 
@@ -53,11 +55,7 @@ export const DogCard = ({ myId, users, authToken }) => {
     }
   };
 
-  return turnCard ? (
-    users?.map((u) => (
-      <Detail key={u._id} user={u} handleTurnCard={handleTurnCard} />
-    ))
-  ) : (
+  return (
     <Box className="tinder-card board">
       <link
         href="https://fonts.googleapis.com/css?family=Damion&display=swap"
@@ -68,38 +66,55 @@ export const DogCard = ({ myId, users, authToken }) => {
         rel="stylesheet"
       />
 
-      <div className="card-container">
-        {users?.map((character, index) => (
-          <TinderCard
-            ref={childRefs[index]}
-            className="swipe"
-            key={character._id}
-            onSwipe={(dir) => swiped(dir, character, index)}
-            onCardLeftScreen={() => outOfFrame(character.name, index)}
-          >
-            <div
-              style={{
-                backgroundImage: character.imgs[0]?.original
-                  ? "url(" + character.imgs[0]?.original + ")"
-                  : "url(https://www.bil-jac.com/Images/DogPlaceholder.svg)",
-              }}
-              className="card"
+      {turnCard ? (
+        <Detail user={userToDisplay} handleTurnCard={handleTurnCard} />
+      ) : (
+        <>
+          <div className="card-container">
+            {users?.map((character, index) => (
+              <TinderCard
+                ref={childRefs[index]}
+                className="swipe"
+                key={character._id}
+                onSwipe={(dir) => swiped(dir, character, index)}
+                onCardLeftScreen={() => outOfFrame(character.name, index)}
+              >
+                <div
+                  style={{
+                    backgroundImage: character.imgs[0]?.original
+                      ? "url(" + character.imgs[0]?.original + ")"
+                      : "url(https://www.bil-jac.com/Images/DogPlaceholder.svg)",
+                  }}
+                  className="card"
+                >
+                  <span
+                    className="pet-name kalam"
+                    onClick={() => handleTurnCard(character)}
+                  >
+                    {character.name || "user" + character._id.slice(3, 7)}
+                  </span>
+                </div>
+              </TinderCard>
+            ))}
+          </div>
+          <div className="buttons">
+            <Fab
+              size="small"
+              disabled={!canSwipe}
+              onClick={() => swipe("left")}
             >
-              <span className="pet-name kalam" onClick={handleTurnCard}>
-                {character.name || "user" + character._id.slice(3, 7)}
-              </span>
-            </div>
-          </TinderCard>
-        ))}
-      </div>
-      <div className="buttons">
-        <Fab size="small" disabled={!canSwipe} onClick={() => swipe("left")}>
-          <CloseIcon color="error" />
-        </Fab>
-        <Fab size="small" disabled={!canSwipe} onClick={() => swipe("right")}>
-          <FavoriteOutlinedIcon color="success" />
-        </Fab>
-      </div>
+              <CloseIcon color="error" />
+            </Fab>
+            <Fab
+              size="small"
+              disabled={!canSwipe}
+              onClick={() => swipe("right")}
+            >
+              <FavoriteOutlinedIcon color="success" />
+            </Fab>
+          </div>
+        </>
+      )}
     </Box>
   );
 };
