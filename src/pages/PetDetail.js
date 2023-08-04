@@ -20,5 +20,20 @@ export default function PetDetail() {
     getUserProfile();
   }, [authToken, userId]);
 
-  return loggedIn && user && <Detail user={user} goBack={true} />;
+  return (
+    loggedIn &&
+    user && (
+      <div
+        style={{
+          minHeight: "88dvh",
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+        }}
+        className="detail-container"
+      >
+        <Detail user={user} goBack={true} />
+      </div>
+    )
+  );
 }

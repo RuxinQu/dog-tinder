@@ -6,6 +6,7 @@ import Box from "@mui/material/Box";
 import Fab from "@mui/material/Fab";
 import CloseIcon from "@mui/icons-material/Close";
 import FavoriteOutlinedIcon from "@mui/icons-material/FavoriteOutlined";
+import MoreVertIcon from "@mui/icons-material/MoreVert";
 
 export const DogCard = ({ myId, users, authToken }) => {
   const [turnCard, setTurnCard] = useState(false);
@@ -13,18 +14,15 @@ export const DogCard = ({ myId, users, authToken }) => {
   const [currentIndex, setCurrentIndex] = useState(users.length - 1);
   // used for outOfFrame closure
   const currentIndexRef = useRef(currentIndex);
-
   const handleTurnCard = (character) => {
     setUserToDisplay(character);
-    turnCard ? setTurnCard(false) : setTurnCard(true);
+    setTurnCard(true);
   };
 
-  const childRefs = useMemo(
-    () =>
-      Array(users.length)
-        .fill(0)
-        .map((i) => React.createRef()),
-    [users.length]
+  const childRefs = useMemo(() =>
+    Array(users.length)
+      .fill(0)
+      .map((i) => React.createRef())
   );
 
   const updateCurrentIndex = (val) => {
@@ -66,54 +64,48 @@ export const DogCard = ({ myId, users, authToken }) => {
         rel="stylesheet"
       />
 
-      {turnCard ? (
-        <Detail user={userToDisplay} handleTurnCard={handleTurnCard} />
-      ) : (
-        <>
-          <div className="card-container">
-            {users?.map((character, index) => (
-              <TinderCard
-                ref={childRefs[index]}
-                className="swipe"
-                key={character._id}
-                onSwipe={(dir) => swiped(dir, character, index)}
-                onCardLeftScreen={() => outOfFrame(character.name, index)}
+      <div className="card-container">
+        {users?.map((character, index) => (
+          <TinderCard
+            ref={childRefs[index]}
+            className="swipe"
+            key={character._id}
+            onSwipe={(dir) => swiped(dir, character, index)}
+            onCardLeftScreen={() => outOfFrame(character.name, index)}
+          >
+            {turnCard ? (
+              <Detail user={userToDisplay} setTurnCard={setTurnCard} />
+            ) : (
+              <div
+                style={{
+                  backgroundImage: character.imgs[0]?.original
+                    ? "url(" + character.imgs[0]?.original + ")"
+                    : "url(https://www.bil-jac.com/Images/DogPlaceholder.svg)",
+                }}
+                className="card"
               >
-                <div
-                  style={{
-                    backgroundImage: character.imgs[0]?.original
-                      ? "url(" + character.imgs[0]?.original + ")"
-                      : "url(https://www.bil-jac.com/Images/DogPlaceholder.svg)",
-                  }}
-                  className="card"
+                <Fab
+                  color="secondary"
+                  size="small"
+                  sx={{ float: "right" }}
+                  onClick={() => handleTurnCard(character)}
                 >
-                  <span
-                    className="pet-name kalam"
-                    onClick={() => handleTurnCard(character)}
-                  >
-                    {character.name || "user" + character._id.slice(3, 7)}
-                  </span>
-                </div>
-              </TinderCard>
-            ))}
-          </div>
-          <div className="buttons">
-            <Fab
-              size="small"
-              disabled={!canSwipe}
-              onClick={() => swipe("left")}
-            >
-              <CloseIcon color="error" />
-            </Fab>
-            <Fab
-              size="small"
-              disabled={!canSwipe}
-              onClick={() => swipe("right")}
-            >
-              <FavoriteOutlinedIcon color="success" />
-            </Fab>
-          </div>
-        </>
+                  <MoreVertIcon />
+                </Fab>
+              </div>
+            )}
+          </TinderCard>
+        ))}
+      </div>
+      {!turnCard && (
+        <div className="buttons">
+          <Fab size="small" disabled={!canSwipe} onClick={() => swipe("left")}>
+            <CloseIcon color="" />
+          </Fab>
+          <Fab size="small" disabled={!canSwipe} onClick={() => swipe("right")}>
+            <FavoriteOutlinedIcon color="error" />
+          </Fab>
+        </div>
       )}
     </Box>
   );

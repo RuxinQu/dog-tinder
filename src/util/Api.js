@@ -1,4 +1,4 @@
-const baseUrl = "https://dog-tinder-backend-da6b7ebb15b3.herokuapp.com";
+const baseUrl = "http://localhost:3001";
 const generateOptions = (method, token) => {
   return {
     method: method,
