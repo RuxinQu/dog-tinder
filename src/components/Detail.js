@@ -34,7 +34,7 @@ export const Detail = ({ user, setTurnCard, goBack }) => {
         )}
       </div>
       <div className="detail-info">
-        <h2>I am~~~{user.name || "user" + user._id.slice(3, 7)} </h2>
+        <h2>I am {user.name || "user" + user._id.slice(3, 7)} </h2>
         <Button variant="outlined" color="secondary" size="small">
           {user.breed || "unknown"}
         </Button>
