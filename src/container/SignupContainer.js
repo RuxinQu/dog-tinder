@@ -15,21 +15,25 @@ export const SignupContainer = ({ register, handleClose }) => {
   };
   const [loading, setLoading] = useState(false);
   // Define Yup validation schema
-  const validationSchema = Yup.object().shape({
-    email: Yup.string().email().required("Email is required"),
-    password: Yup.string()
-      .min(6, "Password must be at least 6 characters")
-      .required("Password is required"),
-    //only do validation on comfirmPassword input when signup
-    confirmPassword: Yup.string().when(`${register}`, {
-      is: true,
-      then: () =>
-        Yup.string()
+  let validationSchema;
+  // couldn't get yup conditional validation to work
+  register
+    ? (validationSchema = Yup.object().shape({
+        email: Yup.string().email().required("Email is required"),
+        password: Yup.string()
+          .min(6, "Password must be at least 6 characters")
+          .required("Password is required"),
+        //only do validation on comfirmPassword input when signup
+        confirmPassword: Yup.string()
           .oneOf([Yup.ref("password"), null], "Passwords must match")
           .required("Confirm password is required"),
-      otherwise: () => Yup.string().strip(),
-    }),
-  });
+      }))
+    : (validationSchema = Yup.object().shape({
+        email: Yup.string().email().required("Email is required"),
+        password: Yup.string()
+          .min(6, "Password must be at least 6 characters")
+          .required("Password is required"),
+      }));
 
   // Handle form submission
   const handleSubmit = async (values) => {
