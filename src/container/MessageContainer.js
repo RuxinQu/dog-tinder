@@ -26,7 +26,7 @@ export const MessageContainer = ({ you, me, authToken }) => {
   }, [authToken, allMessage, me._id, you]);
 
   return (
-    <Box sx={{}}>
+    <Box sx={{ borderLeft: "5px solid #e6a7b2" }}>
       {you && (
         <h3
           style={{
@@ -34,7 +34,6 @@ export const MessageContainer = ({ you, me, authToken }) => {
             padding: 15,
             marginBottom: 15,
             backgroundColor: "#fec8a7",
-            // borderRadius: "0 50px 0 0",
           }}
           className="kalam"
         >

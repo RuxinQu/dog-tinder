@@ -32,6 +32,7 @@ export default function Chat({ myId }) {
           width: "90%",
           margin: "0 auto",
           border: showBorder && "5px solid #e6a7b2",
+          borderRadius: "5px",
         }}
       >
         <Box sx={{ width: { xs: "100%", sm: "30%" } }}>
