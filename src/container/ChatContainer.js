@@ -2,12 +2,14 @@ import React, { useEffect, useState } from "react";
 import { getUser } from "../util/Api";
 import Avatar from "@mui/material/Avatar";
 
+// is the component that contains only one matched user
 export function ChatContainer({
   yourId,
   myId,
   userToDisplay,
   setUserToDisplay,
   authToken,
+  setShowBorder,
 }) {
   const [isHovered, setIsHovered] = useState(false);
   const [you, setYou] = useState([]);
@@ -21,7 +23,11 @@ export function ChatContainer({
       const yourMatch = youInfoJson.matches;
       if (yourMatch.includes(myId)) {
         setMatch(true);
-      } else setMatch(false);
+        setShowBorder(true);
+      } else {
+        setMatch(false);
+        setShowBorder(false);
+      }
     };
     getMatch();
   }, [yourId, match, authToken, myId]);
@@ -42,31 +48,30 @@ export function ChatContainer({
       return "#f1f1f1";
     }
   };
+
   return (
-    match && (
-      <div
-        style={{
-          display: "flex",
-          alignItems: "center",
-          padding: 10,
-          backgroundColor: setBg(),
-          borderRadius: "50px 0 0 50px",
-        }}
-        onClick={() => setUserToDisplay(you)}
-        onMouseEnter={handleMouseEnter}
-        onMouseLeave={handleMouseLeave}
-      >
-        <Avatar
-          alt={you.name}
-          src={
-            you.imgs[0]?.original ||
-            "https://www.bil-jac.com/Images/DogPlaceholder.svg"
-          }
-        />
-        <span style={{ padding: "0 5px" }}>
-          {you.name || "user" + you._id.slice(3, 7)}
-        </span>
-      </div>
-    )
+    <div
+      style={{
+        display: "flex",
+        alignItems: "center",
+        padding: 10,
+        backgroundColor: setBg(),
+        // borderRadius: "50px 0 0 50px",
+      }}
+      onClick={() => setUserToDisplay(you)}
+      onMouseEnter={handleMouseEnter}
+      onMouseLeave={handleMouseLeave}
+    >
+      <Avatar
+        alt={you.name}
+        src={
+          you.imgs[0]?.original ||
+          "https://www.bil-jac.com/Images/DogPlaceholder.svg"
+        }
+      />
+      <span style={{ padding: "0 5px" }}>
+        {you.name || "user" + you._id.slice(3, 7)}
+      </span>
+    </div>
   );
 }

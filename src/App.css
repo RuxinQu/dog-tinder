@@ -43,19 +43,6 @@ h1 {
   height: 88dvh;
 }
 
-.dashboard::before,
-.detail-container::before {
-  content: " ";
-  background-image: url(../public/bg-board.jpeg);
-  background-size: cover;
-  position: absolute;
-  top: 12dvh;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  opacity: 0.7;
-}
-
 .swipe {
   max-width: 640px;
   min-height: 450px;

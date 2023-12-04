@@ -52,6 +52,7 @@ export const SignupContainer = ({ register, handleClose }) => {
     } else {
       setAlertMessage(jsonResponse.message);
     }
+    setLoading(false);
   };
 
   return (

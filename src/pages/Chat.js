@@ -22,34 +22,39 @@ export default function Chat({ myId }) {
     getMatch();
   });
 
+  const [showBorder, setShowBorder] = useState(false);
   return loggedIn ? (
-    <Box
-      sx={{
-        display: "flex",
-        flexWrap: "wrap",
-        justifyContent: "center",
-      }}
-    >
+    me.matches?.length !== 0 ? (
       <Box
         sx={{
-          width: { xs: "100%", sm: "30%" },
-          border: "5px solid #e6a7b2",
-          borderRadius: "20px 0 0 20px",
+          display: "flex",
+          justifyContent: "center",
+          width: "90%",
+          margin: "0 auto",
+          border: showBorder && "5px solid #e6a7b2",
         }}
       >
-        {me.matches?.map((yourId) => (
-          <ChatContainer
-            yourId={yourId}
-            key={yourId}
-            myId={myId}
-            userToDisplay={userToDisplay}
-            setUserToDisplay={setUserToDisplay}
-            authToken={authToken}
-          />
-        ))}
+        <Box sx={{ width: { xs: "100%", sm: "30%" } }}>
+          {me.matches?.map((yourId) => (
+            // this is the box that contains all the matched users
+            <ChatContainer
+              yourId={yourId}
+              key={yourId}
+              myId={myId}
+              userToDisplay={userToDisplay}
+              setUserToDisplay={setUserToDisplay}
+              authToken={authToken}
+              setShowBorder={setShowBorder}
+            />
+          ))}
+        </Box>
+        <Box sx={{ width: { xs: "100%", sm: "70%" } }}>
+          <MessageContainer you={userToDisplay} me={me} authToken={authToken} />
+        </Box>
       </Box>
-      <MessageContainer you={userToDisplay} me={me} authToken={authToken} />
-    </Box>
+    ) : (
+      <p style={{ textAlign: "center", padding: 10 }}>No matches yet</p>
+    )
   ) : (
     <p style={{ textAlign: "center", padding: 10 }}>You've logged out.</p>
   );
