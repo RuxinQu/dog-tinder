@@ -5,11 +5,12 @@ import { Header } from "../components/Header";
 export const theme = createTheme({
   palette: {
     primary: {
-      main: "#F48B48",
+      main: "#F48B48", //orange
     },
     secondary: {
-      main: "#aa00ff",
+      main: "#FFB0C2", //pink from the home page background
     },
+
     background: {
       default: "#00000",
     },
@@ -24,6 +25,11 @@ export const theme = createTheme({
       '"Segoe UI Emoji"',
       '"Segoe UI Symbol"',
     ].join(","),
+    h3: {
+      fontSize: "35px",
+      padding: "10px 0 10px 0",
+      textAlign: "center",
+    },
   },
 });
 export const Layout = () => {

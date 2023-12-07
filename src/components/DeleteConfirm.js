@@ -8,7 +8,7 @@ import DialogContentText from "@mui/material/DialogContentText";
 import DialogTitle from "@mui/material/DialogTitle";
 import HighlightOffIcon from "@mui/icons-material/HighlightOff";
 
-export const ButtonDialog = ({ handleDeleteImg, handleDeletePet, button }) => {
+export const DeleteConfirm = ({ handleDeleteImg, handleDeletePet, button }) => {
   const [open, setOpen] = React.useState(false);
 
   const handleClickOpen = () => {
@@ -24,12 +24,13 @@ export const ButtonDialog = ({ handleDeleteImg, handleDeletePet, button }) => {
       style={{
         display: "inline-block",
         position: "absolute",
-        top: 0,
-        right: 0,
+        top: -17,
+        right: -17,
       }}
     >
       <IconButton
-        // type="button"
+        // type="button
+        aria-label="delete"
         onClick={handleClickOpen}
         size="small"
         color="error"
@@ -56,7 +57,9 @@ export const ButtonDialog = ({ handleDeleteImg, handleDeletePet, button }) => {
           </DialogContentText>
         </DialogContent>
         <DialogActions>
-          <Button onClick={handleClose}>close</Button>
+          <Button color="success" onClick={handleClose}>
+            close
+          </Button>
           <Button
             color="error"
             onClick={() => {

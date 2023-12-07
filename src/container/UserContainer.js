@@ -3,7 +3,7 @@ import { getUser } from "../util/Api";
 import Avatar from "@mui/material/Avatar";
 
 // is the component that contains only one matched user
-export function ChatContainer({
+export function UserContainer({
   yourId,
   myId,
   userToDisplay,
