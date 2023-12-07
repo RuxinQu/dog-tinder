@@ -67,7 +67,7 @@ export const Header = () => {
               window.location.assign("/board");
             }}
           >
-            <PetsIcon color="primary" fontSize="large" />
+            <PetsIcon fontSize="large" />
           </IconButton>
         </Grid>
         <Grid item xs={4}>
@@ -78,7 +78,7 @@ export const Header = () => {
               // handleClose();
             }}
           >
-            <ForumIcon fontSize="large" color="info" />
+            <ForumIcon fontSize="large" />
           </IconButton>
         </Grid>
       </Grid>

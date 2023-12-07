@@ -36,13 +36,13 @@ export const Signup = ({
         <CancelOutlinedIcon />
       </div>
 
-      <h2 className="kalam" style={{ textAlign: "center" }}>
+      <h2 className="itim" style={{ textAlign: "center" }}>
         {register ? "CREATE ACCOUNT" : "LOGIN YOUR ACCOUNT"}
       </h2>
-      <p style={{ padding: "15px 0" }}>
+      <small style={{ padding: "15px 0" }}>
         By clicking Submit, you agree to our terms. Learn how we process your
         data in our Privacy Policy and Cookie Policy.
-      </p>
+      </small>
 
       <Formik
         initialValues={initialValues}
@@ -57,6 +57,7 @@ export const Signup = ({
             flexDirection: "column",
             justifyContent: "space-evenly",
             alignItems: "center",
+            paddingTop: 30,
           }}
         >
           <FormControl sx={{ m: 1, width: "25ch" }} variant="outlined">
@@ -141,14 +142,14 @@ export const Signup = ({
 
           <Button
             type="submit"
-            className="kalam"
-            variant="outlined"
-            color="secondary"
+            className="itim"
+            variant="contained"
             sx={{
               m: 3,
               width: "30ch",
               borderRadius: 25,
               fontSize: 18,
+              fontWeight: "bold",
             }}
             disabled={loading}
           >

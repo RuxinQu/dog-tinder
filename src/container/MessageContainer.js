@@ -26,16 +26,20 @@ export const MessageContainer = ({ you, me, authToken }) => {
   }, [authToken, allMessage, me._id, you]);
 
   return (
-    <Box sx={{ borderLeft: "5px solid #e6a7b2" }}>
+    <Box
+      sx={{
+        boxShadow: "5px 5px 5px gray",
+        borderRadius: "5px",
+      }}
+    >
       {you && (
         <h3
           style={{
             textAlign: "center",
-            padding: 15,
+            padding: 20,
             marginBottom: 15,
             backgroundColor: "#fec8a7",
           }}
-          className="kalam"
         >
           {you.name || "user" + you._id.slice(3, 7)}
         </h3>

@@ -1,6 +1,7 @@
 import React from "react";
-import { deleteImg } from "../util/Api";
+import { deleteImg } from "../../util/Api";
 import { DeleteConfirm } from "./DeleteConfirm";
+import { ImageDropbox } from "./ImageDropbox";
 import Typography from "@mui/material/Typography";
 import Grid from "@mui/material/Grid";
 
@@ -18,17 +19,17 @@ export const PetForm = ({
   return (
     <div>
       <Typography variant="h3">Profile</Typography>
-      <Grid container className="profile-form">
-        <Grid item xs={4}>
-          <span>Email: </span>
+      <Grid container spacing={1} className="profile-form ">
+        <Grid item xs={6}>
+          <label>Email:</label>
         </Grid>
-        <Grid item xs={8}>
+        <Grid item xs={6}>
           {formState.email}
         </Grid>
-        <Grid item xs={4}>
+        <Grid item xs={6}>
           <label htmlFor="name">Name: </label>
         </Grid>
-        <Grid item xs={8}>
+        <Grid item xs={6}>
           <input
             type="text"
             id="name"
@@ -38,10 +39,10 @@ export const PetForm = ({
             required
           />
         </Grid>
-        <Grid item xs={4}>
+        <Grid item xs={6}>
           <label htmlFor="breed">Breed: </label>
         </Grid>
-        <Grid item xs={8}>
+        <Grid item xs={6}>
           <input
             type="text"
             id="breed"
@@ -52,10 +53,10 @@ export const PetForm = ({
           />
         </Grid>
 
-        <Grid item xs={4}>
+        <Grid item xs={6}>
           <label htmlFor="age">Age: </label>
         </Grid>
-        <Grid item xs={8}>
+        <Grid item xs={6}>
           <input
             type="text"
             id="age"
@@ -66,10 +67,10 @@ export const PetForm = ({
           />
         </Grid>
 
-        <Grid item xs={4}>
+        <Grid item xs={6}>
           <label htmlFor="size">Size: </label>
         </Grid>
-        <Grid item xs={8}>
+        <Grid item xs={6}>
           <select
             id="size"
             name="size"
@@ -84,10 +85,10 @@ export const PetForm = ({
             <option value="x-large">X-large</option>
           </select>
         </Grid>
-        <Grid item xs={4}>
+        <Grid item xs={6}>
           <label>Gender: </label>
         </Grid>
-        <Grid item xs={8}>
+        <Grid item xs={6}>
           <label>
             <input
               type="radio"
@@ -109,10 +110,10 @@ export const PetForm = ({
             Male
           </label>
         </Grid>
-        <Grid item xs={4}>
+        <Grid item xs={6}>
           <label htmlFor="description">Description:</label>
         </Grid>
-        <Grid item xs={8}>
+        <Grid item xs={6}>
           <textarea
             id="description"
             name="description"
@@ -121,20 +122,8 @@ export const PetForm = ({
             onChange={handleInputChange}
           ></textarea>
         </Grid>
+
         <Grid item xs={12}>
-          <label htmlFor="imgs">
-            Upload Images: <small>(up to 10 images each time)</small>
-          </label>
-        </Grid>
-        <Grid item xs={12}>
-          <input
-            type="file"
-            name="imgs"
-            multiple
-            onChange={handleFormImageChange}
-          />
-        </Grid>
-        <div>
           <p>Pet Images: </p>
           {petImage?.map((i) => {
             return (
@@ -185,7 +174,14 @@ export const PetForm = ({
               </div>
             );
           })}
-        </div>
+        </Grid>
+
+        <Grid item xs={12}>
+          <label>Upload Images</label>
+        </Grid>
+        <Grid item xs={12}>
+          <ImageDropbox className="image-upload-dropbox" />
+        </Grid>
       </Grid>
     </div>
   );

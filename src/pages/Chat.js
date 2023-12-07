@@ -25,21 +25,11 @@ export default function Chat({ myId }) {
 
   const [showBorder, setShowBorder] = useState(false);
   return (
-    <div className="chat-container">
-      <Typography variant="h3">Chat with matched friends</Typography>
+    <div>
+      <Typography variant="h3">Start Chating with friends!</Typography>
       {loggedIn ? (
         me.matches?.length !== 0 ? (
-          <Box
-            sx={{
-              display: "flex",
-              justifyContent: "center",
-              width: "90%",
-              margin: "0 auto",
-              border: showBorder && "5px solid #e6a7b2",
-              borderRadius: "5px",
-              backgroundColor: "#e2e2e2b9",
-            }}
-          >
+          <Box className="chat-container">
             <Box sx={{ width: { xs: "100%", sm: "30%" } }}>
               {me.matches?.map((yourId) => (
                 // this is the box that contains all the matched users

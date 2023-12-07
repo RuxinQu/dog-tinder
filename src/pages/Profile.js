@@ -3,7 +3,7 @@ import Cookies from "js-cookie";
 import Auth from "../util/auth";
 import { updateProfile, uploadImgs, getUser } from "../util/Api";
 import { ProfileUpdateAlerts } from "../components/ProfileUpdateAlerts";
-import { PetForm } from "../components/Petform";
+import { PetForm } from "../components/Profile/Petform";
 
 export default function Profile({ myId }) {
   const authToken = Cookies.get("AuthToken");
@@ -52,7 +52,8 @@ export default function Profile({ myId }) {
       }
       const response = await updateProfile(myId, formState, authToken);
       if (response.ok) {
-        setAlertMessage("Pro");
+        setAlertMessage("Profile updated");
+        setFormImage([]);
         setButtonDisabled(false);
       }
     } catch (error) {
@@ -62,7 +63,7 @@ export default function Profile({ myId }) {
   };
 
   return loggedIn ? (
-    <div className="profile-form-container">
+    <div>
       <PetForm
         myId={myId}
         formState={formState}

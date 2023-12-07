@@ -5,10 +5,10 @@ import { Header } from "../components/Header";
 export const theme = createTheme({
   palette: {
     primary: {
-      main: "#F48B48", //orange
+      main: "#E6AD73", //orange
     },
     secondary: {
-      main: "#FFB0C2", //pink from the home page background
+      main: "#73c8e5", //pink from the home page background
     },
 
     background: {
@@ -27,7 +27,8 @@ export const theme = createTheme({
     ].join(","),
     h3: {
       fontSize: "35px",
-      padding: "10px 0 10px 0",
+      fontWeight: 700,
+      padding: "20px 0 20px 0",
       textAlign: "center",
     },
   },

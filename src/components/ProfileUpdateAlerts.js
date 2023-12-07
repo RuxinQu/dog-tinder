@@ -28,10 +28,11 @@ export const ProfileUpdateAlerts = ({
   };
 
   return (
-    <Box sx={{ mt: 1 }}>
+    <Box sx={{ my: 3, textAlign: "center" }}>
       <Button
         variant="contained"
         color="secondary"
+        size="large"
         disabled={buttonDisabled}
         onClick={handleClick}
       >
