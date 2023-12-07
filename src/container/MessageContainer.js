@@ -28,7 +28,8 @@ export const MessageContainer = ({ you, me, authToken }) => {
   return (
     <Box
       sx={{
-        boxShadow: "5px 5px 5px gray",
+        // boxShadow: "5px 5px 5px gray",
+
         borderRadius: "5px",
       }}
     >

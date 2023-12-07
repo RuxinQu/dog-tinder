@@ -19,7 +19,7 @@ export default function PetDetail() {
     };
     getUserProfile();
   }, [authToken, userId]);
-
+  console.log(user);
   return (
     loggedIn &&
     user && (
@@ -32,7 +32,7 @@ export default function PetDetail() {
         }}
         className="detail-container"
       >
-        <Detail user={user} goBack={true} />
+        {/* <Detail user={user} goBack={true} /> */}
       </div>
     )
   );

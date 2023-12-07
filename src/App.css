@@ -166,6 +166,7 @@ h1 {
 .chat-container {
   display: flex;
   justify-content: center;
+  align-items: flex-start;
   width: 90%;
   margin: 0 auto;
   border-radius: 5px;

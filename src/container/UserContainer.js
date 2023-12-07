@@ -9,7 +9,6 @@ export function UserContainer({
   userToDisplay,
   setUserToDisplay,
   authToken,
-  setShowBorder,
 }) {
   const [isHovered, setIsHovered] = useState(false);
   const [you, setYou] = useState([]);
@@ -23,10 +22,8 @@ export function UserContainer({
       const yourMatch = youInfoJson.matches;
       if (yourMatch.includes(myId)) {
         setMatch(true);
-        setShowBorder(true);
       } else {
         setMatch(false);
-        setShowBorder(false);
       }
     };
     getMatch();
@@ -40,23 +37,21 @@ export function UserContainer({
     setIsHovered(false);
   };
   const setBg = () => {
-    if (userToDisplay._id === you._id) {
-      return "#fff";
-    } else if (isHovered) {
-      return "#fff";
+    if (userToDisplay._id === you._id || isHovered) {
+      return "#fdfdfd";
     } else {
-      return "#f1f1f1";
+      return "#c9e3ef";
     }
   };
 
   return (
+    // the matched users avatar and name
     <div
       style={{
         display: "flex",
         alignItems: "center",
         padding: 10,
         backgroundColor: setBg(),
-        boxShadow: "5px 5px 5px gray",
         borderRadius: "5px",
       }}
       onClick={() => setUserToDisplay(you)}

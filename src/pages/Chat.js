@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import Cookies from "js-cookie";
 import Auth from "../util/auth";
 import { getUser } from "../util/Api";
-import { ChatContainer, UserContainer } from "../container/UserContainer";
+import { UserContainer } from "../container/UserContainer";
 import { MessageContainer } from "../container/MessageContainer";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
@@ -12,6 +12,7 @@ export default function Chat({ myId }) {
   const loggedIn = Auth.loggedIn(authToken);
   const [userToDisplay, setUserToDisplay] = useState("");
   const [me, setMe] = useState({});
+
   useEffect(() => {
     // get all the users from my match list
     const getMatch = async () => {
@@ -23,7 +24,6 @@ export default function Chat({ myId }) {
     getMatch();
   });
 
-  const [showBorder, setShowBorder] = useState(false);
   return (
     <div>
       <Typography variant="h3">Start Chating with friends!</Typography>
@@ -40,11 +40,16 @@ export default function Chat({ myId }) {
                   userToDisplay={userToDisplay}
                   setUserToDisplay={setUserToDisplay}
                   authToken={authToken}
-                  setShowBorder={setShowBorder}
                 />
               ))}
             </Box>
-            <Box sx={{ width: { xs: "100%", sm: "70%" } }}>
+
+            <Box
+              sx={{
+                width: { xs: "100%", sm: "70%" },
+                backgroundColor: "#fdfdfd",
+              }}
+            >
               <MessageContainer
                 you={userToDisplay}
                 me={me}
