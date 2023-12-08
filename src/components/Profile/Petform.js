@@ -6,6 +6,7 @@ import Typography from "@mui/material/Typography";
 import Grid from "@mui/material/Grid";
 
 export const PetForm = ({
+  setImageDeleteAlert,
   myId,
   formState,
   handleInputChange,
@@ -14,7 +15,9 @@ export const PetForm = ({
   petImage,
   buttonDisabled,
   authToken,
-  alertMessage,
+  formImage,
+  files,
+  setFiles,
 }) => {
   return (
     <div>
@@ -134,12 +137,13 @@ export const PetForm = ({
                   width: 100,
                   margin: "0 10px",
                   textAlign: "center",
+                  position: "relative",
                 }}
               >
                 <img
                   src={i.original}
                   alt={formState.name}
-                  style={{ width: "100%" }}
+                  style={{ width: "100%", borderRadius: 5 }}
                 />
                 <div>
                   <button
@@ -169,6 +173,7 @@ export const PetForm = ({
                       i._id,
                       authToken
                     );
+                    setImageDeleteAlert(true);
                   }}
                 />
               </div>
@@ -180,7 +185,13 @@ export const PetForm = ({
           <label>Upload Images</label>
         </Grid>
         <Grid item xs={12}>
-          <ImageDropbox className="image-upload-dropbox" />
+          <ImageDropbox
+            className="image-upload-dropbox"
+            // formImage={formImage}
+            formState={formState}
+            files={files}
+            setFiles={setFiles}
+          />
         </Grid>
       </Grid>
     </div>

@@ -44,18 +44,13 @@ export default function Chat({ myId }) {
               ))}
             </Box>
 
-            <Box
-              sx={{
-                width: { xs: "100%", sm: "70%" },
-                backgroundColor: "#fdfdfd",
-              }}
-            >
-              <MessageContainer
-                you={userToDisplay}
-                me={me}
-                authToken={authToken}
-              />
-            </Box>
+            {/* <Box> */}
+            <MessageContainer
+              you={userToDisplay}
+              me={me}
+              authToken={authToken}
+            />
+            {/* </Box> */}
           </Box>
         ) : (
           <p style={{ textAlign: "center", padding: 10 }}>No matches yet</p>

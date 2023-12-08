@@ -54,7 +54,6 @@ h1 {
 .image-upload-dropbox {
   padding: 25px;
   margin-top: 10px;
-  border: 1px solid #73c8e5;
   background-color: #fff;
   text-align: center;
   border-radius: 10px;
@@ -169,7 +168,6 @@ h1 {
   align-items: flex-start;
   width: 90%;
   margin: 0 auto;
-  border-radius: 5px;
 }
 
 .chat-box {

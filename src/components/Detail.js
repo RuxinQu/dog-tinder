@@ -45,9 +45,7 @@ export const Detail = ({ user, setTurnCard, goBack }) => {
           {user.size || "unknown"}
         </Button>
 
-        <Typography variant="body1" sx={{ mt: 3 }}>
-          {user.description || "Information was not provided yet."}
-        </Typography>
+        <Typography variant="body1" sx={{ mt: 3 }}></Typography>
       </div>
     </div>
   );

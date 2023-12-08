@@ -52,7 +52,7 @@ export function UserContainer({
         alignItems: "center",
         padding: 10,
         backgroundColor: setBg(),
-        borderRadius: "5px",
+        borderRadius: "20px 0 0 20px",
       }}
       onClick={() => setUserToDisplay(you)}
       onMouseEnter={handleMouseEnter}

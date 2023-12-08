@@ -8,8 +8,9 @@ import DialogContentText from "@mui/material/DialogContentText";
 import DialogTitle from "@mui/material/DialogTitle";
 import HighlightOffIcon from "@mui/icons-material/HighlightOff";
 
-export const DeleteConfirm = ({ handleDeleteImg, handleDeletePet, button }) => {
+export const DeleteConfirm = ({ handleDeleteImg, imageDeleteAlert }) => {
   const [open, setOpen] = React.useState(false);
+  // const [imageDeleteAlert, setimageDeleteAlert] = React.useState(false);
 
   const handleClickOpen = () => {
     setOpen(true);
@@ -29,7 +30,6 @@ export const DeleteConfirm = ({ handleDeleteImg, handleDeletePet, button }) => {
       }}
     >
       <IconButton
-        // type="button
         aria-label="delete"
         onClick={handleClickOpen}
         size="small"
@@ -44,33 +44,18 @@ export const DeleteConfirm = ({ handleDeleteImg, handleDeletePet, button }) => {
         aria-labelledby="alert-dialog-title"
         aria-describedby="alert-dialog-description"
       >
-        <DialogTitle id="alert-dialog-title">
-          Delete the {button === "deletePet" ? "Pet" : "Image"}
-        </DialogTitle>
+        <DialogTitle id="alert-dialog-title">Delete the Image</DialogTitle>
         <DialogContent>
           <DialogContentText id="alert-dialog-description">
-            Are you sure you want to delete this{" "}
-            {button === "deletePet"
-              ? "pet? All information and images will be deleted"
-              : "image?"}{" "}
-            This action is irreversible.
+            Are you sure you want to delete this image? This action is
+            irreversible.
           </DialogContentText>
         </DialogContent>
         <DialogActions>
           <Button color="success" onClick={handleClose}>
             close
           </Button>
-          <Button
-            color="error"
-            onClick={() => {
-              if (button === "deletePet") {
-                handleDeletePet();
-              } else {
-                handleDeleteImg();
-              }
-            }}
-            autoFocus
-          >
+          <Button color="error" onClick={handleDeleteImg} autoFocus>
             Delete
           </Button>
         </DialogActions>

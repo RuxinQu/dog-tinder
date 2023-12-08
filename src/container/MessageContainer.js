@@ -28,9 +28,9 @@ export const MessageContainer = ({ you, me, authToken }) => {
   return (
     <Box
       sx={{
-        // boxShadow: "5px 5px 5px gray",
-
-        borderRadius: "5px",
+        width: { xs: "100%", sm: "70%" },
+        backgroundColor: "#fdfdfd",
+        borderRadius: "0 20px 20px 20px",
       }}
     >
       {you && (
@@ -40,6 +40,7 @@ export const MessageContainer = ({ you, me, authToken }) => {
             padding: 20,
             marginBottom: 15,
             backgroundColor: "#fec8a7",
+            borderRadius: "0 20px 0 0",
           }}
         >
           {you.name || "user" + you._id.slice(3, 7)}
