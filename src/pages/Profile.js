@@ -9,15 +9,13 @@ export default function Profile({ myId }) {
   const authToken = Cookies.get("AuthToken");
   const loggedIn = Auth.loggedIn(authToken);
   const [formState, setFormState] = useState({});
-  //formImage is the file that the input form stores
-  // const [formImage, setFormImage] = useState([]);
+  //the files in the drop box
+  const [files, setFiles] = useState([]);
+
   //petImage is the images already uploaded to the S3 bucket
   const [petImage, setPetImage] = useState([]);
   const [buttonDisabled, setButtonDisabled] = useState(false);
-  const [imageDeleteAlert, setImageDeleteAlert] = useState(false);
   const [alertMessage, setAlertMessage] = useState("");
-
-  const [files, setFiles] = useState([]);
 
   useEffect(() => {
     const getUserProfile = async () => {
@@ -32,13 +30,11 @@ export default function Profile({ myId }) {
   }, [myId, authToken, loggedIn]);
 
   const handleInputChange = (event) => {
-    const { name, value } = event.target;
-    setFormState({ ...formState, [name]: value });
+    setFormState({
+      ...formState,
+      [event.target.name]: event.target.value,
+    });
   };
-  // const handleFormImageChange = (event) => {
-  //   const selectedFiles = Array.from(event.target.files);
-  //   setFormImage([...formImage, ...selectedFiles]);
-  // };
 
   const handleSubmit = async () => {
     setButtonDisabled(true);
@@ -49,12 +45,9 @@ export default function Profile({ myId }) {
     });
 
     try {
-      // if (formImage.length) {
       const uploadImgResponse = await uploadImgs(data, authToken);
       const imageUrl = uploadImgResponse.imgs;
       formState.imgs.push(...imageUrl);
-      console.log(formState);
-      // }
       const response = await updateProfile(myId, formState, authToken);
       if (response.ok) {
         setAlertMessage("Profile updated");
@@ -75,7 +68,6 @@ export default function Profile({ myId }) {
         petImage={petImage}
         setPetImage={setPetImage}
         handleInputChange={handleInputChange}
-        // handleFormImageChange={handleFormImageChange}
         handleSubmit={handleSubmit}
         buttonDisabled={buttonDisabled}
         authToken={authToken}

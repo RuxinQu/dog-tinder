@@ -1,5 +1,8 @@
 import React, { useCallback, useState } from "react";
 import { useDropzone } from "react-dropzone";
+import IconButton from "@mui/material/IconButton";
+import FileUploadOutlinedIcon from "@mui/icons-material/FileUploadOutlined";
+import HighlightOffIcon from "@mui/icons-material/HighlightOff";
 
 export const ImageDropbox = ({ className, files, setFiles }) => {
   // const [files, setFiles] = useState([]);
@@ -34,30 +37,55 @@ export const ImageDropbox = ({ className, files, setFiles }) => {
     <>
       <div {...getRootProps({ className: className })}>
         <input {...getInputProps()} />
+        <FileUploadOutlinedIcon />
         {isDragActive ? (
           <p>Drop the files here ...</p>
         ) : (
           <p>Drag 'n' drop some files here, or click to select files</p>
         )}
       </div>
-      <div>
-        <ul>
-          {files.map((f) => (
-            <div key={f.preview}>
-              <button onClick={() => removeFile(f.name)}>Remove</button>
-              <img
-                style={{ width: 100 }}
-                src={f.preview}
-                //once uploaded, revoke the url to prevent url leaks
-                onLoad={() => {
-                  URL.revokeObjectURL(f.preview);
-                }}
-              />
-              <p>{f.name}</p>
-            </div>
-          ))}
-        </ul>
-      </div>
+      {files.length !== 0 && <p style={{ marginTop: "50px" }}>Preview:</p>}
+      {files.map((f) => (
+        <div
+          key={f.preview}
+          style={{
+            display: "inline-block",
+            margin: 10,
+            textAlign: "center",
+            position: "relative",
+          }}
+        >
+          <IconButton
+            aria-label="delete"
+            size="small"
+            color="error"
+            onClick={() => removeFile(f.name)}
+            style={{
+              display: "inline-block",
+              position: "absolute",
+              top: -17,
+              right: -17,
+            }}
+          >
+            <HighlightOffIcon />
+          </IconButton>
+          <img
+            style={{
+              width: 100,
+              height: 100,
+              objectFit: "cover",
+              borderRadius: 5,
+            }}
+            src={f.preview}
+            alt={f.name}
+            //once uploaded, revoke the url to prevent url leaks
+            onLoad={() => {
+              URL.revokeObjectURL(f.preview);
+            }}
+          />
+          <p style={{ fontSize: 14, color: "gray" }}>{f.name}</p>
+        </div>
+      ))}
     </>
   );
 };

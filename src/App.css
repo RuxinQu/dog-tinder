@@ -1,6 +1,8 @@
 @import url("https://fonts.googleapis.com/css2?family=Itim&display=swap");
 :root {
-  --header: #c3e3ef;
+  --header-light-blue: #c3e3ef;
+  --theme-orange: #e6ad73;
+  --theme-blue: #73c8e5;
 }
 
 h1 {
@@ -35,7 +37,7 @@ h1 {
   height: 12dvh;
   display: flex;
   align-items: center;
-  background-color: var(--header);
+  background-color: var(--header-light-blue);
   box-shadow: 2px 2px 2px gray;
 }
 
@@ -44,19 +46,26 @@ h1 {
   max-width: 800px;
   padding: 50px;
   border-radius: 5px;
-  background-color: var(--header);
-  box-shadow: 5px 5px 5px gray;
+  background-color: var(--header-light-blue);
+  box-shadow: 5px 5px 5px rgb(181, 181, 181);
   margin: 0 auto !important;
   font-size: 17px;
   font-weight: 600;
 }
 
+.profile-row {
+  display: flex;
+  align-items: flex-end;
+  width: 100%;
+}
+
 .image-upload-dropbox {
-  padding: 25px;
+  padding: 50px;
   margin-top: 10px;
-  background-color: #fff;
+  background-color: #eafaff;
   text-align: center;
   border-radius: 10px;
+  color: #7e7e7e !important;
 }
 
 /* dashboard  */

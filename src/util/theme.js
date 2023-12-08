@@ -8,7 +8,7 @@ export const theme = createTheme({
       main: "#E6AD73", //orange
     },
     secondary: {
-      main: "#73c8e5", //pink from the home page background
+      main: "#73c8e5", //blue from the home page background
     },
 
     background: {

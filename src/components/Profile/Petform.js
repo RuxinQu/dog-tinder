@@ -4,6 +4,13 @@ import { DeleteConfirm } from "./DeleteConfirm";
 import { ImageDropbox } from "./ImageDropbox";
 import Typography from "@mui/material/Typography";
 import Grid from "@mui/material/Grid";
+import Button from "@mui/material/Button";
+import TextField from "@mui/material/TextField";
+import Select from "@mui/material/Select";
+import MenuItem from "@mui/material/MenuItem";
+import FormControlLabel from "@mui/material/FormControlLabel";
+import Radio from "@mui/material/Radio";
+import RadioGroup from "@mui/material/RadioGroup";
 
 export const PetForm = ({
   setImageDeleteAlert,
@@ -22,120 +29,139 @@ export const PetForm = ({
   return (
     <div>
       <Typography variant="h3">Profile</Typography>
-      <Grid container spacing={1} className="profile-form ">
-        <Grid item xs={6}>
-          <label>Email:</label>
-        </Grid>
-        <Grid item xs={6}>
-          {formState.email}
-        </Grid>
-        <Grid item xs={6}>
-          <label htmlFor="name">Name: </label>
-        </Grid>
-        <Grid item xs={6}>
-          <input
-            type="text"
+
+      <Grid className="profile-form" container noValidate autoComplete="off">
+        <div className="profile-row">
+          <Grid item xs={6}>
+            <label>Email: </label>
+          </Grid>
+          <TextField
+            value={formState.email || ""}
+            variant="standard"
+            placeholder={formState.email}
+          />
+        </div>
+
+        <div className="profile-row">
+          <Grid item xs={6}>
+            <label htmlFor="name">Name: </label>
+          </Grid>
+          <TextField
             id="name"
             name="name"
             value={formState.name || ""}
             onChange={handleInputChange}
             required
+            variant="standard"
           />
-        </Grid>
-        <Grid item xs={6}>
-          <label htmlFor="breed">Breed: </label>
-        </Grid>
-        <Grid item xs={6}>
-          <input
-            type="text"
+        </div>
+
+        <div className="profile-row">
+          <Grid item xs={6}>
+            <label htmlFor="breed">Breed: </label>
+          </Grid>
+          <TextField
             id="breed"
             name="breed"
             value={formState.breed || ""}
             onChange={handleInputChange}
             required
+            variant="standard"
           />
-        </Grid>
+        </div>
 
-        <Grid item xs={6}>
-          <label htmlFor="age">Age: </label>
-        </Grid>
-        <Grid item xs={6}>
-          <input
-            type="text"
+        <div className="profile-row">
+          <Grid item xs={6}>
+            <label htmlFor="age">Age: </label>
+          </Grid>
+          <TextField
             id="age"
             name="age"
             value={formState.age || ""}
             onChange={handleInputChange}
             required
+            variant="standard"
           />
-        </Grid>
+        </div>
 
-        <Grid item xs={6}>
-          <label htmlFor="size">Size: </label>
-        </Grid>
-        <Grid item xs={6}>
-          <select
+        {/* size */}
+        <div className="profile-row">
+          <Grid item xs={6}>
+            <label htmlFor="size">Size: </label>
+          </Grid>
+          <Select
             id="size"
             name="size"
-            value={formState.size}
+            value={formState.size || ""}
             onChange={handleInputChange}
             required
+            variant="standard"
           >
-            <option value="">-- Select --</option>
-            <option value="small">Small</option>
-            <option value="medium">Medium</option>
-            <option value="large">Large</option>
-            <option value="x-large">X-large</option>
-          </select>
-        </Grid>
-        <Grid item xs={6}>
-          <label>Gender: </label>
-        </Grid>
-        <Grid item xs={6}>
-          <label>
-            <input
-              type="radio"
-              name="gender"
+            <MenuItem value="small">Small</MenuItem>
+            <MenuItem value="medium">Medium</MenuItem>
+            <MenuItem value="large">Large</MenuItem>
+            <MenuItem value="x-large">X-large</MenuItem>
+          </Select>
+        </div>
+
+        {/* gender */}
+        <div className="profile-row">
+          <Grid item xs={6}>
+            <label htmlFor="gender">Gender: </label>
+          </Grid>
+          <RadioGroup row name="gender">
+            <FormControlLabel
               value="female"
-              checked={formState.gender === "female"}
-              onChange={handleInputChange}
+              control={
+                <Radio
+                  value="female"
+                  checked={formState.gender === "female"}
+                  onChange={handleInputChange}
+                  size="small"
+                />
+              }
+              label="Female"
             />
-            Female
-          </label>
-          <label>
-            <input
-              type="radio"
-              name="gender"
+            <FormControlLabel
               value="male"
-              checked={formState.gender === "male"}
-              onChange={handleInputChange}
+              control={
+                <Radio
+                  value="male"
+                  checked={formState.gender === "male"}
+                  onChange={handleInputChange}
+                  size="small"
+                />
+              }
+              label="Male"
             />
-            Male
-          </label>
-        </Grid>
-        <Grid item xs={6}>
+          </RadioGroup>
+        </div>
+
+        {/* description */}
+
+        <Grid item xs={12} sx={{ padding: "20px 0 10px 0" }}>
           <label htmlFor="description">Description:</label>
         </Grid>
-        <Grid item xs={6}>
-          <textarea
-            id="description"
-            name="description"
-            required
-            value={formState.description}
-            onChange={handleInputChange}
-          ></textarea>
-        </Grid>
+        <TextField
+          id="description"
+          name="description"
+          required
+          value={formState.description}
+          onChange={handleInputChange}
+          multiline
+          fullWidth
+          rows={2}
+        ></TextField>
 
         <Grid item xs={12}>
-          <p>Pet Images: </p>
+          <p style={{ marginTop: "50px" }}>Pet Images: </p>
           {petImage?.map((i) => {
             return (
               <div
                 key={i.original}
                 style={{
                   display: "inline-block",
-                  width: 100,
-                  margin: "0 10px",
+                  margin: 10,
                   textAlign: "center",
                   position: "relative",
                 }}
@@ -143,10 +169,17 @@ export const PetForm = ({
                 <img
                   src={i.original}
                   alt={formState.name}
-                  style={{ width: "100%", borderRadius: 5 }}
+                  style={{
+                    width: 150,
+                    height: 150,
+                    objectFit: "cover",
+                    borderRadius: 5,
+                  }}
                 />
                 <div>
-                  <button
+                  <Button
+                    size="small"
+                    sx={{ color: "black" }}
                     onClick={(e) => {
                       e.preventDefault();
                       const newImageState = petImage.filter(
@@ -157,8 +190,8 @@ export const PetForm = ({
                       formState.imgs = newImageState;
                     }}
                   >
-                    Move to Top
-                  </button>
+                    Cover
+                  </Button>
                 </div>
                 <DeleteConfirm
                   handleDeleteImg={async () => {
@@ -180,14 +213,12 @@ export const PetForm = ({
             );
           })}
         </Grid>
-
-        <Grid item xs={12}>
+        <Grid item xs={12} style={{ marginTop: "50px" }}>
           <label>Upload Images</label>
         </Grid>
         <Grid item xs={12}>
           <ImageDropbox
             className="image-upload-dropbox"
-            // formImage={formImage}
             formState={formState}
             files={files}
             setFiles={setFiles}
