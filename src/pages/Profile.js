@@ -27,7 +27,8 @@ export default function Profile({ myId }) {
   const [petImage, setPetImage] = useState([]);
   const [buttonDisabled, setButtonDisabled] = useState(false);
   const [alertMessage, setAlertMessage] = useState("");
-  // if user profile changes rerender the page
+
+  // render the page with initial information, if user profile changes rerender the page
   useEffect(() => {
     const getUserProfile = async () => {
       const user = await getUser(myId, authToken);
@@ -41,19 +42,21 @@ export default function Profile({ myId }) {
     getUserProfile();
   }, [myId, authToken, loggedIn]);
 
-  // for the update alert
+  // for the alert after click the update button
+  const [status, setStatus] = useState("success");
   const [open, setOpen] = useState(false);
-
-  const handleClick = async () => {
-    await handleSubmit();
-    setOpen(true);
-  };
 
   const handleClose = (event, reason) => {
     if (reason === "clickaway") {
       return;
     }
     setOpen(false);
+  };
+
+  const handleUpdateAlert = (s, m) => {
+    setStatus(s);
+    setAlertMessage(m);
+    setOpen(true);
   };
 
   // handle formInput change
@@ -64,11 +67,33 @@ export default function Profile({ myId }) {
     });
   };
 
+  const handleUpdateProfile = async (newProfile) => {
+    const response = await updateProfile(myId, newProfile, authToken);
+    if (response.ok) {
+      // can't be this because user might also change the text input
+      // setFormState((prevFormState) => ({
+      //   ...prevFormState,
+      //   imgs: [...prevFormState.imgs, ...uploadImgArr],
+      // }));
+      const jsonResponse = await response.json();
+      setFormState((prevFormState) => ({
+        ...prevFormState,
+        ...jsonResponse,
+      }));
+      console.log("===");
+      setOpen(true);
+      setAlertMessage("Profile updated");
+      console.log("llalal");
+      setFiles([]);
+      setButtonDisabled(false);
+    }
+  };
+
   const handleSubmit = async () => {
     setButtonDisabled(true);
-
-    // append the images
+    let uploadImgArr = [];
     try {
+      // if there are files waiting to be uploaded, append the images
       if (files.length) {
         const data = new FormData();
         files.forEach((img) => {
@@ -76,20 +101,14 @@ export default function Profile({ myId }) {
         });
         const uploadImgResponse = await uploadImgs(data, authToken);
         // the url array of all the uploaded images
-        const uploadImgArr = uploadImgResponse.imgs;
-        formState.imgs.push(...uploadImgArr);
+        uploadImgArr.push(...uploadImgResponse.imgs);
       }
-      const response = await updateProfile(myId, formState, authToken);
-      const jsonResponse = await response.json();
-      setFormState((prevFormState) => ({
-        ...prevFormState,
-        ...jsonResponse,
-      }));
-      if (response.ok) {
-        setAlertMessage("Profile updated");
-        setFiles([]);
-        setButtonDisabled(false);
-      }
+      // instead of using the formState, create a new object for update profile
+      const newProfile = {
+        ...formState,
+        imgs: [...formState.imgs, ...uploadImgArr],
+      };
+      handleUpdateProfile(newProfile);
     } catch (error) {
       setButtonDisabled(false);
       console.log(error);
@@ -106,29 +125,30 @@ export default function Profile({ myId }) {
         i._id,
         authToken
       );
-
       if (response.ok) {
         setFormState((prevFormState) => ({
           ...prevFormState,
           imgs: newImageState,
         }));
-        setAlertMessage("Image deleted successfully");
-        setOpen(true);
+        handleUpdateAlert("success", "Image deleted successfully");
+      } else {
+        handleUpdateAlert("error", "Failed to delete image");
       }
     } catch (err) {
-      setAlertMessage("Failed to delete image");
+      handleUpdateAlert("error", "Failed to delete image");
     }
   };
 
   const setCover = async (i) => {
     // e.preventDefault();
-    const newImageState = petImage.filter((img) => img._id !== i._id);
+    const newImageState = formState.imgs.filter((img) => img._id !== i._id);
     newImageState.unshift(i);
-    setFormState((prevFormState) => ({
-      ...prevFormState,
-      imgs: newImageState,
-    }));
-    handleSubmit();
+    console.log(newImageState);
+    const newProfile = {
+      ...formState,
+      imgs: [...newImageState],
+    };
+    handleUpdateProfile(newProfile);
   };
 
   return loggedIn ? (
@@ -147,10 +167,10 @@ export default function Profile({ myId }) {
         setCover={setCover}
       />
       <ProfileUpdateAlerts
+        status={status}
         open={open}
         alertMessage={alertMessage}
         buttonDisabled={buttonDisabled}
-        handleClick={handleClick}
         handleClose={handleClose}
         handleSubmit={handleSubmit}
       />

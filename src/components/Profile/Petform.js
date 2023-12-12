@@ -1,5 +1,4 @@
 import React from "react";
-import { deleteImg } from "../../util/Api";
 import { DeleteConfirm } from "./DeleteConfirm";
 import { ImageDropbox } from "./ImageDropbox";
 import Typography from "@mui/material/Typography";

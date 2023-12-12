@@ -12,9 +12,10 @@ export const ProfileUpdateAlerts = ({
   open,
   buttonDisabled,
   alertMessage,
-  handleSubmit,
   handleClose,
-  handleClick,
+
+  status,
+  handleSubmit,
 }) => {
   return (
     <Box sx={{ my: 3, textAlign: "center" }}>
@@ -23,13 +24,13 @@ export const ProfileUpdateAlerts = ({
         color="secondary"
         size="large"
         disabled={buttonDisabled}
-        onClick={handleClick}
+        onClick={handleSubmit}
       >
         Update
       </Button>
 
       <Snackbar open={open} autoHideDuration={2000} onClose={handleClose}>
-        <Alert onClose={handleClose} severity="success" sx={{ width: "100%" }}>
+        <Alert onClose={handleClose} severity={status} sx={{ width: "100%" }}>
           {alertMessage}
         </Alert>
       </Snackbar>
