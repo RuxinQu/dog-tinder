@@ -13,18 +13,17 @@ import Radio from "@mui/material/Radio";
 import RadioGroup from "@mui/material/RadioGroup";
 
 export const PetForm = ({
-  setImageDeleteAlert,
+  setAlertMessage,
   myId,
   formState,
   handleInputChange,
-  setPetImage,
-  handleFormImageChange,
   petImage,
-  buttonDisabled,
+  setPetImage,
+  handleDeleteImg,
   authToken,
-  formImage,
   files,
   setFiles,
+  setCover,
 }) => {
   return (
     <div>
@@ -155,7 +154,7 @@ export const PetForm = ({
 
         <Grid item xs={12}>
           <p style={{ marginTop: "50px" }}>Pet Images: </p>
-          {petImage?.map((i) => {
+          {formState.imgs?.map((i) => {
             return (
               <div
                 key={i.original}
@@ -180,35 +179,12 @@ export const PetForm = ({
                   <Button
                     size="small"
                     sx={{ color: "black" }}
-                    onClick={(e) => {
-                      e.preventDefault();
-                      const newImageState = petImage.filter(
-                        (img) => img._id !== i._id
-                      );
-                      newImageState.unshift(i);
-                      setPetImage(newImageState);
-                      formState.imgs = newImageState;
-                    }}
+                    onClick={() => setCover(i)}
                   >
                     Cover
                   </Button>
                 </div>
-                <DeleteConfirm
-                  handleDeleteImg={async () => {
-                    const newImageState = petImage.filter(
-                      (img) => img._id !== i._id
-                    );
-                    setPetImage(newImageState);
-                    const url = new URL(i.original);
-                    await deleteImg(
-                      url.pathname.slice(1),
-                      myId,
-                      i._id,
-                      authToken
-                    );
-                    setImageDeleteAlert(true);
-                  }}
-                />
+                <DeleteConfirm handleDeleteImg={handleDeleteImg} i={i} />
               </div>
             );
           })}

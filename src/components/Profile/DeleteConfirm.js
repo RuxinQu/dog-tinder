@@ -8,9 +8,8 @@ import DialogContentText from "@mui/material/DialogContentText";
 import DialogTitle from "@mui/material/DialogTitle";
 import HighlightOffIcon from "@mui/icons-material/HighlightOff";
 
-export const DeleteConfirm = ({ handleDeleteImg, imageDeleteAlert }) => {
+export const DeleteConfirm = ({ handleDeleteImg, i }) => {
   const [open, setOpen] = React.useState(false);
-  // const [imageDeleteAlert, setimageDeleteAlert] = React.useState(false);
 
   const handleClickOpen = () => {
     setOpen(true);
@@ -34,7 +33,6 @@ export const DeleteConfirm = ({ handleDeleteImg, imageDeleteAlert }) => {
         onClick={handleClickOpen}
         size="small"
         color="error"
-        // style={{ backgroundColor: "#FFCDD2" }}
       >
         <HighlightOffIcon />
       </IconButton>
@@ -55,7 +53,14 @@ export const DeleteConfirm = ({ handleDeleteImg, imageDeleteAlert }) => {
           <Button color="success" onClick={handleClose}>
             close
           </Button>
-          <Button color="error" onClick={handleDeleteImg} autoFocus>
+          <Button
+            color="error"
+            onClick={() => {
+              handleClose();
+              handleDeleteImg(i);
+            }}
+            autoFocus
+          >
             Delete
           </Button>
         </DialogActions>

@@ -9,24 +9,13 @@ const Alert = React.forwardRef(function Alert(props, ref) {
 });
 
 export const ProfileUpdateAlerts = ({
+  open,
   buttonDisabled,
   alertMessage,
   handleSubmit,
+  handleClose,
+  handleClick,
 }) => {
-  const [open, setOpen] = React.useState(false);
-
-  const handleClick = () => {
-    handleSubmit();
-    setOpen(true);
-  };
-
-  const handleClose = (event, reason) => {
-    if (reason === "clickaway") {
-      return;
-    }
-    setOpen(false);
-  };
-
   return (
     <Box sx={{ my: 3, textAlign: "center" }}>
       <Button
@@ -38,6 +27,7 @@ export const ProfileUpdateAlerts = ({
       >
         Update
       </Button>
+
       <Snackbar open={open} autoHideDuration={2000} onClose={handleClose}>
         <Alert onClose={handleClose} severity="success" sx={{ width: "100%" }}>
           {alertMessage}
