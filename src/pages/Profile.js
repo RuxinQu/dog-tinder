@@ -22,9 +22,6 @@ export default function Profile({ myId }) {
     size: "",
   });
   const [files, setFiles] = useState([]); //the files in the drop box
-
-  //petImage is the images already uploaded to the S3 bucket
-  const [petImage, setPetImage] = useState([]);
   const [buttonDisabled, setButtonDisabled] = useState(false);
   const [alertMessage, setAlertMessage] = useState("");
 
@@ -80,10 +77,9 @@ export default function Profile({ myId }) {
         ...prevFormState,
         ...jsonResponse,
       }));
-      console.log("===");
+
       setOpen(true);
       setAlertMessage("Profile updated");
-      console.log("llalal");
       setFiles([]);
       setButtonDisabled(false);
     }
@@ -154,21 +150,16 @@ export default function Profile({ myId }) {
   return loggedIn ? (
     <div>
       <PetForm
-        myId={myId}
         formState={formState}
-        petImage={petImage}
-        setPetImage={setPetImage}
         handleInputChange={handleInputChange}
-        authToken={authToken}
         files={files}
         setFiles={setFiles}
-        setAlertMessage={setAlertMessage}
         handleDeleteImg={handleDeleteImg}
         setCover={setCover}
       />
       <ProfileUpdateAlerts
-        status={status}
         open={open}
+        status={status}
         alertMessage={alertMessage}
         buttonDisabled={buttonDisabled}
         handleClose={handleClose}

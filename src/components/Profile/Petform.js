@@ -12,14 +12,9 @@ import Radio from "@mui/material/Radio";
 import RadioGroup from "@mui/material/RadioGroup";
 
 export const PetForm = ({
-  setAlertMessage,
-  myId,
   formState,
   handleInputChange,
-  petImage,
-  setPetImage,
   handleDeleteImg,
-  authToken,
   files,
   setFiles,
   setCover,

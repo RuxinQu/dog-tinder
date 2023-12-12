@@ -13,7 +13,6 @@ export const ProfileUpdateAlerts = ({
   buttonDisabled,
   alertMessage,
   handleClose,
-
   status,
   handleSubmit,
 }) => {
