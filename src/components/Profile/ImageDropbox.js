@@ -1,4 +1,4 @@
-import React, { useCallback, useState } from "react";
+import React, { useCallback } from "react";
 import { useDropzone } from "react-dropzone";
 import IconButton from "@mui/material/IconButton";
 import FileUploadOutlinedIcon from "@mui/icons-material/FileUploadOutlined";
@@ -6,20 +6,23 @@ import HighlightOffIcon from "@mui/icons-material/HighlightOff";
 
 export const ImageDropbox = ({ className, files, setFiles }) => {
   // const [files, setFiles] = useState([]);
-  const onDrop = useCallback((acceptedFiles, rejectedFiles) => {
-    if (acceptedFiles?.length) {
-      setFiles((previousFiles) => [
-        ...previousFiles,
-        ...acceptedFiles.map((file) =>
-          Object.assign(file, { preview: URL.createObjectURL(file) })
-        ),
-      ]);
-    }
+  const onDrop = useCallback(
+    (acceptedFiles, rejectedFiles) => {
+      if (acceptedFiles?.length) {
+        setFiles((previousFiles) => [
+          ...previousFiles,
+          ...acceptedFiles.map((file) =>
+            Object.assign(file, { preview: URL.createObjectURL(file) })
+          ),
+        ]);
+      }
 
-    if (rejectedFiles?.length) {
-      window.alert(rejectedFiles[0].errors[0].message);
-    }
-  }, []);
+      if (rejectedFiles?.length) {
+        window.alert(rejectedFiles[0].errors[0].message);
+      }
+    },
+    [setFiles]
+  );
 
   const { getRootProps, getInputProps, isDragActive } = useDropzone({
     onDrop,

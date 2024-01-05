@@ -17,8 +17,6 @@ export const theme = createTheme({
   },
   typography: {
     fontFamily: [
-      "Roboto",
-      '"Helvetica Neue"',
       "Arial",
       "sans-serif",
       '"Apple Color Emoji"',
@@ -26,8 +24,8 @@ export const theme = createTheme({
       '"Segoe UI Symbol"',
     ].join(","),
     h3: {
-      fontSize: "35px",
-      fontWeight: 700,
+      fontSize: "30px",
+      fontWeight: 500,
       padding: "20px 0 20px 0",
       textAlign: "center",
     },

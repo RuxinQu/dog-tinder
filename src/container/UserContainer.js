@@ -9,10 +9,12 @@ export function UserContainer({
   userToDisplay,
   setUserToDisplay,
   authToken,
+  matchesUsers,
+  setMatchedUsers,
 }) {
   const [isHovered, setIsHovered] = useState(false);
   // the state you is the user this component is currently displaying. Each userContainer has one user, clicking on the userContainer box will switch the current userToDisplay to the user stored in the corresponding userContainer
-  const [you, setYou] = useState({ imgs: [], _id: "" });
+  const [you, setYou] = useState({ imgs: [], _id: "", matches: [] });
   const [match, setMatch] = useState(false);
   // go through the match list of the user in my match list. Only display the user from my match list that also has me included in their match list
   useEffect(() => {
@@ -21,14 +23,11 @@ export function UserContainer({
       const youInfoJson = await youInfo.json();
       setYou({ ...youInfoJson });
       const yourMatch = youInfoJson.matches;
-      if (yourMatch.includes(myId)) {
-        setMatch(true);
-      } else {
-        setMatch(false);
-      }
+      setMatch(yourMatch.includes(myId));
+      setMatchedUsers([...matchesUsers, yourId]);
     };
     getMatch();
-  }, [yourId, match, authToken, myId]);
+  }, [authToken, matchesUsers, myId, setMatchedUsers, yourId]);
 
   const handleMouseEnter = () => {
     setIsHovered(true);
@@ -47,28 +46,31 @@ export function UserContainer({
 
   return (
     // the matched users avatar and name
-    <div
-      style={{
-        display: "flex",
-        alignItems: "center",
-        padding: 10,
-        backgroundColor: setBg(),
-        borderRadius: "20px",
-      }}
-      onClick={() => setUserToDisplay(you)}
-      onMouseEnter={handleMouseEnter}
-      onMouseLeave={handleMouseLeave}
-    >
-      <Avatar
-        alt={you.name}
-        src={
-          you.imgs?.[0]?.original ||
-          "https://www.bil-jac.com/Images/DogPlaceholder.svg"
-        }
-      />
-      <span style={{ padding: "0 5px" }}>
-        {you.name || "user" + you._id?.slice(3, 7)}
-      </span>
-    </div>
+    match && (
+      <div
+        style={{
+          display: "flex",
+          alignItems: "center",
+          padding: 10,
+          margin: "2px 0",
+          backgroundColor: setBg(),
+          borderRadius: "20px",
+        }}
+        onClick={() => setUserToDisplay(you)}
+        onMouseEnter={handleMouseEnter}
+        onMouseLeave={handleMouseLeave}
+      >
+        <Avatar
+          alt={you.name}
+          src={
+            you.imgs?.[0]?.original ||
+            "https://www.bil-jac.com/Images/DogPlaceholder.svg"
+          }
+        />
+        <span style={{ padding: "0 5px" }}>
+          {you.name || "user" + you._id?.slice(3, 7)}
+        </span>
+      </div>
+    )
   );
 }

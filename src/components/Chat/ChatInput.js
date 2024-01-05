@@ -5,22 +5,19 @@ import Button from "@mui/material/Button";
 export function ChatInput({ myId, yourId, authToken }) {
   const [content, setContent] = useState("");
   const handleSubmit = async () => {
-    const response = await fetch(
-      `https://dog-tinder-backend-da6b7ebb15b3.herokuapp.com/message/add-message`,
-      {
-        method: "POST",
-        body: JSON.stringify({
-          fromUser: myId,
-          toUser: yourId,
-          content,
-          timeSent: DateTime.now().toString(),
-        }),
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${authToken}`,
-        },
-      }
-    );
+    const response = await fetch(`http://localhost:3001/message/add-message`, {
+      method: "POST",
+      body: JSON.stringify({
+        fromUser: myId,
+        toUser: yourId,
+        content,
+        timeSent: DateTime.now().toString(),
+      }),
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${authToken}`,
+      },
+    });
     response.ok ? setContent("") : alert("Something went wrong");
   };
 
