@@ -38,9 +38,9 @@ export function UserContainer({
   };
   const setBg = () => {
     if (userToDisplay._id === you._id || isHovered) {
-      return "#fdfdfd";
-    } else {
       return "#c9e3ef";
+    } else {
+      return "#FFE2B9";
     }
   };
 

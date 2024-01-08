@@ -5,7 +5,7 @@ import { Header } from "../components/Header";
 export const theme = createTheme({
   palette: {
     primary: {
-      main: "#E6AD73", //orange
+      main: "#F1B45C", //orange
     },
     secondary: {
       main: "#73c8e5", //blue from the home page background

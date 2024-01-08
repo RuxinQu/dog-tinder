@@ -15,16 +15,6 @@ import { VideoBg } from "./components/VideoBg";
 
 import "./App.css";
 
-const contentStyle = {
-  position: "absolute",
-  top: "50%",
-  left: "50%",
-  transform: "translate(-50%, -50%)",
-  textAlign: "center",
-  color: "white",
-  fontSize: "24px",
-  zIndex: 1,
-};
 function App() {
   const authToken = Cookies.get("AuthToken");
   const myId = Cookies.get("UserId");
