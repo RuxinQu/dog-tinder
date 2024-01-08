@@ -148,7 +148,7 @@ export default function Profile({ myId }) {
   };
 
   return loggedIn ? (
-    <div>
+    <div className="profile">
       <PetForm
         formState={formState}
         handleInputChange={handleInputChange}

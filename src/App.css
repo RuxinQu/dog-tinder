@@ -1,6 +1,6 @@
 @import url("https://fonts.googleapis.com/css2?family=Itim&display=swap");
 :root {
-  --header-light-blue: #c3e3ef;
+  --header-light-orange: #fef2e6;
   --theme-orange: #e6ad73;
   --theme-blue: #73c8e5;
 }
@@ -37,7 +37,6 @@ h1 {
   height: 12dvh;
   display: flex;
   align-items: center;
-  background-color: var(--header-light-blue);
 }
 
 /* profile */
@@ -45,7 +44,7 @@ h1 {
   max-width: 800px;
   padding: 50px;
   border-radius: 5px;
-  background-color: var(--header-light-blue);
+  background-color: var(--header-light-orange);
   box-shadow: 5px 5px 5px rgb(181, 181, 181);
   margin: 0 auto !important;
   font-size: 17px;
@@ -61,7 +60,7 @@ h1 {
 .image-upload-dropbox {
   padding: 50px;
   margin-top: 10px;
-  background-color: #eafaff;
+  background-color: #f1b35c30;
   text-align: center;
   border-radius: 10px;
   color: #7e7e7e !important;

@@ -20,7 +20,6 @@ export const ProfileUpdateAlerts = ({
     <Box sx={{ my: 3, textAlign: "center" }}>
       <Button
         variant="contained"
-        color="secondary"
         size="large"
         disabled={buttonDisabled}
         onClick={handleSubmit}
