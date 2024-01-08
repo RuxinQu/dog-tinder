@@ -19,7 +19,7 @@ export function Yourchat({ content, user }) {
           alt={user?.name || "user" + user._id.slice(3, 7)}
         />
       </Link>
-      <span className="message-box" style={{ backgroundColor: "#fec8a7" }}>
+      <span className="message-box" style={{ backgroundColor: "#F1B45C" }}>
         {content}
       </span>
     </div>

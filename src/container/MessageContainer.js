@@ -39,7 +39,7 @@ export const MessageContainer = ({
     <Box
       sx={{
         width: { xs: "100%", sm: "70%" },
-        backgroundColor: "#fdfdfd",
+        backgroundColor: "#E8F8FF",
         borderRadius: "20px",
         position: "relative",
       }}
@@ -63,7 +63,7 @@ export const MessageContainer = ({
           textAlign: "center",
           padding: 20,
           marginBottom: 15,
-          backgroundColor: "#fec8a7",
+          backgroundColor: "#c9e3ef",
           borderRadius: "20px 20px 0 0",
         }}
       >
