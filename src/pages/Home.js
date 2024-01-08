@@ -27,15 +27,15 @@ export default function Home({ loggedIn }) {
       }}
     >
       <Button
-        className="kalam"
-        variant="outlined"
-        color="secondary"
-        size="large"
+        className="itim"
+        // variant="contained"
+        // color="secondary"
         sx={{
           position: "absolute",
           top: 20,
           right: 20,
           backgroundColor: "#f1f1f1",
+          color: "#000",
           fontWeight: "bold",
           opacity: 0.8,
         }}
@@ -55,15 +55,15 @@ export default function Home({ loggedIn }) {
       >
         <div>
           <img className="logo" src={"./logo.png"} alt="Logo" />
-          <h1 className="kalam">Meetup for dogs.</h1>
-          <h2>Join and meet other dog pals</h2>
+          <h1 className="itim">Meetup for dogs.</h1>
+          <h2 className="itim">Join and meet other dog pals</h2>
         </div>
 
         <Fab
           variant="extended"
-          className="kalam"
+          className="itim"
           color="secondary"
-          sx={{ my: 2, fontWeight: "bold" }}
+          sx={{ my: 2, fontWeight: "bold", fontSize: 20 }}
           onClick={() => {
             loggedIn ? window.location.assign("/board") : handleOpenSignup();
           }}

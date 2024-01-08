@@ -8,7 +8,7 @@ import DialogContentText from "@mui/material/DialogContentText";
 import DialogTitle from "@mui/material/DialogTitle";
 import HighlightOffIcon from "@mui/icons-material/HighlightOff";
 
-export const ButtonDialog = ({ handleDeleteImg, handleDeletePet, button }) => {
+export const DeleteConfirm = ({ handleDeleteImg, i }) => {
   const [open, setOpen] = React.useState(false);
 
   const handleClickOpen = () => {
@@ -24,16 +24,15 @@ export const ButtonDialog = ({ handleDeleteImg, handleDeletePet, button }) => {
       style={{
         display: "inline-block",
         position: "absolute",
-        top: 0,
-        right: 0,
+        top: -17,
+        right: -17,
       }}
     >
       <IconButton
-        // type="button"
+        aria-label="delete"
         onClick={handleClickOpen}
         size="small"
         color="error"
-        // style={{ backgroundColor: "#FFCDD2" }}
       >
         <HighlightOffIcon />
       </IconButton>
@@ -43,28 +42,22 @@ export const ButtonDialog = ({ handleDeleteImg, handleDeletePet, button }) => {
         aria-labelledby="alert-dialog-title"
         aria-describedby="alert-dialog-description"
       >
-        <DialogTitle id="alert-dialog-title">
-          Delete the {button === "deletePet" ? "Pet" : "Image"}
-        </DialogTitle>
+        <DialogTitle id="alert-dialog-title">Delete the Image</DialogTitle>
         <DialogContent>
           <DialogContentText id="alert-dialog-description">
-            Are you sure you want to delete this{" "}
-            {button === "deletePet"
-              ? "pet? All information and images will be deleted"
-              : "image?"}{" "}
-            This action is irreversible.
+            Are you sure you want to delete this image? This action is
+            irreversible.
           </DialogContentText>
         </DialogContent>
         <DialogActions>
-          <Button onClick={handleClose}>close</Button>
+          <Button color="success" onClick={handleClose}>
+            close
+          </Button>
           <Button
             color="error"
             onClick={() => {
-              if (button === "deletePet") {
-                handleDeletePet();
-              } else {
-                handleDeleteImg();
-              }
+              handleClose();
+              handleDeleteImg(i);
             }}
             autoFocus
           >

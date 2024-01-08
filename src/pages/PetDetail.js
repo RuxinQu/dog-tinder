@@ -3,7 +3,7 @@ import { useParams } from "react-router-dom";
 import Cookies from "js-cookie";
 import Auth from "../util/auth";
 import { getUser } from "../util/Api";
-import { Detail } from "../components/Detail";
+import { Detail } from "../components/Dashboard/Detail";
 
 export default function PetDetail() {
   const authToken = Cookies.get("AuthToken");
@@ -23,15 +23,7 @@ export default function PetDetail() {
   return (
     loggedIn &&
     user && (
-      <div
-        style={{
-          minHeight: "88dvh",
-          display: "flex",
-          justifyContent: "center",
-          alignItems: "center",
-        }}
-        className="detail-container"
-      >
+      <div style={{ position: "relative", top: "10dvh" }}>
         <Detail user={user} goBack={true} />
       </div>
     )

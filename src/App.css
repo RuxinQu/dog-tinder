@@ -1,11 +1,16 @@
-@import url("https://fonts.googleapis.com/css2?family=Kalam&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Itim&display=swap");
+:root {
+  --header-light-orange: #fef2e6;
+  --theme-orange: #e6ad73;
+  --theme-blue: #73c8e5;
+}
 
 h1 {
   font-size: 45px;
 }
 
-.kalam {
-  font-family: "kalam", cursive !important;
+.itim {
+  font-family: "Itim", cursive !important;
 }
 
 .logo {
@@ -14,46 +19,60 @@ h1 {
 }
 
 .bg-home {
-  background-image: url(../public/bg-home.png);
+  background-image: url(../public/bg-home.jpg);
   background-size: cover;
   background-position: center;
 }
 
 /* signup form */
 .signup-form {
-  background-color: #fff;
+  background-color: #f1f1f1;
   max-width: 360px;
   border-radius: 10px;
   padding: 20px;
   text-align: center;
 }
 
-/* dashboard  */
 .header {
   height: 12dvh;
   display: flex;
   align-items: center;
 }
 
+/* profile */
+.profile-form {
+  max-width: 800px;
+  padding: 50px;
+  border-radius: 5px;
+  background-color: var(--header-light-orange);
+  box-shadow: 5px 5px 5px rgb(181, 181, 181);
+  margin: 0 auto !important;
+  font-size: 17px;
+  font-weight: 600;
+}
+
+.profile-row {
+  display: flex;
+  align-items: flex-end;
+  width: 100%;
+}
+
+.image-upload-dropbox {
+  padding: 50px;
+  margin-top: 10px;
+  background-color: #f1b35c30;
+  text-align: center;
+  border-radius: 10px;
+  color: #7e7e7e !important;
+}
+
+/* dashboard dog card  */
 .tinder-card {
   display: flex;
   flex-direction: column;
-  justify-content: center;
   align-items: center;
-  height: 88dvh;
-}
-
-.dashboard::before,
-.detail-container::before {
-  content: " ";
-  background-image: url(../public/bg-board.jpeg);
-  background-size: cover;
-  position: absolute;
-  top: 12dvh;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  opacity: 0.7;
+  top: 10dvh;
+  position: relative;
 }
 
 .swipe {
@@ -75,46 +94,47 @@ h1 {
   width: 80vw;
   max-width: 640px;
   min-height: 450px;
-  box-shadow: 0px 0px 60px 0px rgba(0, 0, 0, 0.3) !important;
   border-radius: 20px;
   background-size: cover;
   background-position: center;
+  box-shadow: 10px 10px 5px rgba(0, 0, 0, 0.05);
 }
 
-.card-content {
-  width: 100%;
-  height: 100%;
-}
-
+/* these are the card action button  */
 .buttons {
-  margin: 40px 0;
+  margin: 5dvh 0;
   width: 260px;
   display: flex;
   justify-content: space-between;
-  position: absolute;
-  bottom: 0;
+  position: relative;
 }
 
 /* detail */
 .detail {
-  background-color: #f1f1f1 !important;
+  width: 100%;
+  background-color: var(--header-light-blue) !important;
   position: relative;
   margin: 0 auto;
   min-height: 450px;
   max-width: 640px;
   display: flex;
-  justify-content: center;
+  flex-direction: column;
   align-items: center;
-  flex-wrap: wrap;
-  box-shadow: 0px 0px 60px 0px rgba(0, 0, 0, 0.5) !important;
   border-radius: 20px;
   padding: 10px;
+  margin-bottom: 5dvh;
+  box-shadow: 10px 10px 5px rgba(0, 0, 0, 0.05);
 }
 
-.detail-info {
-  width: 300px;
-  text-align: center;
+.detail-img {
+  display: block;
+  width: 320px;
+  height: 320px;
+  object-fit: cover;
+  margin: 10px;
+  border-radius: 5px;
 }
+
 @keyframes popup {
   0% {
     transform: scale(1, 1);
@@ -139,34 +159,16 @@ h1 {
   }
 }
 
-.no-match {
-  text-align: center;
-  margin-top: 10dvh;
-}
-
-.no-match * {
-  margin-top: 30px;
-}
-
-.profile-form-container {
-  background-color: #e7dddd;
-  display: flex;
-  justify-content: center;
-  padding: 30px;
-}
-
-.profile-form {
-  max-width: 600px;
-  padding: 20px;
-  border: 5px solid #fff;
-  border-radius: 20px;
-}
-
-.profile-form * {
-  margin-top: 2px;
-}
-
 /* chat  */
+.chat-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: flex-start;
+  width: 90%;
+  margin: 0 auto;
+}
+
 .chat-box {
   display: flex;
   align-items: center;
@@ -174,6 +176,15 @@ h1 {
 
 .message-box {
   padding: 10px;
-  background-color: #a6e0ff;
+  background-color: #caedff;
   border-radius: 5px;
+}
+
+.no-match {
+  text-align: center;
+  margin-top: 10dvh;
+}
+
+.no-match * {
+  margin-top: 30px;
 }
