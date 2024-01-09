@@ -1,6 +1,6 @@
 @import url("https://fonts.googleapis.com/css2?family=Itim&display=swap");
 :root {
-  --header-light-orange: #fef2e6;
+  --light-orange: #fef2e6;
   --theme-orange: #e6ad73;
   --theme-blue: #73c8e5;
 }
@@ -44,7 +44,7 @@ h1 {
   max-width: 800px;
   padding: 50px;
   border-radius: 5px;
-  background-color: var(--header-light-orange);
+  background-color: var(--light-orange);
   box-shadow: 5px 5px 5px rgb(181, 181, 181);
   margin: 0 auto !important;
   font-size: 17px;
@@ -76,8 +76,6 @@ h1 {
 }
 
 .swipe {
-  max-width: 640px;
-  min-height: 450px;
   position: absolute;
 }
 
@@ -91,6 +89,7 @@ h1 {
 
 .card {
   position: relative;
+  background-color: var(--light-orange);
   width: 80vw;
   max-width: 640px;
   min-height: 450px;
@@ -111,12 +110,13 @@ h1 {
 
 /* detail */
 .detail {
-  width: 100%;
-  background-color: var(--header-light-blue) !important;
+  width: 640px;
+  background-color: var(--light-orange);
   position: relative;
   margin: 0 auto;
-  min-height: 450px;
+  height: 450px;
   max-width: 640px;
+  overflow-y: scroll;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -131,6 +131,15 @@ h1 {
   width: 320px;
   height: 320px;
   object-fit: cover;
+  margin: 10px;
+  border-radius: 5px;
+}
+
+.detail-img-container {
+  width: 320px;
+  height: 320px;
+  background-size: cover;
+  background-position: center;
   margin: 10px;
   border-radius: 5px;
 }
