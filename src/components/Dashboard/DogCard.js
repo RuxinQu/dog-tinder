@@ -76,8 +76,11 @@ export const DogCard = ({ myId, users, authToken }) => {
             onSwipe={(dir) => swiped(dir, character, index)}
             onCardLeftScreen={() => outOfFrame(character.name, index)}
           >
+            {/* by default shows the front side of the card  */}
+            {/* after turning the card, set backgroundcolor beige first then load the background img since the img load slower  */}
             <div
               style={{
+                backgroundColor: "#FDF6F0",
                 backgroundImage: !turnCard
                   ? `url(${
                       character.imgs[0]?.original || "./placeholder-img.png"
