@@ -84,7 +84,7 @@ export default function Chat({ myId }) {
               )}
             </Box>
           )}
-          {!matchesUsers.length && (
+          {!matchesUsers.length === 0 && (
             <p style={{ textAlign: "center", padding: 10 }}>
               You don't have any matched users yet. Keep exploring!
             </p>

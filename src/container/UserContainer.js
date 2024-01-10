@@ -24,7 +24,9 @@ export function UserContainer({
       setYou({ ...youInfoJson });
       const yourMatch = youInfoJson.matches;
       setMatch(yourMatch.includes(myId));
-      setMatchedUsers([...matchesUsers, yourId]);
+      if (match) {
+        setMatchedUsers((prevMatchesUsers) => [...prevMatchesUsers, yourId]);
+      }
     };
     getMatch();
   }, [authToken, matchesUsers, myId, setMatchedUsers, yourId]);
