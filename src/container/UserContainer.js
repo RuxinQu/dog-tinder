@@ -9,27 +9,25 @@ export function UserContainer({
   userToDisplay,
   setUserToDisplay,
   authToken,
-  matchesUsers,
-  setMatchedUsers,
+  setMatcheCount,
 }) {
   const [isHovered, setIsHovered] = useState(false);
   // the state you is the user this component is currently displaying. Each userContainer has one user, clicking on the userContainer box will switch the current userToDisplay to the user stored in the corresponding userContainer
   const [you, setYou] = useState({ imgs: [], _id: "", matches: [] });
-  const [match, setMatch] = useState(false);
+
   // go through the match list of the user in my match list. Only display the user from my match list that also has me included in their match list
   useEffect(() => {
     const getMatch = async () => {
       const youInfo = await getUser(yourId, authToken);
       const youInfoJson = await youInfo.json();
-      setYou({ ...youInfoJson });
-      const yourMatch = youInfoJson.matches;
-      setMatch(yourMatch.includes(myId));
-      if (match) {
-        setMatchedUsers((prevMatchesUsers) => [...prevMatchesUsers, yourId]);
-      }
+      setYou((prevYou) => ({
+        ...prevYou,
+        ...youInfoJson,
+      }));
+      setMatcheCount((prev) => prev + 1);
     };
     getMatch();
-  }, [authToken, matchesUsers, myId, setMatchedUsers, yourId]);
+  }, [authToken, yourId, setMatcheCount]);
 
   const handleMouseEnter = () => {
     setIsHovered(true);
@@ -48,7 +46,7 @@ export function UserContainer({
 
   return (
     // the matched users avatar and name
-    match && (
+    you.matches.includes(myId) && (
       <div
         style={{
           display: "flex",
@@ -64,10 +62,7 @@ export function UserContainer({
       >
         <Avatar
           alt={you.name}
-          src={
-            you.imgs?.[0]?.original ||
-            "https://www.bil-jac.com/Images/DogPlaceholder.svg"
-          }
+          src={you.imgs?.[0]?.original || "./placeholder-img.png"}
         />
         <span style={{ padding: "0 5px" }}>
           {you.name || "user" + you._id?.slice(3, 7)}

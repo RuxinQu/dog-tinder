@@ -4,6 +4,7 @@ import Auth from "../util/auth";
 import { getUser } from "../util/Api";
 import { UserContainer } from "../container/UserContainer";
 import { MessageContainer } from "../container/MessageContainer";
+import { UserDetail } from "../components/Chat/UserDetail";
 import { useMediaQuery } from "@mui/material";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
@@ -20,8 +21,10 @@ export default function Chat({ myId }) {
   });
   const [showUserContainer, setShowUserContainer] = useState(true);
 
+  const [showDetail, setShowDetail] = useState(false);
+
   // the array for all the matched users.
-  const [matchesUsers, setMatchedUsers] = useState([]);
+  const [matchCount, setMatcheCount] = useState(0);
   // in small screens, after a user is clicked, the userlist disappears
   useEffect(() => {
     if (isSmallScreen && userToDisplay._id) {
@@ -65,8 +68,8 @@ export default function Chat({ myId }) {
                       setUserToDisplay={setUserToDisplay}
                       authToken={authToken}
                       isSmallScreen={isSmallScreen}
-                      matchesUsers={matchesUsers}
-                      setMatchedUsers={setMatchedUsers}
+                      // setMatchedUsers={setMatchedUsers}
+                      setMatcheCount={setMatcheCount}
                     />
                   ))}
                 </Box>
@@ -80,14 +83,22 @@ export default function Chat({ myId }) {
                   showUserContainer={showUserContainer}
                   setShowUserContainer={setShowUserContainer}
                   setUserToDisplay={setUserToDisplay}
+                  setShowDetail={setShowDetail}
                 />
               )}
             </Box>
           )}
-          {!matchesUsers.length === 0 && (
+          {/* if no match users  */}
+          {!matchCount === 0 && (
             <p style={{ textAlign: "center", padding: 10 }}>
               You don't have any matched users yet. Keep exploring!
             </p>
+          )}
+          {showDetail && userToDisplay && (
+            <UserDetail
+              character={userToDisplay}
+              setShowDetail={setShowDetail}
+            />
           )}
         </div>
       ) : (
