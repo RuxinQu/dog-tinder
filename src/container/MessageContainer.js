@@ -24,6 +24,7 @@ export const MessageContainer = ({
         if (!myMessage.ok) return;
         const myMessageJson = await myMessage.json();
         const yourMessage = await getMessage(you._id, me._id, authToken);
+        if (!yourMessage.ok) return;
         const yourMessageJson = await yourMessage.json();
         setAllMessage([...myMessageJson, ...yourMessageJson]);
         const message = allMessage.sort(
