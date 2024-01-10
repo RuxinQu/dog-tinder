@@ -14,6 +14,7 @@ export const DogCard = ({ myId, users, authToken }) => {
   const [currentIndex, setCurrentIndex] = useState(users.length - 1);
   // used for outOfFrame closure
   const currentIndexRef = useRef(currentIndex);
+
   const handleTurnCard = (character) => {
     setUserToDisplay(character);
     setTurnCard(true);
@@ -35,9 +36,11 @@ export const DogCard = ({ myId, users, authToken }) => {
   // set last direction and decrease current index
   const swiped = (direction, character, index) => {
     updateCurrentIndex(index - 1);
+    // after user swipe at the detail page, the card displays the next dog
     if (direction === "right") {
       addMatch(myId, character._id, authToken);
     }
+    setTurnCard(false);
   };
 
   const outOfFrame = (name, idx) => {
@@ -56,7 +59,7 @@ export const DogCard = ({ myId, users, authToken }) => {
   };
 
   return (
-    <Box className="tinder-card board">
+    <Box className="tinder-card">
       <link
         href="https://fonts.googleapis.com/css?family=Damion&display=swap"
         rel="stylesheet"
@@ -82,7 +85,7 @@ export const DogCard = ({ myId, users, authToken }) => {
                 style={{
                   backgroundImage: character.imgs[0]?.original
                     ? "url(" + character.imgs[0]?.original + ")"
-                    : "url(https://www.bil-jac.com/Images/DogPlaceholder.svg)",
+                    : "url(./placeholder-img.png)",
                 }}
                 className="card"
               >
@@ -99,16 +102,15 @@ export const DogCard = ({ myId, users, authToken }) => {
           </TinderCard>
         ))}
       </div>
-      {!turnCard && (
-        <div className="buttons">
-          <Fab size="small" disabled={!canSwipe} onClick={() => swipe("left")}>
-            <CloseIcon color="" />
-          </Fab>
-          <Fab size="small" disabled={!canSwipe} onClick={() => swipe("right")}>
-            <FavoriteOutlinedIcon color="error" />
-          </Fab>
-        </div>
-      )}
+
+      <div className="buttons">
+        <Fab size="small" disabled={!canSwipe} onClick={() => swipe("left")}>
+          <CloseIcon color="" />
+        </Fab>
+        <Fab size="small" disabled={!canSwipe} onClick={() => swipe("right")}>
+          <FavoriteOutlinedIcon color="error" />
+        </Fab>
+      </div>
     </Box>
   );
 };
