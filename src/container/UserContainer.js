@@ -64,10 +64,7 @@ export function UserContainer({
       >
         <Avatar
           alt={you.name}
-          src={
-            you.imgs?.[0]?.original ||
-            "https://www.bil-jac.com/Images/DogPlaceholder.svg"
-          }
+          src={you.imgs?.[0]?.original || "./placeholder-img.png"}
         />
         <span style={{ padding: "0 5px" }}>
           {you.name || "user" + you._id?.slice(3, 7)}

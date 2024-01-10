@@ -44,7 +44,9 @@ export function ChatInput({ myId, yourId, authToken }) {
         display: "flex",
         justifyContent: "center",
         alignItems: "center",
-        padding: "30px 0",
+        padding: "15px 0",
+        backgroundColor: "#c9e3ef",
+        borderRadius: "0 0 20px 20px",
       }}
     >
       <input

@@ -10,14 +10,12 @@ import MoreVertIcon from "@mui/icons-material/MoreVert";
 
 export const DogCard = ({ myId, users, authToken }) => {
   const [turnCard, setTurnCard] = useState(false);
-  const [userToDisplay, setUserToDisplay] = useState({});
   const [currentIndex, setCurrentIndex] = useState(users.length - 1);
   // used for outOfFrame closure
   const currentIndexRef = useRef(currentIndex);
 
   const handleTurnCard = (character) => {
-    setUserToDisplay(character);
-    setTurnCard(true);
+    setTurnCard(turnCard === true ? false : true);
   };
 
   const childRefs = useMemo(
@@ -78,27 +76,26 @@ export const DogCard = ({ myId, users, authToken }) => {
             onSwipe={(dir) => swiped(dir, character, index)}
             onCardLeftScreen={() => outOfFrame(character.name, index)}
           >
-            {turnCard ? (
-              <Detail user={userToDisplay} setTurnCard={setTurnCard} />
-            ) : (
-              <div
-                style={{
-                  backgroundImage: character.imgs[0]?.original
-                    ? "url(" + character.imgs[0]?.original + ")"
-                    : "url(./placeholder-img.png)",
-                }}
-                className="card"
+            <div
+              style={{
+                backgroundImage: !turnCard
+                  ? `url(${
+                      character.imgs[0]?.original || "./placeholder-img.png"
+                    })`
+                  : "url(./bg-dog-card.svg)",
+              }}
+              className="card"
+            >
+              <Fab
+                color="secondary"
+                size="small"
+                sx={{ position: "fixed", right: 0 }}
+                onClick={() => handleTurnCard(character)}
               >
-                <Fab
-                  color="secondary"
-                  size="small"
-                  sx={{ float: "right" }}
-                  onClick={() => handleTurnCard(character)}
-                >
-                  <MoreVertIcon />
-                </Fab>
-              </div>
-            )}
+                <MoreVertIcon />
+              </Fab>
+              {turnCard && <Detail character={character} />}
+            </div>
           </TinderCard>
         ))}
       </div>

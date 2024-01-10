@@ -82,21 +82,21 @@ h1 {
 .card-container {
   width: 90vw;
   max-width: 640px;
-  min-height: 450px;
+  height: 450px;
   display: flex;
   justify-content: center;
 }
 
 .card {
   position: relative;
-  background-color: var(--light-orange);
   width: 80vw;
   max-width: 640px;
-  min-height: 450px;
+  height: 450px;
   border-radius: 20px;
   background-size: cover;
   background-position: center;
   box-shadow: 10px 10px 5px rgba(0, 0, 0, 0.05);
+  overflow: scroll;
 }
 
 /* these are the card action button  */
@@ -110,29 +110,9 @@ h1 {
 
 /* detail */
 .detail {
-  width: 640px;
-  background-color: var(--light-orange);
-  position: relative;
-  margin: 0 auto;
-  height: 450px;
-  max-width: 640px;
-  overflow-y: scroll;
   display: flex;
   flex-direction: column;
   align-items: center;
-  border-radius: 20px;
-  padding: 10px;
-  margin-bottom: 5dvh;
-  box-shadow: 10px 10px 5px rgba(0, 0, 0, 0.05);
-}
-
-.detail-img {
-  display: block;
-  width: 320px;
-  height: 320px;
-  object-fit: cover;
-  margin: 10px;
-  border-radius: 5px;
 }
 
 .detail-img-container {
@@ -187,6 +167,18 @@ h1 {
   padding: 10px;
   background-color: #b9e5fb;
   border-radius: 5px;
+}
+
+.user-detail {
+  width: 100%;
+  max-width: 640px;
+  border-radius: 20px;
+  position: absolute;
+  top: 50px;
+  left: 50%;
+  transform: translate(-50%, 0);
+  background-position: center;
+  background-size: contain;
 }
 
 .no-match {

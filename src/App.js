@@ -10,7 +10,6 @@ import Profile from "./pages/Profile";
 import Dashboard from "./pages/Dashboard";
 import Chat from "./pages/Chat";
 import NoMatch from "./pages/NoMatch";
-import PetDetail from "./pages/PetDetail";
 import { VideoBg } from "./components/VideoBg";
 
 import "./App.css";
@@ -32,9 +31,6 @@ function App() {
               <Route path="/profile" element={<Profile myId={myId} />} />
             )}
             {loggedIn && <Route path="/chat" element={<Chat myId={myId} />} />}
-            {loggedIn && (
-              <Route path="/detail/:userId" element={<PetDetail />} />
-            )}
           </Route>
           {/* show no match page for all paths when loggedIn is false */}
           <Route path="*" element={<NoMatch />} />
