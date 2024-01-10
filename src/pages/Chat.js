@@ -24,7 +24,7 @@ export default function Chat({ myId }) {
   const [showDetail, setShowDetail] = useState(false);
 
   // the array for all the matched users.
-  const [matchesUsers, setMatchedUsers] = useState([]);
+  const [matchCount, setMatcheCount] = useState(0);
   // in small screens, after a user is clicked, the userlist disappears
   useEffect(() => {
     if (isSmallScreen && userToDisplay._id) {
@@ -68,8 +68,8 @@ export default function Chat({ myId }) {
                       setUserToDisplay={setUserToDisplay}
                       authToken={authToken}
                       isSmallScreen={isSmallScreen}
-                      matchesUsers={matchesUsers}
-                      setMatchedUsers={setMatchedUsers}
+                      // setMatchedUsers={setMatchedUsers}
+                      setMatcheCount={setMatcheCount}
                     />
                   ))}
                 </Box>
@@ -89,7 +89,7 @@ export default function Chat({ myId }) {
             </Box>
           )}
           {/* if no match users  */}
-          {!matchesUsers.length === 0 && (
+          {!matchCount === 0 && (
             <p style={{ textAlign: "center", padding: 10 }}>
               You don't have any matched users yet. Keep exploring!
             </p>
