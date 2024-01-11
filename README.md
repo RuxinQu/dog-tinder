@@ -20,7 +20,19 @@ This repo contains the front end of the project. The back end of this project is
 
 ## Demo
 
-You can access the live demo [here](https://watch.screencastify.com/v/YeCGALrJzt2hBYzqXbCN) and the deployed website [here](https://dog-tinder-rq.netlify.app)
+You can access the deployed website [here](https://dog-tinder-rq.netlify.app)
+
+### Screenshots:
+
+- Home page:
+  ![home-page](./assets/home.png)
+- Profile page:
+  ![profile](./assets/profile.png)
+- Dashboard page:
+  ![dashboard](./assets/dashboard.png)
+
+- Chat page:
+  ![chat](./assets/chat.png)
 
 ## Features
 
@@ -72,14 +84,8 @@ To run Dog Tinder locally, follow these steps:
 
 ## Contributing
 
-We welcome contributions from the community to enhance Dog Tinder. If you find any bugs or have ideas for new features, feel free to open an issue or submit a pull request.
-
-Before contributing, please read our Contribution Guidelines for more information.
+If you find any bugs or have ideas for new features, feel free to open an issue or submit a pull request.
 
 ## License
 
 The Dog Tinder project is licensed under the MIT License.
-
-## Acknowledgements
-
-ChatGPT for the assistance in debugging and generating the README.

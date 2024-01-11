@@ -89,6 +89,7 @@ h1 {
 
 .card {
   position: relative;
+  background-color: var(--light-orange);
   width: 80vw;
   max-width: 640px;
   height: 450px;
