@@ -80,12 +80,11 @@ export const DogCard = ({ myId, users, authToken }) => {
             {/* after turning the card, set backgroundcolor beige first then load the background img since the img load slower  */}
             <div
               style={{
-                backgroundColor: "#FDF6F0",
                 backgroundImage: !turnCard
                   ? `url(${
                       character.imgs[0]?.original || "./placeholder-img.png"
                     })`
-                  : "url(./bg-dog-card.svg)",
+                  : "none",
               }}
               className="card"
             >
