@@ -36,10 +36,11 @@ You can access the deployed website [here](https://dog-tinder-rq.netlify.app)
 
 ## Features
 
-- User Registration and Authentication: Users can create an account, log in, and update their profiles.
+- User Registration and Authentication
+- Update the user profile and upload user images by dragging and dropping images into the **dropzone**.
 - Browse Dog Profiles: Users can view profiles of different dogs and see their details and pictures.
-- Matchmaking: Users can swipe left or right on dog profiles to express interest and potentially match with other dogs.
-- Private Messaging: Matched users can chat with each other through the built-in messaging system.
+- **Matchmaking**: Users can swipe left or right on dog profiles to express interest and potentially match with other dogs.
+- Private **Messaging**: Matched users can chat with each other through the built-in messaging system.
 
 ## Technologies Used
 
@@ -47,9 +48,10 @@ You can access the deployed website [here](https://dog-tinder-rq.netlify.app)
 
 - HTML, CSS, JavaScript
 - React.js
-- JavaScript Cookie: Save user authentication data to cookies
-- Formik && Yup: Form validation
+- React Cookie: Save user authentication data to cookies
 - JSON Web Token
+- Formik && Yup: Form validation
+- [React Dropzone](https://react-dropzone.js.org)
 - [React Tinder Card](https://www.npmjs.com/package/react-tinder-card): A react component to make swipeable elements like in the app tinder
 
 ### Back-end:
