@@ -1,4 +1,5 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
 import Auth from "../util/auth";
 import Box from "@mui/material/Box";
 import Grid from "@mui/material/Grid";
@@ -18,7 +19,7 @@ export const Header = () => {
   const handleClose = () => {
     setAnchorEl(null);
   };
-
+  const navigate = useNavigate();
   return (
     <Box sx={{ flexGrow: 1 }} className="header">
       <Grid
@@ -46,14 +47,14 @@ export const Header = () => {
           >
             <MenuItem
               onClick={() => {
-                window.location.assign("/profile");
+                navigate("/profile");
               }}
             >
               Profile
             </MenuItem>
             <MenuItem
               onClick={() => {
-                window.location.assign("/");
+                navigate("/");
               }}
             >
               Home
@@ -64,7 +65,7 @@ export const Header = () => {
         <Grid item xs={4}>
           <IconButton
             onClick={() => {
-              window.location.assign("/board");
+              navigate("/board");
             }}
           >
             <PetsIcon fontSize="large" />
@@ -73,7 +74,7 @@ export const Header = () => {
         <Grid item xs={4}>
           <IconButton
             onClick={() => {
-              window.location.assign("/chat");
+              navigate("/chat");
               // navigate("/chat");
               // handleClose();
             }}
