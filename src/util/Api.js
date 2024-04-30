@@ -26,6 +26,20 @@ export const signIn = async (data, request) => {
     console.log(err);
   }
 };
+export const verifyEmailToken = async (emailToken) => {
+  try {
+    const response = await fetch(`${baseUrl}/user/verify`, {
+      method: "POST",
+      body: JSON.stringify({ emailToken }),
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+    return response;
+  } catch (err) {
+    console.log(err);
+  }
+};
 
 export const getUsers = async (token) => {
   const options = generateOptions("GET", token);

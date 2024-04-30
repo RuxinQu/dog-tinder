@@ -30,13 +30,12 @@ You can access the deployed website [here](https://dog-tinder-rq.netlify.app)
   ![profile](./assets/profile.png)
 - Dashboard page:
   ![dashboard](./assets/dashboard.png)
-
 - Chat page:
   ![chat](./assets/chat.png)
 
 ## Features
 
-- User Registration and Authentication
+- User Registration and Authentication. Email verification.
 - Update the user profile and upload user images by dragging and dropping images into the **dropzone**.
 - Browse Dog Profiles: Users can view profiles of different dogs and see their details and pictures.
 - **Matchmaking**: Users can swipe left or right on dog profiles to express interest and potentially match with other dogs.
@@ -61,6 +60,7 @@ You can access the deployed website [here](https://dog-tinder-rq.netlify.app)
 - MongoDB
 - Mongoose
 - Multer && AWS S3
+- Nodemailer: send verification emails
 
 ### Deployment:
 

@@ -5,6 +5,7 @@ import { ThemeProvider } from "@mui/material/styles";
 import { theme, Layout } from "./util/theme";
 import Auth from "./util/auth";
 import { getUser, getUsers } from "./util/Api";
+import VerifyEmail from "./pages/VerifyEmail";
 
 // import Home from "./pages/Home";
 // import Profile from "./pages/Profile";
@@ -30,6 +31,7 @@ function App() {
     const fetchData = async () => {
       try {
         // Fetch users
+        if (!authToken) return;
         const usersResponse = await getUsers(authToken);
         if (!usersResponse.ok) return;
         const usersJson = await usersResponse.json();
@@ -59,6 +61,7 @@ function App() {
       <Suspense fallback={<h1>loading...</h1>}>
         <Router>
           <Routes>
+            <Route path="/verify" element={<VerifyEmail />} />
             <Route path="/" element={<Home loggedIn={loggedIn} />} />
             <Route element={<Layout />}>
               {loggedIn && (
@@ -74,6 +77,7 @@ function App() {
                 <Route path="/chat" element={<Chat myId={myId} />} />
               )}
             </Route>
+
             {/* show no match page for all paths when loggedIn is false */}
             <Route path="*" element={<NoMatch />} />
           </Routes>

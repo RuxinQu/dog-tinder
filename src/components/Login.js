@@ -12,23 +12,20 @@ import VisibilityOff from "@mui/icons-material/VisibilityOff";
 import CancelOutlinedIcon from "@mui/icons-material/CancelOutlined";
 import Alert from "@mui/material/Alert";
 
-export const Signup = ({
+export const Login = ({
   alertMessage,
   handleClose,
   showPassword,
   handleClickShowPassword,
   handleMouseDownPassword,
   validationSchema,
+  handleLogin,
   loading,
-  handleEmail,
-  handleRegister,
-  formRef,
 }) => {
   // Define initial form values
   const initialValues = {
     email: "",
     password: "",
-    confirmPassword: "",
   };
 
   return (
@@ -38,7 +35,7 @@ export const Signup = ({
       </div>
 
       <h2 className="itim" style={{ textAlign: "center" }}>
-        CREATE ACCOUNT
+        LOGIN YOUR ACCOUNT
       </h2>
       <small style={{ padding: "15px 0" }}>
         By clicking Submit, you agree to our terms. Learn how we process your
@@ -48,9 +45,8 @@ export const Signup = ({
       <Formik
         initialValues={initialValues}
         validationSchema={validationSchema}
-        onSubmit={(values) => handleRegister(values)}
+        onSubmit={handleLogin}
         validateOnBlur={false}
-        innerRef={formRef}
       >
         <Form
           style={{
@@ -109,40 +105,8 @@ export const Signup = ({
             />
           </FormControl>
 
-          <FormControl sx={{ m: 1, width: "25ch" }} variant="outlined">
-            <InputLabel htmlFor="outlined-adornment-confirm-password">
-              Confirm Password
-            </InputLabel>
-            <Field
-              as={OutlinedInput}
-              autoComplete="on"
-              name="confirmPassword"
-              id="outlined-adornment-confirm-password"
-              type={showPassword ? "text" : "password"}
-              endAdornment={
-                <InputAdornment position="end">
-                  <IconButton
-                    aria-label="toggle password visibility"
-                    onClick={handleClickShowPassword}
-                    onMouseDown={handleMouseDownPassword}
-                    edge="end"
-                  >
-                    {showPassword ? <VisibilityOff /> : <Visibility />}
-                  </IconButton>
-                </InputAdornment>
-              }
-              label="confirm-password"
-            />
-            <ErrorMessage
-              name="confirmPassword"
-              component="div"
-              style={{ color: "red", fontSize: "14px" }}
-            />
-          </FormControl>
-
           <Button
-            // type="submit"
-            onClick={handleEmail}
+            type="submit"
             className="itim"
             variant="contained"
             sx={{

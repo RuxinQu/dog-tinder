@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { SignupContainer } from "../container/SignupContainer";
+import { LoginContainer } from "../container/LoginContainer";
 import Auth from "../util/auth";
 import Button from "@mui/material/Button";
 import Fab from "@mui/material/Fab";
@@ -13,8 +14,8 @@ export default function Home({ loggedIn }) {
     setRegister(true);
   };
   const handleOpenLogin = () => {
-    setRegister(false);
     setOpen(true);
+    setRegister(false);
   };
 
   const handleClose = () => setOpen(false);
@@ -81,9 +82,12 @@ export default function Home({ loggedIn }) {
           alignItems: "center",
         }}
       >
-        {open && (
-          <SignupContainer handleClose={handleClose} register={register} />
-        )}
+        {open &&
+          (register ? (
+            <SignupContainer handleClose={handleClose} />
+          ) : (
+            <LoginContainer handleClose={handleClose} />
+          ))}
       </Box>
     </Box>
   );
