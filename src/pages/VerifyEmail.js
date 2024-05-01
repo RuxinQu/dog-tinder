@@ -13,10 +13,10 @@ export default function VerifyEmail() {
     const emailVerify = async () => {
       const response = await verifyEmailToken(emailToken);
       const jsonResponse = await response.json();
-      if (!response.ok) {
-        setVerifyMessage(jsonResponse.message);
-      } else {
+      if (response.ok) {
         setVerifyMessage("Email verified succesfully.");
+      } else {
+        setVerifyMessage(jsonResponse.message);
       }
     };
     emailVerify();

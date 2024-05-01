@@ -35,15 +35,15 @@ function App() {
         const usersResponse = await getUsers(authToken);
         if (!usersResponse.ok) return;
         const usersJson = await usersResponse.json();
+        const verifiedUser = usersJson.filter((user) => user.isVerified);
 
         // Fetch current user's matches
         const meResponse = await getUser(myId, authToken);
         if (!meResponse.ok) return;
         const meJson = await meResponse.json();
         const { matches } = meJson;
-
         // Filter users to exclude matches and the current user
-        const filteredUsers = usersJson.filter(
+        const filteredUsers = verifiedUser.filter(
           (user) => !matches.includes(user._id) && user._id !== myId
         );
         setUsers(filteredUsers);
@@ -58,7 +58,7 @@ function App() {
   return (
     <ThemeProvider theme={theme}>
       {/* lazy loading the pages to improve web performance */}
-      <Suspense fallback={<h1>loading...</h1>}>
+      <Suspense fallback={<h1 style={{ textAlign: "center" }}>loading...</h1>}>
         <Router>
           <Routes>
             <Route path="/verify" element={<VerifyEmail />} />

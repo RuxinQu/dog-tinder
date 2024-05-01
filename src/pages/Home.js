@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { SignupContainer } from "../container/SignupContainer";
 import { LoginContainer } from "../container/LoginContainer";
 import Auth from "../util/auth";
@@ -19,7 +20,7 @@ export default function Home({ loggedIn }) {
   };
 
   const handleClose = () => setOpen(false);
-
+  const navigator = useNavigate();
   return (
     <Box
       sx={{
@@ -29,8 +30,6 @@ export default function Home({ loggedIn }) {
     >
       <Button
         className="itim"
-        // variant="contained"
-        // color="secondary"
         sx={{
           position: "absolute",
           top: 20,
@@ -66,7 +65,7 @@ export default function Home({ loggedIn }) {
           color="secondary"
           sx={{ my: 2, fontWeight: "bold", fontSize: 20 }}
           onClick={() => {
-            loggedIn ? window.location.assign("/board") : handleOpenSignup();
+            loggedIn ? navigator("/board") : handleOpenSignup();
           }}
         >
           {loggedIn ? "Meet Our Dogs" : "Register Now"}
